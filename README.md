@@ -34,7 +34,7 @@ src/
 - Personal image displayed
 
 ## 📸 Live Preview
-[Live Portfolio](https://claracayres-portfolio.vercel.app)
+[Live Portfolio](https://claracayres-portfolio.vercel.app){:target="_blank"}
 
 ## 📬 Contact
 Feel free to connect with me:
