@@ -29,7 +29,7 @@ body {
 }
 
 .card {
-    background: rgba(11, 19, 64, 0.8);
+    background: rgba(28, 39, 65, 0.8);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(147, 112, 219, 0.3);
 }
