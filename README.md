@@ -1,13 +1,43 @@
-# React + Vite
+#💻 Maria Clara | Dev Portfolio
+Welcome to my personal portfolio! This project was created to showcase my skills, projects, and journey as a developer in a clean, responsive, and scroll-friendly interface.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## ✨ About
+This is a single-page portfolio developed using React and styled with Tailwind CSS. It represents my personality, current skills, and interests as an aspiring Full-Stack Developer, with a growing focus on Front-End, APIs, and Data Science.
 
-Currently, two official plugins are available:
+## 🛠️ Technologies Used
+- React
+- Vite
+- Tailwind CSS
+- React Icons
+- Styled Components
+- Fully responsive design
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📁 Project Structure
+```bash
+src/
+│
+├── assets/              # Images, CV, and icons
+├── components/          # Header, Footer, etc.
+├── pages/               # Sections: Home, About Me, Projects, Skills, Contact
+├── styles/              # Global CSS
+├── App.jsx              # Main App component
+├── main.jsx             # Entry point
+└── index.html
+```
 
-## Expanding the ESLint configuration
+## 🎯 Features
+- Smooth anchor navigation (scroll to sections)
+- Visual SVG shapes and subtle animations
+- Call-to-action buttons (Contact & CV Download)
+- Responsive and modern layout
+- Custom colors configured in tailwind.config.js
+- Personal image displayed
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-"# claracayres-portfolio" 
+## 📸 Live Preview
+[Live Portfolio](https://claracayres-portfolio.vercel.app)
+
+## 📬 Contact
+Feel free to connect with me:
+
+- **LinkedIn**: [Maria Clara Cayres](https://www.linkedin.com/in/maria-clara-cayres-de-almeida/)
+- **Email**: [clara.cayres1205@gmail.com](mailto:clara.cayres1205@gmail.com)
