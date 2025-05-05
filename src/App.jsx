@@ -1,4 +1,5 @@
 import React from 'react';
+import { Analytics } from "@vercel/analytics/react"
 import { useEffect } from 'react';
 import { initDomScripts } from '/Script';
 import Header from './components/Header';
@@ -38,6 +39,7 @@ function App() {
       </main>
       <Footer />
       <BackToTop />
+      <Analytics/>
     </>
   );
 }
