@@ -31,11 +31,18 @@ const AboutMe = () => {
                                     </svg>
        
                                     <div className="absolute inset-0 flex items-center justify-center">
-                                        <img
-                                            src={eu}
-                                            alt="Maria Clara"
-                                            className="w-50 h-50 md:w-75 md:h-75 object-cover rounded-full border-4 border-purple/30 shadow-md"
-                                        />
+                                        <svg 
+                                        className="w-32 h-32 md:w-48 md:h-48 text-purple/80" 
+                                        fill="currentColor" 
+                                        viewBox="0 0 20 20" 
+                                        xmlns="http://www.w3.org/2000/svg">
+                                            <path 
+                                            fillRule="evenodd" 
+                                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" 
+                                            clipRule="evenodd">
+
+                                            </path>
+                                        </svg>
                                     </div>
                                 </div>
                             </div>

@@ -35,12 +35,12 @@ export function initDomScripts() {
       }
     });
 
-    navLinks.forEach((link) => {
-      link.classList.remove("active");
-      if (link.getAttribute("href").substring(1) === current) {
-        link.classList.add("active");
-      }
-    });
+    // navLinks.forEach((link) => {
+    //   link.classList.remove("active");
+    //   if (link.getAttribute("href").substring(1) === current) {
+    //     link.classList.add("active");
+    //   }
+    // });
   });
 
   // Back to top button
