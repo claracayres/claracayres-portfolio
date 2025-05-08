@@ -87,10 +87,10 @@ const Contact = () => {
                             <div className="mt-8">
                                 <h4 className="font-medium mb-4">Find me on social media</h4>
                                 <div className="flex space-x-4">
-                                    <a href="https://www.linkedin.com/in/maria-clara-cayres-de-almeida" className="w-10 h-10 rounded-full bg-pink/20 flex items-center justify-center hover:bg-pink/40 transition-colors">
+                                    <a href="https://www.linkedin.com/in/maria-clara-cayres-de-almeida" target="blank" className="w-10 h-10 rounded-full bg-pink/20 flex items-center justify-center hover:bg-pink/40 transition-colors">
                                         <i className="fab fa-linkedin-in text-pink"></i>
                                     </a>
-                                    <a href="https://github.com/claracayres" className="w-10 h-10 rounded-full bg-purple/20 flex items-center justify-center hover:bg-purple/40 transition-colors">
+                                    <a href="https://github.com/claracayres" target="blank" className="w-10 h-10 rounded-full bg-purple/20 flex items-center justify-center hover:bg-purple/40 transition-colors">
                                         <i className="fab fa-github text-purple"></i>
                                     </a>
                                 </div>

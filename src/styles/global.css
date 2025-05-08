@@ -103,3 +103,11 @@ body {
     z-index: -1;
     overflow: hidden;
 }
+
+@media (max-width: 768px) {
+    #home .inset-4,
+    #home.inset-0, 
+    #home .w-64{
+       display: none;
+    }
+}
