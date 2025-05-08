@@ -9,7 +9,7 @@ const Home = () => {
             <div className="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
                 <p className="text-pink text-lg mb-2">Hello, I'm</p>
                 <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                    <span className="gradient-text">Maria Clara</span>
+                    <span className="gradient-text">Clara Cayres</span>
                 </h1>
                 <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-lightPurple">Aspiring Full-Stack Developer</h2>
                 <p className="text-gray-300 mb-8 max-w-lg mx-auto md:mx-0">
