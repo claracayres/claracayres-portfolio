@@ -106,7 +106,7 @@ const AboutMe = () => {
                         </div>
                         <a
                             download="Resume-Maria-Clara-Cayres-de-Almeida.pdf"
-                            href="./src/assets/Resume - Maria Clara Cayres de Almeida.pdf"
+                            href="/Resume-Maria-Clara-Cayres-de-Almeida.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-gradient px-8 py-3 rounded-full font-medium inline-block hover:opacity-90 transition-opacity shadow-lg shadow-pink/20"
