@@ -4,6 +4,7 @@ import eu from '../assets/eu.jpg';
 const AboutMe = () => {
     return (
         <section id="about" className="py-20 bg-gradient-to-b from-darkBlue to-darkBlue/95">
+
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold mb-2">
@@ -72,7 +73,7 @@ const AboutMe = () => {
                                 {
                                     icon: "fas fa-briefcase",
                                     title: "Experience",
-                                    description: "<1 years of experience",
+                                    description: "<1 year of experience",
                                     bgColor: "bg-purple/20",
                                     iconColor: "text-purple",
                                 },
