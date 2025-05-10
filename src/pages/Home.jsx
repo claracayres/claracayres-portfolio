@@ -1,10 +1,17 @@
 import React from 'react';
 import eu from '../assets/eu.jpg';
+import { Helmet } from 'react-helmet';
 
 const Home = () => {
   return (
     // Hero Section
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+        <Helmet>
+            <title>Clara Cayres - Home</title>
+            <meta name="description" content="Home page of Clara Cayres, web developer. See my projects and get in touch." />
+            <meta name="keywords" content="Clara Cayres, portfolio, web developer, projects, frontend, backend, freelancer, internship" />
+        </Helmet>
+
         <div className="container mx-auto px-4 py-16 flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
                 <p className="text-pink text-lg mb-2">Hello, I'm</p>
