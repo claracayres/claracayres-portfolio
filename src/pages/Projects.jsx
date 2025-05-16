@@ -1,14 +1,7 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
 
 const Projects = () => {
     return (
         <section id="projects" className="py-20 bg-gradient-to-b from-darkBlue/95 to-darkBlue">
-            <Helmet>
-                <title>Clara Cayres - Projects</title>
-                <meta name="description" content="Projects by Clara Cayres, web developer. See my work and get in touch." />
-            </Helmet>
-
                 <div className="container mx-auto px-4">
                         <div className="text-center mb-16">
                                 <h2 className="text-3xl md:text-4xl font-bold mb-2">My <span className="gradient-text">Projects</span></h2>

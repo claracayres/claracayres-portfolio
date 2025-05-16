@@ -1,15 +1,8 @@
-import React from 'react';
 import eu from '../assets/eu.jpg';
-import { Helmet } from 'react-helmet';
 
 const AboutMe = () => {
     return (
         <section id="about" className="py-20 bg-gradient-to-b from-darkBlue to-darkBlue/95">
-            <Helmet>
-                <title>Clara Cayres - Full Stack Developer</title>
-                    <meta name="description" content="Portfolio by Clara Cayres, web developer. See projects, skills, and get in touch." />
-                    <meta name="keywords" content="Clara Cayres, portfolio, web developer, projects, frontend, backend, freelancer, internship" />  
-            </Helmet>
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold mb-2">

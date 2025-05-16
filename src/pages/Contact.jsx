@@ -1,5 +1,3 @@
-import React, { useEffect } from "react";
-import { Helmet } from "react-helmet";
 
 const Contact = () => {
     const handleFormSubmit = async (event) => {
@@ -37,10 +35,6 @@ const Contact = () => {
     return (
         // <!-- Contact Section -->
         <section id="contact" className="py-20 bg-gradient-to-b from-darkBlue/95 to-darkBlue">
-            <Helmet>
-                <title>Clara Cayres - Contact</title>
-                <meta name="description" content="Contact Clara Cayres, web developer. Discuss your project ideas and get in touch." />
-            </Helmet>
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold mb-2">
