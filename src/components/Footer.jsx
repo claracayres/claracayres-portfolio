@@ -13,7 +13,7 @@ const Footer = () => {
 
           <div className="mb-4 text-center md:mb-0 md:text-left">
             <p className="text-gray-400">
-              © 2025 All rights reserved.
+              ©2025 Clara Cayres. All rights reserved.
             </p>
           </div>
 
