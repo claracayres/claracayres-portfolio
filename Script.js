@@ -2,65 +2,6 @@
 export function initDomScripts() {
   if (typeof window === "undefined") return;
 
-  // Mobile menu toggle
-  document.addEventListener("DOMContentLoaded", () => {
-    const mobileMenuButton = document.getElementById("mobile-menu-button");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const navLinks = document.querySelectorAll(".nav-link");
-
-    if (mobileMenuButton && mobileMenu) {
-      mobileMenuButton.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
-      });
-
-      navLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          mobileMenu.classList.add("hidden");
-        });
-      });
-    }
-  });
-
-  // Active nav link
-  const sections = document.querySelectorAll("section");
-
-  window.addEventListener("scroll", () => {
-    let current = "";
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-
-      if (pageYOffset >= sectionTop - 200) {
-        current = section.getAttribute("id");
-      }
-    });
-
-    // navLinks.forEach((link) => {
-    //   link.classList.remove("active");
-    //   if (link.getAttribute("href").substring(1) === current) {
-    //     link.classList.add("active");
-    //   }
-    // });
-  });
-
-  // Back to top button
-  const backToTopButton = document.getElementById("back-to-top");
-  if (backToTopButton) {
-    window.addEventListener("scroll", () => {
-      if (window.pageYOffset > 300) {
-        backToTopButton.classList.remove("opacity-0", "invisible");
-        backToTopButton.classList.add("opacity-100", "visible");
-      } else {
-        backToTopButton.classList.add("opacity-0", "invisible");
-        backToTopButton.classList.remove("opacity-100", "visible");
-      }
-    });
-
-    backToTopButton.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
-
   // Particle animation
   function createParticles() {
     const particles = document.getElementById("particles");
@@ -91,32 +32,6 @@ export function initDomScripts() {
       particles.appendChild(particle);
     }
   }
-
-  // Form submission handler
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const subject = document.getElementById("subject").value;
-    const message = document.getElementById("message").value;
-
-    const formspreeUrl = "https://formspree.io/f/xqapnorp";
-    const formData = { name, email, subject, message };
-
-    try {
-      await fetch(formspreeUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      console.log("Message sent to Formspree!");
-      alert("Your message has been sent successfully!");
-    } catch (error) {
-      console.error("Error sending to Formspree:", error);
-      alert("There was an error sending your message. Please try again later.");
-    }
-  };
 
   // Add floating animation styles
   const style = document.createElement("style");
