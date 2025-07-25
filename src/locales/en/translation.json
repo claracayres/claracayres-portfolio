@@ -1,0 +1,115 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "achievements": "Achievements",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "name": "Clara Cayres",
+    "title": "Aspiring Full Stack Developer",
+    "subtitle": "Exploring APIs, Python, and scalable systems — with a growing passion for Data Science and advancing in Front-End development.",
+    "cta": "Let's talk",
+    "projects": "View Projects"
+  },
+  "about": {
+    "title": "About",
+    "subtitle": "Me",
+    "area": "Full Stack Developer & UI/UX Designer",
+    "p1": "Hi! I'm Clara Cayres, a Software Engineering student dedicated to technology, continuous learning, and turning ideas into real solutions. I'm currently in my 5th semester of college.",
+    "p2": "Currently, I live in the United States as an au pair, which has provided me with an amazing multicultural experience and helped me grow in resilience, independence, and communication. My goal is to build a solid career as a developer and contribute to projects that truly make a difference.",
+    "p3": "My hands-on experience includes building APIs, modern web apps, and microservices using tools like Python, Flask, Django, SQL, Docker, and Kubernetes. I'm also working to enhance my Front-End skills to become a full-stack developer.",
+    "p4": "Beyond coding, I love exploring new cultures and learning languages. I value empathy, curiosity, and teamwork, and I’m always eager to take on new challenges that help me grow both personally and professionally.",
+    "btn": "Download CV",
+    "btnlink":"/Resume - en - Maria Clara Cayres de Almeida.pdf"
+  },
+  "aboutopics": {
+    "education": "Education",
+    "edescription": "Bachelor's in Software Engineering",
+    "edgraduation": "Grad. 2026",
+    "experience": "Professional Experience",
+    "exdescription": "<1 year of experience",
+    "location": "Location",
+    "locdescription": "North Carolina, USA",
+    "fredescription": "Avaiable"
+  },
+
+  "projects": {
+    "title": "My",
+    "subtitle": "Projects",
+    "description": "Check out some of my most recent work. Each project represents a unique challenge that helped me grow as a developer.",
+    "fisiotitle": "Fisioella Clinic Website",
+    "fisiodescription": "A website developed for Fisioella Clinic by Dr. Neila Cayres, focused to reach more women in need of pelvic physiotherapy and offer them valuable guidance and support. Built with React, Vite, CSS, and JavaScript, and deployed on Vercel."
+  },
+
+  "achievements": {
+    "title": "My",
+    "subtitle": "Achievements",
+    "description": "Here are some of the courses and certifications I've completed to enhance my skills and knowledge in software development.",
+    "certificate": "View Certificate",
+    "card1": {
+      "date": "February, 2025",
+      "description": "A comprehensive course that enhanced my understanding of English grammar at an intermediate level."
+    },
+    "card2": {
+      "date": "September, 2024",
+      "description": "Focused on advanced grammar concepts and their practical applications and conversational skills."
+    },
+    "card3": {
+      "date": "March, 2025",
+      "description": "A 11-course certificate from IBM on building scalable back-end apps using Python, Flask, Docker, Kubernetes, and microservices — with hands-on projects and real-world training."
+    },
+    "card4": {
+      "date": "April, 2025",
+      "description": "Completed this 4-course specialization mastering web essentials like HTML5, CSS3, responsive design, JavaScript, and AJAX to build dynamic, user-friendly web applications. Achieved perfect scores in most courses, emphasizing strong front-end development skills."
+    },
+    "card5": {
+      "title": "Data Structures in Python",
+      "date": "1st semester, 2025",
+      "description": "Completed a 10-hour course covering the fundamentals of data structures using Python. This training strengthened my understanding of core programming logic, object-oriented concepts, and practical problem-solving."
+    },
+    "card6": {
+      "title": "Meta Front-End Developer",
+      "date": "In Progress",
+      "description": "A 9-course specialization from Meta focusing on front-end development using React, JavaScript, and CSS. This program provided hands-on experience in building responsive user interfaces and mastering essential front-end technologies."
+    }
+  },
+
+  "skills": {
+    "title": "My",
+    "subtitle": "Skills",
+    "description": "These are the technologies and tools I work with daily to create efficient digital solutions.",
+    "technologies": "Technologies & Tools"
+  },
+  "contact": {
+    "title": "Get in",
+    "subtitle": "Touch",
+    "description": "Have a project in mind? Let's talk about how I can help turn your idea into reality.",
+    "info": "Contact Information",
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "locationDescription": "Angier, North Carolina, United States",
+    "social": "Find me on social media",
+    "form": {
+      "title": "Send a message",
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "Your email",
+      "subject": "Subject",
+      "subjectPlaceholder": "Message subject",
+      "message": "Message",
+      "messagePlaceholder": "Your message...",
+      "send": "Send Message",
+      "success": "Your message has been sent successfully!",
+      "error": "There was an error sending your message. Please try again later."
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  }
+}

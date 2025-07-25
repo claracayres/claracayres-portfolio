@@ -1,0 +1,117 @@
+{
+  "nav": {
+    "home": "Início",
+    "about": "Sobre",
+    "skills": "Habilidades",
+    "achievements": "Conquistas",
+    "projects": "Projetos",
+    "contact": "Contato"
+  },
+  "hero": {
+    "greeting": "Olá, eu sou",
+    "name": "Clara Cayres",
+    "title": "Futura Desenvolvedora Full Stack",
+    "subtitle": "Explorando APIs, Python e sistemas escaláveis — com uma crescente paixão por Ciência de Dados e avanço no desenvolvimento Front-End.",
+    "cta": "Vamos conversar",
+    "projects": "Ver Projetos"
+  },
+  "about": {
+    "title": "Sobre",
+    "subtitle": "Mim",
+    "area": "Desenvolvedora Full Stack & Designer UI/UX",
+    "p1": "Olá! Sou Clara Cayres, estudante de Engenharia de Software dedicada à tecnologia, aprendizado contínuo e transformar ideias em soluções reais. Estou atualmente no meu 5º semestre de faculdade.",
+    "p2": "Atualmente, moro nos Estados Unidos como au pair, o que me proporcionou uma incrível experiência multicultural e me ajudou a crescer em resiliência, independência e comunicação. Meu objetivo é construir uma carreira sólida como desenvolvedora e contribuir para projetos que realmente façam a diferença.",
+    "p3": "Minha experiência prática inclui a construção de APIs, aplicativos web modernos e microserviços usando ferramentas como Python, Flask, Django, SQL, Docker e Kubernetes. Também estou trabalhando para aprimorar minhas habilidades em Front-End para me tornar uma desenvolvedora full-stack.",
+    "p4": "Além de codificar, adoro explorar novas culturas e aprender idiomas. Valorizo a empatia, curiosidade e trabalho em equipe, e estou sempre ansiosa para enfrentar novos desafios que me ajudem a crescer pessoal e profissionalmente.",
+    "description": "Sou uma desenvolvedora apaixonada por criar experiências digitais que fazem a diferença. Com experiência em desenvolvimento web moderno, estou sempre buscando novas tecnologias e desafios.",
+    "btn": "Baixar Currículo",
+    "btnlink": "/Resume - pt-br - Maria Clara Cayres de Almeida.pdf"
+  },
+  "aboutopics": {
+    "education": "Educação",
+    "edescription": "Bacharelado em Engenharia de Software",
+    "edgraduation": "Grad. 2026",
+    "experience": "Experiência Profissional",
+    "exdescription": "<1 ano de experiência",
+    "location": "Localização",
+    "locdescription": "Carolina do Norte, EUA",
+    "fredescription": "Disponível"
+  },
+
+  "projects": {
+    "title": "Meus",
+    "subtitle": "Projetos",
+    "description": "Confira alguns dos meus trabalhos mais recentes. Cada projeto representa um desafio único que me ajudou a crescer como desenvolvedora.",
+    "fisiotitle": "Site da Clínica Fisioella",
+    "fisiodescription": "Um site desenvolvido para a Clínica Fisioella pela Dra. Neila Cayres, focado em alcançar mais mulheres que precisam de fisioterapia pélvica e oferecer orientação e suporte valiosos. Construído com React, Vite, CSS e JavaScript, e hospedado no Vercel."
+  },
+
+  "achievements": {
+    "title": "Minhas",
+    "subtitle": "Conquistas",
+    "description": "Aqui estão alguns dos cursos e certificações que completei para aprimorar minhas habilidades e conhecimentos em desenvolvimento de software.",
+    "certificate": "Ver Certificado",
+    "card1": {
+      "date": "Fevereiro, 2025",
+      "description": "Um curso abrangente que aprimorou minha compreensão da gramática inglesa em nível intermediário."
+    },
+    "card2": {
+      "date": "Setembro, 2024",
+      "description": "Focado em conceitos avançados de gramática e suas aplicações práticas e habilidades de conversação."
+    },
+    "card3": {
+      "date": "Março, 2025",
+      "description": "Um certificado de 11 cursos da IBM sobre construção de aplicativos back-end escaláveis usando Python, Flask, Docker, Kubernetes e microserviços — com projetos práticos e treinamento no mundo real."
+    },
+    "card4": {
+      "title": "Especialização em Desenvolvimento Web",
+      "date": "Abril, 2025",
+      "description": "Concluída esta especialização de 4 cursos dominando fundamentos da web como HTML5, CSS3, design responsivo, JavaScript e AJAX para construir aplicações web dinâmicas e amigáveis ao usuário. Obtive pontuações perfeitas na maioria dos cursos, enfatizando fortes habilidades de desenvolvimento front-end."
+    },
+    "card5": {
+      "title": "Certificação em Estruturas de Dados",
+      "date": "1º Semestre, 2025",
+      "description": "Concluído um curso de 10 horas abordando os fundamentos das estruturas de dados usando Python. Este treinamento fortaleceu minha compreensão da lógica de programação básica, conceitos de orientação a objetos e resolução prática de problemas."
+    },
+    "card6": {
+      "title": "Meta Front-End Developer",
+      "date": "Em progresso",
+      "description": "Uma especialização de 9 cursos da Meta com foco em desenvolvimento front-end usando React, JavaScript e CSS. Este programa proporcionou experiência prática na construção de interfaces de usuário responsivas e no domínio das tecnologias essenciais de front-end."
+    }
+  },
+
+  "skills": {
+    "title": "Minhas",
+    "subtitle": "Habilidades",
+    "description": "Estas são as tecnologias e ferramentas que utilizo diariamente para criar soluções digitais eficientes.",
+    "technologies": "Tecnologias e Ferramentas"
+  },
+  "contact": {
+    "title": "Entre em",
+    "subtitle": "Contato",
+    "description": "Tem um projeto em mente? Vamos conversar sobre como posso ajudar a transformar sua ideia em realidade.",
+    "info": "Informações de Contato",
+    "email": "Email",
+    "phone": "Telefone",
+    "location": "Localização",
+    "locationDescription": "Angier, Carolina do Norte, EUA",
+    "social": "Me encontre nas redes sociais",
+    "form": {
+      "title": "Envie uma mensagem",
+      "name": "Nome",
+      "namePlaceholder": "Seu nome",
+      "email": "Email",
+      "emailPlaceholder": "Seu email",
+      "subject": "Assunto",
+      "subjectPlaceholder": "Assunto da mensagem",
+      "message": "Mensagem",
+      "messagePlaceholder": "Sua mensagem...",
+      "send": "Enviar Mensagem",
+      "success": "Sua mensagem foi enviada com sucesso!",
+      "error": "Houve um erro ao enviar sua mensagem. Tente novamente mais tarde."
+    }
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados."
+  }
+}
