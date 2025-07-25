@@ -16,7 +16,7 @@ const Home = () => {
       id="home"
       className="relative flex min-h-screen items-center justify-center overflow-hidden pt-16"
     >
-      <div className="container mx-15 flex flex-col items-center px-4 py-16 md:flex-row">
+      <div className="container mx-10 flex flex-col items-center px-4 py-16 md:flex-row">
         <div className="mb-10 text-center md:mb-0 md:w-1/2 md:text-left">
           <p className="text-pink mb-2 text-lg">{t("hero.greeting")}</p>
           <h1 className="mb-4 text-4xl font-bold md:text-5xl">
