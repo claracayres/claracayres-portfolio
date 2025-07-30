@@ -51,7 +51,7 @@ const Skills = () => {
           <h3 className="text-lightPurple mb-10 text-center text-2xl font-semibold">
             {t("skills.technologies")}
           </h3>
-          <div className="mx-auto grid max-w-4xl grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+          <div className="mx-auto grid max-w-4xl grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 justify-items-center">
             {[
               { icon: "fab fa-html5", color: "text-pink", name: "HTML5" },
               { icon: "fab fa-css3-alt", color: "text-purple", name: "CSS3" },
@@ -62,11 +62,7 @@ const Skills = () => {
               { icon: "fab fa-figma", color: "text-pink", name: "Figma" },
               { icon: "fab fa-python", color: "text-purple", name: "Python" },
               { icon: "fab fa-docker", color: "text-pink", name: "Docker" },
-              {
-                icon: "fab fa-microsoft",
-                color: "text-purple",
-                name: "Microsoft Azure",
-              },
+              { icon: "fab fa-microsoft", color: "text-purple", name: "Microsoft Azure" },
             ].map((tech, index) => {
               const totalItems = 10;
               const itemsPerRow = 6;
@@ -76,7 +72,7 @@ const Skills = () => {
               return (
                 <div
                   key={index}
-                  className={`card hover:glow flex flex-col items-center justify-center rounded-lg p-4 transition-all ${
+                  className={`w-30 h-30 text-center card hover:glow flex flex-col items-center justify-center rounded-lg p-4 transition-all ${
                     isFirstOfLastRow ? "lg:col-start-2" : ""
                   }`}
                 >
