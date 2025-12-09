@@ -30,6 +30,7 @@ body {
 
 .card {
   background: rgba(28, 39, 65, 0.8);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(147, 112, 219, 0.3);
 }

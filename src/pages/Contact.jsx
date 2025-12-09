@@ -75,16 +75,6 @@ const Contact = () => {
                 </div>
 
                 <div className="flex items-start">
-                  <div className="bg-purple/20 mr-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-full">
-                    <i className="fas fa-phone-alt text-purple"></i>
-                  </div>
-                  <div>
-                    <h4 className="mb-1 font-medium">{t("contact.phone")}</h4>
-                    <p className="text-gray-400">+1 (919) 888-1033</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
                   <div className="bg-pink/20 mr-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-full">
                     <i className="fas fa-map-marker-alt text-pink"></i>
                   </div>

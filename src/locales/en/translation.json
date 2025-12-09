@@ -51,18 +51,22 @@
     "description": "Here are some of the courses and certifications I've completed to enhance my skills and knowledge in software development.",
     "certificate": "View Certificate",
     "card1": {
+      "title": "Learn English Intermediate Grammar ",
       "date": "February, 2025",
       "description": "A comprehensive course that enhanced my understanding of English grammar at an intermediate level."
     },
     "card2": {
+      "title": "Beyond the Basics: Advanced Grammar",
       "date": "September, 2024",
       "description": "Focused on advanced grammar concepts and their practical applications and conversational skills."
-    },
-    "card3": {
+      },
+      "card3": {
+      "title": "IBM Back-End Development Professional Certificate",
       "date": "March, 2025",
       "description": "A 11-course certificate from IBM on building scalable back-end apps using Python, Flask, Docker, Kubernetes, and microservices — with hands-on projects and real-world training."
     },
     "card4": {
+      "title": "HTML, CSS, and Javascript for Web Developers",
       "date": "April, 2025",
       "description": "Completed this 4-course specialization mastering web essentials like HTML5, CSS3, responsive design, JavaScript, and AJAX to build dynamic, user-friendly web applications. Achieved perfect scores in most courses, emphasizing strong front-end development skills."
     },
