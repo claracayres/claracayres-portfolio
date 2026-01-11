@@ -88,10 +88,20 @@ const Projects = () => {
 
                 <div className="p-6">
                   <h3 className="mt-4 mb-2 text-xl font-semibold">
-                    {t(project.titleKey) || project.titleKey}
+                    {t(project.titleKey) !== project.titleKey
+                      ? t(project.titleKey)
+                      : project.title?.[t("lang")] ||
+                        project.title?.pt ||
+                        project.title?.en ||
+                        project.titleKey}
                   </h3>
                   <p className="mb-4 text-gray-400">
-                    {t(project.descKey) || project.descKey}
+                    {t(project.descKey) !== project.descKey
+                      ? t(project.descKey)
+                      : project.description?.[t("lang")] ||
+                        project.description?.pt ||
+                        project.description?.en ||
+                        project.descKey}
                   </p>
 
                   {/* Technologies Tags */}

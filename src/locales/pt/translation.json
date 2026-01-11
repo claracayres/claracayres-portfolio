@@ -1,4 +1,5 @@
 {
+  "lang": "pt",
   "nav": {
     "home": "Início",
     "about": "Sobre",
@@ -42,7 +43,11 @@
     "subtitle": "Projetos",
     "description": "Confira alguns dos meus trabalhos mais recentes. Cada projeto representa um desafio único que me ajudou a crescer como desenvolvedora.",
     "fisiotitle": "Site da Clínica Fisioella",
-    "fisiodescription": "Um site desenvolvido para a Clínica Fisioella pela Dra. Neila Cayres, focado em alcançar mais mulheres que precisam de fisioterapia pélvica e oferecer orientação e suporte valiosos. Construído com React, Vite, CSS e JavaScript, e hospedado no Vercel."
+    "fisiodescription": "Um site desenvolvido para a Clínica Fisioella pela Dra. Neila Cayres, focado em alcançar mais mulheres que precisam de fisioterapia pélvica e oferecer orientação e suporte valiosos. Construído com React, Vite, CSS e JavaScript, e hospedado no Vercel.",
+    "fisioella": {
+      "title": "Site da Clínica Fisioella",
+      "description": "Um site desenvolvido para a Clínica Fisioella pela Dra. Neila Cayres, focado em alcançar mais mulheres que precisam de fisioterapia pélvica e oferecer orientação e suporte valiosos. Construído com React, Vite, CSS e JavaScript, e hospedado no Vercel."
+    }
   },
   "achievements": {
     "title": "Minhas",
@@ -80,17 +85,12 @@
       "title": "Web & Mobile Designer: UI/UX e Figma",
       "date": "Em progresso",
       "description": "Curso completo de UI/UX Design para web e mobile, com foco em Figma, prototipação, design responsivo, usabilidade e boas práticas de interface. Estou desenvolvendo projetos práticos que me permitem aplicar conceitos de tipografia, cores, grids e interação, aprimorando minhas habilidades em design digital de ponta."
-    }
-  },
-  "projects": {
-    "title": "Meus",
-    "subtitle": "Projetos",
-    "description": "Confira alguns dos meus trabalhos mais recentes. Cada projeto representa um desafio único que me ajudou a crescer como desenvolvedora.",
-    "fisiotitle": "Site da Clínica Fisioella",
-    "fisiodescription": "Um site desenvolvido para a Clínica Fisioella pela Dra. Neila Cayres, focado em alcançar mais mulheres que precisam de fisioterapia pélvica e oferecer orientação e suporte valiosos. Construído com React, Vite, CSS e JavaScript, e hospedado no Vercel.",
-    "fisioella": {
-      "title": "Site da Clínica Fisioella",
-      "description": "Um site desenvolvido para a Clínica Fisioella pela Dra. Neila Cayres, focado em alcançar mais mulheres que precisam de fisioterapia pélvica e oferecer orientação e suporte valiosos. Construído com React, Vite, CSS e JavaScript, e hospedado no Vercel."
+    },
+    "projects": {
+      "project2": {
+        "title": "Habitus",
+        "description": "Uma landing page responsiva criada para promover um aplicativo de compras para dispositivos móveis. Este projeto foi originalmente inspirado em um curso de design de UI/UX, mas o HTML e o CSS foram completamente reconstruídos do zero, com foco em semântica limpa, responsividade e melhores práticas de desenvolvimento front-end."
+      }
     }
   },
   "skills": {

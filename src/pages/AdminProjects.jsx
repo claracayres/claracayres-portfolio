@@ -227,6 +227,15 @@ export default function AdminProjects() {
       const projectData = {
         titleKey: currentProject.titleKey || "",
         descKey: currentProject.descKey || "",
+        // Adiciona traduções diretamente no documento
+        title: {
+          pt: currentProject.titlePt || "",
+          en: currentProject.titleEn || "",
+        },
+        description: {
+          pt: currentProject.descPt || "",
+          en: currentProject.descEn || "",
+        },
         images: currentProject.images || [],
         tags: currentProject.tags || [],
         technologies: currentProject.technologies || [],

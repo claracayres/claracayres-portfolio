@@ -1,4 +1,5 @@
 {
+  "lang": "en",
   "nav": {
     "home": "Home",
     "about": "About",
@@ -86,6 +87,12 @@
       "title": "Web & Mobile Designer: UI/UX and Figma",
       "date": "In Progress",
       "description": "Comprehensive course in UI/UX design for web and mobile, focusing on Figma, prototyping, responsive design, usability, and interface best practices. I am working on practical projects that allow me to apply concepts of typography, colors, grids, and interaction, enhancing my skills in modern digital design."
+    },
+    "projects": {
+      "project2": {
+        "title": "Habitus",
+        "description": "A responsive landing page created to promote a mobile shopping app. This project was originally inspired by a UI/UX design course, but the HTML and CSS were fully rebuilt from scratch with a focus on clean semantics, responsiveness, and real-world front-end best practices."
+      }
     }
   },
   "skills": {
