@@ -3,9 +3,12 @@ import { BrowserRouter } from "react-router-dom";
 import "./styles/global.css";
 import App from "./App.jsx";
 import "./components/i18n.js"; // Importing i18n configuration
+import { AuthProvider } from "./contexts/AuthContext";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <App />
-  </BrowserRouter>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </BrowserRouter>,
 );

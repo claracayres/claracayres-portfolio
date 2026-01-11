@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlus,
@@ -12,10 +14,13 @@ import {
   faCode,
   faGlobe,
   faLink,
+  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { API_ENDPOINTS } from "../config/api";
 
 export default function AdminProjects() {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -361,11 +366,39 @@ export default function AdminProjects() {
     <div className="bg-darkBlue min-h-screen pt-20 pb-10">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="mb-8 text-center">
-          <h1 className="mb-4 text-4xl font-bold">
-            <span className="gradient-text">Admin</span> - Projetos
-          </h1>
-          <p className="text-gray-400">Gerencie os projetos do portfolio</p>
+        <div className="mb-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="mb-4 text-4xl font-bold">
+                <span className="gradient-text">Admin</span> - Projetos
+              </h1>
+              <p className="text-gray-400">Gerencie os projetos do portfolio</p>
+            </div>
+            <div className="flex gap-4">
+              <button
+                onClick={() => navigate("/admin")}
+                className="rounded-lg bg-gray-700 px-4 py-2 text-white hover:bg-gray-600"
+              >
+                Achievements
+              </button>
+              <button
+                onClick={() => navigate("/admin-skills")}
+                className="rounded-lg bg-gray-700 px-4 py-2 text-white hover:bg-gray-600"
+              >
+                Skills
+              </button>
+              <button
+                onClick={() => {
+                  logout();
+                  navigate("/");
+                }}
+                className="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+              >
+                <FontAwesomeIcon icon={faSignOutAlt} />
+                Sair
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Add Button */}
