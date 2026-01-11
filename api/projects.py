@@ -77,5 +77,6 @@ def delete_project(project_id):
         return jsonify({"error": str(e)}), 500
 
 # Handler para Vercel
-def handler(request):
-    return app(request.environ, start_response)
+# Handler para Vercel
+def handler(environ, start_response):
+    return app(environ, start_response)
