@@ -126,9 +126,9 @@ export default function AdminProjects() {
         return;
       }
 
-      // Validar tamanho (max 2MB)
-      if (file.size > 2 * 1024 * 1024) {
-        alert("Imagem muito grande! Máximo 2MB");
+      // Validar tamanho (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Imagem muito grande! Máximo 5MB");
         return;
       }
 
