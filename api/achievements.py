@@ -75,5 +75,6 @@ def delete_achievement(achievement_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-def handler(request):
-    return app(request.environ, start_response)
+# Handler para Vercel
+def handler(environ, start_response):
+    return app(environ, start_response)

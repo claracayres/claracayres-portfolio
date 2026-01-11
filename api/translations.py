@@ -65,5 +65,6 @@ def bulk_translations():
         print("Bulk translation error:", str(e))
         return jsonify({"error": str(e)}), 500
 
-def handler(request):
-    return app(request.environ, start_response)
+# Handler para Vercel
+def handler(environ, start_response):
+    return app(environ, start_response)
