@@ -46,9 +46,5 @@
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ],
-  "env": {
-    "MONGO_URI": "@mongo_uri",
-    "DB_NAME": "@db_name"
-  }
+  ]
 }
