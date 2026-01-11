@@ -18,9 +18,9 @@ def get_db():
     mongo_uri = os.environ.get("MONGO_URI")
     if not mongo_uri:
         raise Exception("MONGO_URI não definido")
-    db_name = os.environ.get("DB_NAME", "Portfolio")
+    db_name = os.environ.get("DB_NAME", "Portfolio")  # nome do banco
     client = MongoClient(mongo_uri)
-    db = client[db_name]
+    db = client[db_name]  # seleciona o banco
     return db
 
 # Função para converter ObjectId para string
