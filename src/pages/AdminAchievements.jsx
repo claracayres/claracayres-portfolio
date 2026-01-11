@@ -122,6 +122,32 @@ export default function AdminAchievements() {
     }
   };
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Validar tipo de arquivo
+      if (!file.type.startsWith("image/")) {
+        alert("Por favor, selecione apenas arquivos de imagem!");
+        return;
+      }
+
+      // Validar tamanho (max 2MB)
+      if (file.size > 2 * 1024 * 1024) {
+        alert("Imagem muito grande! Máximo 2MB");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCurrentAchievement((prev) => ({
+          ...prev,
+          images: [...prev.images, reader.result],
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleRemoveImage = (index) => {
     setCurrentAchievement((prev) => ({
       ...prev,
@@ -700,6 +726,23 @@ export default function AdminAchievements() {
                     <FontAwesomeIcon icon={faImage} className="mr-2" />
                     Imagens
                   </label>
+
+                  {/* Upload de arquivo */}
+                  <div className="mb-2">
+                    <label className="bg-purple hover:bg-purple/80 inline-flex cursor-pointer items-center gap-2 rounded-lg px-4 py-3 text-white">
+                      <FontAwesomeIcon icon={faImage} />
+                      Upload do Dispositivo
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="hidden"
+                      />
+                    </label>
+                    <span className="ml-3 text-sm text-gray-400">ou</span>
+                  </div>
+
+                  {/* URL de imagem */}
                   <div className="flex gap-2">
                     <input
                       type="text"
@@ -711,7 +754,7 @@ export default function AdminAchievements() {
                         }))
                       }
                       className="focus:ring-purple flex-1 rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="/Certificates/image.png"
+                      placeholder="Ou cole a URL da imagem"
                     />
                     <button
                       type="button"
@@ -721,21 +764,27 @@ export default function AdminAchievements() {
                       <FontAwesomeIcon icon={faPlus} />
                     </button>
                   </div>
-                  <div className="mt-2 flex flex-wrap gap-2">
+
+                  {/* Preview das imagens */}
+                  <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-3">
                     {currentAchievement.images.map((image, index) => (
-                      <span
+                      <div
                         key={index}
-                        className="flex items-center gap-2 rounded bg-gray-600 px-3 py-1 text-sm text-white"
+                        className="group relative overflow-hidden rounded-lg bg-gray-700"
                       >
-                        {image}
+                        <img
+                          src={image}
+                          alt={`Preview ${index + 1}`}
+                          className="h-32 w-full object-cover"
+                        />
                         <button
                           type="button"
                           onClick={() => handleRemoveImage(index)}
-                          className="text-red-400 hover:text-red-300"
+                          className="absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white opacity-0 transition-opacity group-hover:opacity-100 hover:bg-red-600"
                         >
                           <FontAwesomeIcon icon={faTimes} />
                         </button>
-                      </span>
+                      </div>
                     ))}
                   </div>
                 </div>
