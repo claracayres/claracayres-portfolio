@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "./api/*.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/projects",
+      "dest": "/api/projects.py"
+    },
+    {
+      "src": "/api/projects/(.*)",
+      "dest": "/api/projects.py"
+    },
+    {
+      "src": "/api/skills",
+      "dest": "/api/skills.py"
+    },
+    {
+      "src": "/api/skills/(.*)",
+      "dest": "/api/skills.py"
+    },
+    {
+      "src": "/api/achievements",
+      "dest": "/api/achievements.py"
+    },
+    {
+      "src": "/api/achievements/(.*)",
+      "dest": "/api/achievements.py"
+    },
+    {
+      "src": "/api/translations/(.*)",
+      "dest": "/api/translations.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "MONGO_URI": "@mongo_uri",
+    "DB_NAME": "@db_name"
+  }
+}

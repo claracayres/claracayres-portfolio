@@ -24,7 +24,7 @@
     "p3": "My hands-on experience includes building APIs, modern web apps, and microservices using tools like Python, Flask, Django, SQL, Docker, and Kubernetes. I'm also working to enhance my Front-End skills to become a full-stack developer.",
     "p4": "Beyond coding, I love exploring new cultures and learning languages. I value empathy, curiosity, and teamwork, and I’m always eager to take on new challenges that help me grow both personally and professionally.",
     "btn": "Download CV",
-    "btnlink":"/Resume - en - Maria Clara Cayres de Almeida.pdf"
+    "btnlink": "/Resume - en - Maria Clara Cayres de Almeida.pdf"
   },
   "aboutopics": {
     "education": "Education",
@@ -36,15 +36,17 @@
     "locdescription": "North Carolina, USA",
     "fredescription": "Available"
   },
-
   "projects": {
     "title": "My",
     "subtitle": "Projects",
     "description": "Check out some of my most recent work. Each project represents a unique challenge that helped me grow as a developer.",
     "fisiotitle": "Fisioella Clinic Website",
-    "fisiodescription": "A website developed for Fisioella Clinic by Dr. Neila Cayres, focused to reach more women in need of pelvic physiotherapy and offer them valuable guidance and support. Built with React, Vite, CSS, and JavaScript, and deployed on Vercel."
+    "fisiodescription": "A website developed for Fisioella Clinic by Dr. Neila Cayres, focused to reach more women in need of pelvic physiotherapy and offer them valuable guidance and support. Built with React, Vite, CSS, and JavaScript, and deployed on Vercel.",
+    "fisioella": {
+      "title": "Fisioella Clinic Website",
+      "description": "A website developed for Fisioella Clinic by Dr. Neila Cayres, focused to reach more women in need of pelvic physiotherapy and offer them valuable guidance and support. Built with React, Vite, CSS, and JavaScript, and deployed on Vercel."
+    }
   },
-
   "achievements": {
     "title": "My",
     "subtitle": "Achievements",
@@ -59,8 +61,8 @@
       "title": "Beyond the Basics: Advanced Grammar",
       "date": "September, 2024",
       "description": "Focused on advanced grammar concepts and their practical applications and conversational skills."
-      },
-      "card3": {
+    },
+    "card3": {
       "title": "IBM Back-End Development Professional Certificate",
       "date": "March, 2025",
       "description": "A 11-course certificate from IBM on building scalable back-end apps using Python, Flask, Docker, Kubernetes, and microservices — with hands-on projects and real-world training."
@@ -77,11 +79,15 @@
     },
     "card6": {
       "title": "Meta Front-End Developer",
-      "date": "In Progress",
+      "date": "September, 2025",
       "description": "A 9-course specialization from Meta focusing on front-end development using React, JavaScript, and CSS. This program provided hands-on experience in building responsive user interfaces and mastering essential front-end technologies."
+    },
+    "card7": {
+      "title": "Web & Mobile Designer: UI/UX and Figma",
+      "date": "In Progress",
+      "description": "Comprehensive course in UI/UX design for web and mobile, focusing on Figma, prototyping, responsive design, usability, and interface best practices. I am working on practical projects that allow me to apply concepts of typography, colors, grids, and interaction, enhancing my skills in modern digital design."
     }
   },
-
   "skills": {
     "title": "My",
     "subtitle": "Skills",

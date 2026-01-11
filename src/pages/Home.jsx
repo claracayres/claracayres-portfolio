@@ -1,13 +1,18 @@
 import eu from "../assets/eu.jpg";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
+import { initDomScripts } from "../Script.js";
 
 const Home = () => {
   const { t } = useTranslation();
+
   useEffect(() => {
     if (window.location.hash) {
       history.replaceState(null, "", window.location.pathname);
     }
+
+    // Inicializar partículas
+    initDomScripts();
   }, []);
 
   return (
@@ -16,7 +21,13 @@ const Home = () => {
       id="home"
       className="relative flex min-h-screen items-center justify-center overflow-hidden pt-16"
     >
-      <div className="container mx-10 flex flex-col items-center px-4 py-16 md:flex-row">
+      {/* Container das partículas */}
+      <div
+        id="particles"
+        className="pointer-events-none absolute inset-0 z-0"
+      ></div>
+
+      <div className="relative z-10 container mx-10 flex flex-col items-center px-4 py-16 md:flex-row">
         <div className="mb-10 text-center md:mb-0 md:w-1/2 md:text-left">
           <p className="text-pink mb-2 text-lg">{t("hero.greeting")}</p>
           <h1 className="mb-4 text-4xl font-bold md:text-5xl">
