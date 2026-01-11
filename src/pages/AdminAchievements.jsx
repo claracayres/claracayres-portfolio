@@ -406,7 +406,7 @@ export default function AdminAchievements() {
             <p className="mt-2 text-gray-400">Carregando achievements...</p>
           </div>
         ) : (
-          <div className="grid justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {achievements.map((achievement) => (
               <div key={achievement._id} className="card rounded-lg p-4">
                 <div className="flex items-center justify-between">
