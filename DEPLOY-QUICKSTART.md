@@ -40,7 +40,7 @@ No dashboard do Vercel > Settings > Environment Variables:
 | Nome        | Valor                                                                                                                     |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------- |
 | `MONGO_URI` | `mongodb+srv://claracayres1205:12m17g14d19n@portfolio.jwkqxpi.mongodb.net/?retryWrites=true&w=majority&appName=portfolio` |
-| `DB_NAME`   | `portfolio`                                                                                                               |
+| `DB_NAME`   | `Portfolio`                                                                                                               |
 
 ⚠️ **IMPORTANTE**: Adicione para **Production, Preview E Development**
 
