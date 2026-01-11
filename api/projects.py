@@ -14,11 +14,12 @@ def after_request(response):
 
 def get_db():
     mongo_uri = os.environ.get("MONGO_URI")
-    if not mongo_uri.endswith("/"):
-        mongo_uri += "/"
-    mongo_uri += os.environ.get("DB_NAME", "Portfolio")
+    if not mongo_uri:
+        raise Exception("MONGO_URI não definido")
+    db_name = os.environ.get("DB_NAME", "Portfolio")  # nome do banco
     client = MongoClient(mongo_uri)
-    return client.get_default_database()
+    db = client[db_name]  # seleciona o banco
+    return db
 
 @app.route('/api/projects', methods=['GET', 'POST', 'OPTIONS'])
 @app.route('/api/projects/<project_id>', methods=['GET', 'PUT', 'DELETE', 'OPTIONS'])
