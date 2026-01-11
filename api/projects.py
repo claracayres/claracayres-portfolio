@@ -13,8 +13,12 @@ def after_request(response):
     return response
 
 def get_db():
-    client = MongoClient(os.environ.get("MONGO_URI"))
-    return client[os.environ.get("DB_NAME")]
+    mongo_uri = os.environ.get("MONGO_URI")
+    if not mongo_uri.endswith("/"):
+        mongo_uri += "/"
+    mongo_uri += os.environ.get("DB_NAME", "Portfolio")
+    client = MongoClient(mongo_uri)
+    return client.get_default_database()
 
 @app.route('/api/projects', methods=['GET', 'POST', 'OPTIONS'])
 @app.route('/api/projects/<project_id>', methods=['GET', 'PUT', 'DELETE', 'OPTIONS'])
