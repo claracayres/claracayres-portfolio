@@ -1,6 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute";
+import AdminLogin from "./pages/AdminLogin";
 import AdminAchievements from "./pages/AdminAchievements";
 import AdminProjects from "./pages/AdminProjects";
 import AdminSkills from "./pages/AdminSkills";
@@ -43,9 +45,31 @@ function App() {
           }
         />
 
-        <Route path="/admin" element={<AdminAchievements />} />
-        <Route path="/admin-projects" element={<AdminProjects />} />
-        <Route path="/admin-skills" element={<AdminSkills />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminAchievements />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin-projects"
+          element={
+            <ProtectedRoute>
+              <AdminProjects />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin-skills"
+          element={
+            <ProtectedRoute>
+              <AdminSkills />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
 
       <Footer />

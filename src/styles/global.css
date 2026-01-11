@@ -2,8 +2,8 @@
 @import "tailwindcss";
 @theme {
   --color-darkBlue: #111827;
-  --color-pink: #ec4899;
-  --color-purple: #6366f1;
+  --color-pink: #ff1493;
+  --color-purple: #9370db;
   --color-lightPurple: #a5b4fc;
   --fontFamily: "Poppins", sans-serif;
 }

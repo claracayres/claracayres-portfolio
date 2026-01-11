@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../contexts/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlus,
@@ -13,11 +15,14 @@ import {
   faCalendar,
   faBuilding,
   faGlobe,
+  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { API_ENDPOINTS } from "../config/api";
 
 export default function AdminAchievements() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { logout } = useAuth();
   const [achievements, setAchievements] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -133,7 +138,7 @@ export default function AdminAchievements() {
 
       // Validar tamanho (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
-        alert('Imagem muito grande! Máximo 5MB');
+        alert("Imagem muito grande! Máximo 5MB");
         return;
       }
 
@@ -407,11 +412,41 @@ export default function AdminAchievements() {
     <div className="bg-darkBlue min-h-screen pt-20 pb-10">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="mb-8 text-center">
-          <h1 className="mb-4 text-4xl font-bold">
-            <span className="gradient-text">Admin</span> - Achievements
-          </h1>
-          <p className="text-gray-400">Gerencie os achievements do portfolio</p>
+        <div className="mb-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="mb-4 text-4xl font-bold">
+                <span className="gradient-text">Admin</span> - Achievements
+              </h1>
+              <p className="text-gray-400">
+                Gerencie os achievements do portfolio
+              </p>
+            </div>
+            <div className="flex gap-4">
+              <button
+                onClick={() => navigate("/admin-projects")}
+                className="rounded-lg bg-gray-700 px-4 py-2 text-white hover:bg-gray-600"
+              >
+                Projects
+              </button>
+              <button
+                onClick={() => navigate("/admin-skills")}
+                className="rounded-lg bg-gray-700 px-4 py-2 text-white hover:bg-gray-600"
+              >
+                Skills
+              </button>
+              <button
+                onClick={() => {
+                  logout();
+                  navigate("/");
+                }}
+                className="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+              >
+                <FontAwesomeIcon icon={faSignOutAlt} />
+                Sair
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Add Button */}
