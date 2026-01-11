@@ -56,6 +56,7 @@ const AboutMe = () => {
             <p className="mb-2 text-gray-300">{t("about.p2")}</p>
             <p className="mb-2 text-gray-300">{t("about.p3")}</p>
             <p className="mb-2 text-gray-300">{t("about.p4")}</p>
+
             <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
               {[
                 {

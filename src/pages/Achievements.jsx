@@ -49,7 +49,7 @@ export default function Achievements() {
         </div>
 
         {/* Grid de cards */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,380px),min(350px,100%)))] place-content-center gap-8">
           {achievements.map((card) => (
             <AchievementCard key={card._id || card.titleKey} card={card} />
           ))}

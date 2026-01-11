@@ -3,6 +3,13 @@ import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faCode } from "@fortawesome/free-solid-svg-icons";
 import { API_ENDPOINTS } from "../config/api";
+import SimpleCarousel from "../components/Carousel";
+
+const colors = [
+  "bg-pink/20 text-pink",
+  "bg-purple/20 text-purple",
+  "bg-lightPurple/20 text-lightPurple",
+];
 
 const Projects = () => {
   const { t } = useTranslation();
@@ -32,9 +39,9 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="from-darkBlue/95 to-darkBlue bg-gradient-to-b py-20"
+      className="from-darkBlue/95 to-darkBlue mx-10 bg-gradient-to-b py-20"
     >
-      <div className="container mx-auto px-4">
+      <div className="container m-auto px-4">
         <div className="mb-16 text-center">
           <h2 className="mb-2 text-3xl font-bold md:text-4xl">
             {t("projects.title")}{" "}
@@ -53,41 +60,37 @@ const Projects = () => {
             <p className="mt-2 text-gray-400">Carregando projetos...</p>
           </div>
         ) : (
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),min(450px,100%)))] place-content-center gap-8">
             {projects.map((project) => (
               <div
                 key={project._id}
-                className="project-card card w-full max-w-md overflow-hidden rounded-xl"
+                className="project-card card flex flex-col justify-between overflow-hidden rounded-xl"
               >
-                {/* Project Image/Header */}
-                <div className="from-pink to-purple relative h-80 overflow-hidden bg-gradient-to-br">
-                  {project.images && project.images[0] ? (
-                    <img
-                      src={project.images[0]}
-                      alt={t(project.titleKey) || project.titleKey}
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
-                  ) : (
-                    <div className="flex h-full items-center justify-center">
-                      <svg
-                        className="h-20 w-20 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="1.5"
-                          d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                        ></path>
-                      </svg>
-                    </div>
-                  )}
+                {/* Carrossel de imagens */}
+                <div className="from-pink to-purple flex h-70 items-center justify-center overflow-hidden bg-gradient-to-br">
+                  {project.images &&
+                    project.images.length > 0 &&
+                    (project.images.length > 1 ? (
+                      <SimpleCarousel images={project.images} />
+                    ) : (
+                      <img
+                        src={project.images[0]}
+                        alt={
+                          t(project.titleKey) !== project.titleKey
+                            ? t(project.titleKey)
+                            : project.title?.[t("lang")] ||
+                              project.title?.pt ||
+                              project.title?.en ||
+                              project.titleKey
+                        }
+                        className="h-full w-full object-cover"
+                      />
+                    ))}
                 </div>
 
-                <div className="p-6">
-                  <h3 className="mt-4 mb-2 text-xl font-semibold">
+                {/* Conteúdo do card */}
+                <div className="flex flex-1 flex-col justify-between p-6">
+                  <h3 className="text-xl font-semibold">
                     {t(project.titleKey) !== project.titleKey
                       ? t(project.titleKey)
                       : project.title?.[t("lang")] ||
@@ -95,7 +98,7 @@ const Projects = () => {
                         project.title?.en ||
                         project.titleKey}
                   </h3>
-                  <p className="mb-4 text-gray-400">
+                  <p className="mt-2 text-gray-400">
                     {t(project.descKey) !== project.descKey
                       ? t(project.descKey)
                       : project.description?.[t("lang")] ||
@@ -104,42 +107,48 @@ const Projects = () => {
                         project.descKey}
                   </p>
 
-                  {/* Technologies Tags */}
+                  {/* Technologies Tags com cores alternadas */}
                   {project.technologies && project.technologies.length > 0 && (
-                    <div className="mb-6 flex flex-wrap gap-2">
-                      {project.technologies.map((tech, index) => (
-                        <span
-                          key={index}
-                          className="bg-purple/20 text-purple rounded-full px-3 py-1 text-xs"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                    <div className="mt-4 mb-4 flex flex-wrap gap-2">
+                      {project.technologies.map((tech, index) => {
+                        const colorClass = colors[index % colors.length];
+                        return (
+                          <span
+                            key={index}
+                            className={`${colorClass} rounded-full px-3 py-1 text-xs`}
+                          >
+                            {tech}
+                          </span>
+                        );
+                      })}
                     </div>
                   )}
 
-                  {/* Project Tags */}
+                  {/* Project Tags com cores alternadas */}
                   {project.tags && project.tags.length > 0 && (
-                    <div className="mb-6 flex flex-wrap gap-2">
-                      {project.tags.map((tag, index) => (
-                        <span
-                          key={index}
-                          className="bg-pink/20 text-pink rounded-full px-3 py-1 text-xs"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                    <div className="mb-4 flex flex-wrap gap-2">
+                      {project.tags.map((tag, index) => {
+                        const colorClass = colors[index % colors.length];
+                        return (
+                          <span
+                            key={index}
+                            className={`${colorClass} rounded-full px-3 py-1 text-xs`}
+                          >
+                            {tag}
+                          </span>
+                        );
+                      })}
                     </div>
                   )}
 
                   {/* Action Buttons */}
-                  <div className="flex space-x-3">
+                  <div className="mt-2 flex gap-4">
                     {project.projectUrl && (
                       <a
                         href={project.projectUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-pink flex items-center gap-2 transition-colors hover:text-white"
+                        className="text-pink flex items-center gap-2 hover:text-white"
                       >
                         <FontAwesomeIcon icon={faEye} />
                         Demo
@@ -150,7 +159,7 @@ const Projects = () => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-purple flex items-center gap-2 transition-colors hover:text-white"
+                        className="text-purple flex items-center gap-2 hover:text-white"
                       >
                         <FontAwesomeIcon icon={faCode} />
                         Code
