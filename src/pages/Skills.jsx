@@ -1,7 +1,40 @@
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { API_ENDPOINTS } from "../config/api";
 
 const Skills = () => {
   const { t } = useTranslation();
+  const [skills, setSkills] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch skills from API
+  useEffect(() => {
+    fetchSkills();
+  }, []);
+
+  const fetchSkills = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(API_ENDPOINTS.SKILLS);
+      if (response.ok) {
+        const data = await response.json();
+        setSkills(data);
+      } else {
+        console.error("Erro ao buscar skills:", response.status);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar skills:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Separar skills por categoria
+  const programmingSkills = skills.filter(
+    (skill) => !skill.category || skill.category === "programming",
+  );
+  const toolsSkills = skills.filter((skill) => skill.category === "tools");
+  const designSkills = skills.filter((skill) => skill.category === "design");
 
   return (
     <section
@@ -22,66 +55,73 @@ const Skills = () => {
         </div>
 
         {/* Skills List */}
-        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2">
-          {[
-            { name: "HTML & CSS", percentage: 85 },
-            { name: "JavaScript", percentage: 50 },
-            { name: "React", percentage: 85 },
-            { name: "Node.js", percentage: 80 },
-            { name: "UI/UX Design", percentage: 75 },
-            { name: "Python", percentage: 50 },
-          ].map((skill, index) => (
-            <div key={index}>
-              <div className="mb-2 flex justify-between">
-                <span className="font-medium">{skill.name}</span>
-                <span className="text-pink">{skill.percentage}%</span>
+        {isLoading ? (
+          <div className="text-center">
+            <div className="border-pink inline-block h-8 w-8 animate-spin rounded-full border-4 border-t-transparent"></div>
+            <p className="mt-2 text-gray-400">Carregando skills...</p>
+          </div>
+        ) : (
+          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2">
+            {programmingSkills.map((skill, index) => (
+              <div key={skill._id || index}>
+                <div className="mb-2 flex justify-between">
+                  <span className="font-medium">{skill.name}</span>
+                  <span className="text-pink">{skill.percentage}%</span>
+                </div>
+                <div className="skill-bar">
+                  <div
+                    className="skill-progress"
+                    style={{ width: `${skill.percentage}%` }}
+                  ></div>
+                </div>
               </div>
-              <div className="skill-bar">
-                <div
-                  className="skill-progress"
-                  style={{ width: `${skill.percentage}%` }}
-                ></div>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* Technologies & Tools */}
         <div className="mt-20">
           <h3 className="text-lightPurple mb-10 text-center text-2xl font-semibold">
             {t("skills.technologies")}
           </h3>
-          <div className="mx-auto grid max-w-4xl grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 justify-items-center">
-            {[
-              { icon: "fab fa-html5", color: "text-pink", name: "HTML5" },
-              { icon: "fab fa-css3-alt", color: "text-purple", name: "CSS3" },
-              { icon: "fab fa-js", color: "text-pink", name: "JavaScript" },
-              { icon: "fab fa-react", color: "text-purple", name: "React" },
-              { icon: "fab fa-node-js", color: "text-pink", name: "Node.js" },
-              { icon: "fab fa-git-alt", color: "text-purple", name: "Git" },
-              { icon: "fab fa-figma", color: "text-pink", name: "Figma" },
-              { icon: "fab fa-python", color: "text-purple", name: "Python" },
-              { icon: "fab fa-docker", color: "text-pink", name: "Docker" },
-              { icon: "fab fa-microsoft", color: "text-purple", name: "Microsoft Azure" },
-            ].map((tech, index) => {
-              const totalItems = 10;
-              const itemsPerRow = 6;
-              const itemsInLastRow = totalItems % itemsPerRow;
-              const isFirstOfLastRow = index === totalItems - itemsInLastRow;
+          {isLoading ? (
+            <div className="text-center">
+              <div className="border-pink inline-block h-8 w-8 animate-spin rounded-full border-4 border-t-transparent"></div>
+            </div>
+          ) : (
+            <div className="mx-auto grid max-w-4xl grid-cols-2 justify-items-center gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+              {toolsSkills.concat(designSkills).map((tech, index) => {
+                const totalItems = toolsSkills.length + designSkills.length;
+                const itemsPerRow = 6;
+                const itemsInLastRow = totalItems % itemsPerRow;
+                const isFirstOfLastRow = index === totalItems - itemsInLastRow;
 
-              return (
-                <div
-                  key={index}
-                  className={`w-30 h-30 text-center card hover:glow flex flex-col items-center justify-center rounded-lg p-4 transition-all ${
-                    isFirstOfLastRow ? "lg:col-start-2" : ""
-                  }`}
-                >
-                  <i className={`${tech.icon} text-4xl ${tech.color} mb-3`}></i>
-                  <span className="text-sm">{tech.name}</span>
-                </div>
-              );
-            })}
-          </div>
+                return (
+                  <div
+                    key={tech._id || index}
+                    className={`card hover:glow flex h-30 w-30 flex-col items-center justify-center rounded-lg p-4 text-center transition-all ${
+                      isFirstOfLastRow && itemsInLastRow > 0
+                        ? "lg:col-start-2"
+                        : ""
+                    }`}
+                  >
+                    {tech.icon ? (
+                      <i
+                        className={`${tech.icon} text-4xl ${tech.color || "text-pink"} mb-3`}
+                      ></i>
+                    ) : (
+                      <div
+                        className={`text-4xl ${tech.color || "text-pink"} mb-3`}
+                      >
+                        ⚡
+                      </div>
+                    )}
+                    <span className="text-sm">{tech.name}</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -37,7 +37,6 @@
     "locdescription": "Carolina do Norte, EUA",
     "fredescription": "Disponível"
   },
-
   "projects": {
     "title": "Meus",
     "subtitle": "Projetos",
@@ -45,7 +44,6 @@
     "fisiotitle": "Site da Clínica Fisioella",
     "fisiodescription": "Um site desenvolvido para a Clínica Fisioella pela Dra. Neila Cayres, focado em alcançar mais mulheres que precisam de fisioterapia pélvica e oferecer orientação e suporte valiosos. Construído com React, Vite, CSS e JavaScript, e hospedado no Vercel."
   },
-
   "achievements": {
     "title": "Minhas",
     "subtitle": "Conquistas",
@@ -77,9 +75,24 @@
       "title": "Meta Front-End Developer",
       "date": "Em progresso",
       "description": "Uma especialização de 9 cursos da Meta com foco em desenvolvimento front-end usando React, JavaScript e CSS. Este programa proporcionou experiência prática na construção de interfaces de usuário responsivas e no domínio das tecnologias essenciais de front-end."
+    },
+    "card7": {
+      "title": "Web & Mobile Designer: UI/UX e Figma",
+      "date": "Em progresso",
+      "description": "Curso completo de UI/UX Design para web e mobile, com foco em Figma, prototipação, design responsivo, usabilidade e boas práticas de interface. Estou desenvolvendo projetos práticos que me permitem aplicar conceitos de tipografia, cores, grids e interação, aprimorando minhas habilidades em design digital de ponta."
     }
   },
-
+  "projects": {
+    "title": "Meus",
+    "subtitle": "Projetos",
+    "description": "Confira alguns dos meus trabalhos mais recentes. Cada projeto representa um desafio único que me ajudou a crescer como desenvolvedora.",
+    "fisiotitle": "Site da Clínica Fisioella",
+    "fisiodescription": "Um site desenvolvido para a Clínica Fisioella pela Dra. Neila Cayres, focado em alcançar mais mulheres que precisam de fisioterapia pélvica e oferecer orientação e suporte valiosos. Construído com React, Vite, CSS e JavaScript, e hospedado no Vercel.",
+    "fisioella": {
+      "title": "Site da Clínica Fisioella",
+      "description": "Um site desenvolvido para a Clínica Fisioella pela Dra. Neila Cayres, focado em alcançar mais mulheres que precisam de fisioterapia pélvica e oferecer orientação e suporte valiosos. Construído com React, Vite, CSS e JavaScript, e hospedado no Vercel."
+    }
+  },
   "skills": {
     "title": "Minhas",
     "subtitle": "Habilidades",
