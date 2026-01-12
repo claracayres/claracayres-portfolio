@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import AchievementCard from "../components/AchievementCards";
 import { API_ENDPOINTS } from "../config/api";
 
@@ -10,10 +9,10 @@ export default function Achievements() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(API_ENDPOINTS.ACHIEVEMENTS)
-      .then((res) => {
-        setAchievements(res.data);
+    fetch(API_ENDPOINTS.ACHIEVEMENTS)
+      .then((res) => res.json())
+      .then((data) => {
+        setAchievements(data);
         setLoading(false);
       })
       .catch((err) => {
@@ -49,7 +48,7 @@ export default function Achievements() {
         </div>
 
         {/* Grid de cards */}
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,380px),min(350px,100%)))] place-content-center gap-8">
+        <div className="flex flex-wrap justify-center gap-10">
           {achievements.map((card) => (
             <AchievementCard key={card._id || card.titleKey} card={card} />
           ))}

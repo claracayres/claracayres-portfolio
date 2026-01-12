@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useAuth } from "../contexts/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlus,
@@ -15,14 +13,11 @@ import {
   faCalendar,
   faBuilding,
   faGlobe,
-  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { API_ENDPOINTS } from "../config/api";
 
-export default function AdminAchievements() {
+export default function AdminAchievements({ embedded = false }) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const { logout } = useAuth();
   const [achievements, setAchievements] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -408,490 +403,463 @@ export default function AdminAchievements() {
     }
   };
 
-  return (
-    <div className="bg-darkBlue min-h-screen pt-20 pb-10">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="mb-4 text-4xl font-bold">
-                <span className="gradient-text">Admin</span> - Achievements
-              </h1>
-              <p className="text-gray-400">
-                Gerencie os achievements do portfolio
-              </p>
-            </div>
-            <div className="flex gap-4">
-              <button
-                onClick={() => navigate("/admin-projects")}
-                className="rounded-lg bg-gray-700 px-4 py-2 text-white hover:bg-gray-600"
-              >
-                Projects
-              </button>
-              <button
-                onClick={() => navigate("/admin-skills")}
-                className="rounded-lg bg-gray-700 px-4 py-2 text-white hover:bg-gray-600"
-              >
-                Skills
-              </button>
-              <button
-                onClick={() => {
-                  logout();
-                  navigate("/");
-                }}
-                className="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700"
-              >
-                <FontAwesomeIcon icon={faSignOutAlt} />
-                Sair
-              </button>
-            </div>
-          </div>
+  const content = (
+    <>
+      {/* Add Button */}
+      <div className="mb-6 text-center">
+        <button
+          onClick={() => handleOpenModal()}
+          className="btn-gradient inline-flex items-center gap-2 rounded-lg px-6 py-3 font-medium text-white shadow-lg hover:opacity-90"
+        >
+          <FontAwesomeIcon icon={faPlus} />
+          {t("admin.addAchievement")}
+        </button>
+      </div>
+
+      {/* Achievements Grid */}
+      {isLoading ? (
+        <div className="text-center">
+          <div className="border-pink inline-block h-8 w-8 animate-spin rounded-full border-4 border-t-transparent"></div>
+          <p className="mt-2 text-gray-400">{t("admin.loadingAchievements")}</p>
         </div>
-
-        {/* Add Button */}
-        <div className="mb-6 text-center">
-          <button
-            onClick={() => handleOpenModal()}
-            className="btn-gradient inline-flex items-center gap-2 rounded-lg px-6 py-3 font-medium text-white shadow-lg hover:opacity-90"
-          >
-            <FontAwesomeIcon icon={faPlus} />
-            Novo Achievement
-          </button>
-        </div>
-
-        {/* Achievements Grid */}
-        {isLoading ? (
-          <div className="text-center">
-            <div className="border-pink inline-block h-8 w-8 animate-spin rounded-full border-4 border-t-transparent"></div>
-            <p className="mt-2 text-gray-400">Carregando achievements...</p>
-          </div>
-        ) : (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {achievements.map((achievement) => (
-              <div key={achievement._id} className="card rounded-lg p-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-white">
-                    {achievement.title?.pt || achievement.titleKey}
-                  </h3>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => handleOpenModal(achievement)}
-                      className="text-purple rounded p-2 transition-colors ease-in hover:text-purple-200"
-                    >
-                      <FontAwesomeIcon icon={faEdit} />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(achievement._id)}
-                      className="rounded text-red-400 hover:text-pink-800"
-                    >
-                      <FontAwesomeIcon icon={faTrash} />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="space-y-2 text-sm text-gray-300">
-                  <p>
-                    <strong>Instituição:</strong> {achievement.institution}
-                  </p>
-                  <p>
-                    <strong>Data:</strong>{" "}
-                    {achievement.date?.pt || achievement.dateKey}
-                  </p>
-                  <p>
-                    <strong>Tags:</strong>{" "}
-                    {achievement.tags?.join(", ") || "Nenhuma"}
-                  </p>
-                  <p>
-                    <strong>Imagens:</strong> {achievement.images?.length || 0}
-                  </p>
-                </div>
-
-                {achievement.certificateUrl && (
-                  <a
-                    href={achievement.certificateUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-pink hover:text-lightPurple mt-4 inline-flex items-center gap-2"
+      ) : (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {achievements.map((achievement) => (
+            <div key={achievement._id} className="flex flex-col card justify-between rounded-lg p-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-white">
+                  {achievement.title?.pt || achievement.titleKey}
+                </h3>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleOpenModal(achievement)}
+                    className="text-purple rounded p-2 transition-colors ease-in hover:text-purple-200"
                   >
-                    <FontAwesomeIcon icon={faEye} />
-                    Ver Certificado
-                  </a>
-                )}
+                    <FontAwesomeIcon icon={faEdit} />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(achievement._id)}
+                    className="rounded text-red-400 hover:text-pink-800"
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                </div>
               </div>
-            ))}
-          </div>
-        )}
 
-        {/* Modal */}
-        {showModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-            <div className="card max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-lg p-6">
-              <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-white">
-                  {editingId ? "Editar" : "Novo"} Achievement
-                </h2>
-                <button
-                  onClick={handleCloseModal}
-                  className="rounded p-2 text-gray-400 hover:bg-gray-700"
+              <div className="space-y-2 text-sm text-gray-300">
+                <p>
+                  <strong>{t("admin.institution")}:</strong>{" "}
+                  {achievement.institution}
+                </p>
+                <p>
+                  <strong>{t("admin.date")}:</strong>{" "}
+                  {achievement.date?.pt || achievement.dateKey}
+                </p>
+                <p>
+                  <strong>{t("admin.tags")}:</strong>{" "}
+                  {achievement.tags?.join(", ") || t("admin.none")}
+                </p>
+                <p>
+                  <strong>{t("admin.images")}:</strong>{" "}
+                  {achievement.images?.length || 0}
+                </p>
+              </div>
+
+              {achievement.certificateUrl && (
+                <a
+                  href={achievement.certificateUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-pink hover:text-lightPurple mt-4 inline-flex items-center gap-2"
                 >
-                  <FontAwesomeIcon icon={faTimes} />
-                </button>
-              </div>
+                  <FontAwesomeIcon icon={faEye} />
+                  Ver Certificado
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
 
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handleSubmit();
-                }}
-                className="space-y-6"
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="card max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-lg p-6">
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-white">
+                {editingId ? t("admin.edit") : t("admin.create")}{" "}
+                {t("admin.achievement")}
+              </h2>
+              <button
+                onClick={handleCloseModal}
+                className="rounded p-2 text-gray-400 hover:bg-gray-700"
               >
-                {/* Title Section */}
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      <FontAwesomeIcon icon={faGlobe} className="mr-2" />
-                      Title Key
-                    </label>
-                    <input
-                      type="text"
-                      value={currentAchievement.titleKey}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          titleKey: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="achievements.card1.title"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      <FontAwesomeIcon icon={faBuilding} className="mr-2" />
-                      Instituição
-                    </label>
-                    <input
-                      type="text"
-                      value={currentAchievement.institution}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          institution: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="IBM, Meta, etc."
-                    />
-                  </div>
-                </div>
+                <FontAwesomeIcon icon={faTimes} />
+              </button>
+            </div>
 
-                {/* Titles PT/EN */}
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Título (PT)
-                    </label>
-                    <input
-                      type="text"
-                      value={currentAchievement.titlePt}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          titlePt: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="Título em português"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Title (EN)
-                    </label>
-                    <input
-                      type="text"
-                      value={currentAchievement.titleEn}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          titleEn: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="Title in English"
-                    />
-                  </div>
-                </div>
-
-                {/* Date Section */}
-                <div className="grid gap-4 md:grid-cols-3">
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      <FontAwesomeIcon icon={faCalendar} className="mr-2" />
-                      Date Key
-                    </label>
-                    <input
-                      type="text"
-                      value={currentAchievement.dateKey}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          dateKey: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="achievements.card1.date"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Data (PT)
-                    </label>
-                    <input
-                      type="text"
-                      value={currentAchievement.datePt}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          datePt: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="Janeiro, 2025"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Date (EN)
-                    </label>
-                    <input
-                      type="text"
-                      value={currentAchievement.dateEn}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          dateEn: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="January, 2025"
-                    />
-                  </div>
-                </div>
-
-                {/* Description Section */}
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="md:col-span-2">
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Description Key
-                    </label>
-                    <input
-                      type="text"
-                      value={currentAchievement.descKey}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          descKey: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="achievements.card1.description"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Descrição (PT)
-                    </label>
-                    <textarea
-                      value={currentAchievement.descPt}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          descPt: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      rows="3"
-                      placeholder="Descrição em português..."
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Description (EN)
-                    </label>
-                    <textarea
-                      value={currentAchievement.descEn}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          descEn: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      rows="3"
-                      placeholder="Description in English..."
-                    />
-                  </div>
-                </div>
-
-                {/* Certificate URL */}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+              className="space-y-6"
+            >
+              {/* Title Section */}
+              <div className="grid gap-4 md:grid-cols-2">
                 <div>
                   <label className="mb-2 block text-sm font-medium text-white">
                     <FontAwesomeIcon icon={faGlobe} className="mr-2" />
-                    Certificate URL
+                    Title Key
                   </label>
                   <input
-                    type="url"
-                    value={currentAchievement.certificateUrl}
+                    type="text"
+                    value={currentAchievement.titleKey}
                     onChange={(e) =>
                       setCurrentAchievement((prev) => ({
                         ...prev,
-                        certificateUrl: e.target.value,
+                        titleKey: e.target.value,
                       }))
                     }
                     className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                    placeholder="https://coursera.org/..."
+                    placeholder="achievements.card1.title"
                   />
                 </div>
-
-                {/* Images Section */}
                 <div>
                   <label className="mb-2 block text-sm font-medium text-white">
-                    <FontAwesomeIcon icon={faImage} className="mr-2" />
-                    Imagens
+                    <FontAwesomeIcon icon={faBuilding} className="mr-2" />
+                    {t("admin.institution")}
                   </label>
-
-                  {/* Upload de arquivo */}
-                  <div className="mb-2">
-                    <label className="bg-purple hover:bg-purple/80 inline-flex cursor-pointer items-center gap-2 rounded-lg px-4 py-3 text-white">
-                      <FontAwesomeIcon icon={faImage} />
-                      Upload do Dispositivo
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="hidden"
-                      />
-                    </label>
-                    <span className="ml-3 text-sm text-gray-400">ou</span>
-                  </div>
-
-                  {/* URL de imagem */}
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      value={currentAchievement.imageUrl}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          imageUrl: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple flex-1 rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="Ou cole a URL da imagem"
-                    />
-                    <button
-                      type="button"
-                      onClick={handleAddImage}
-                      className="bg-purple hover:bg-purple/80 rounded-lg px-4 py-3 text-white"
-                    >
-                      <FontAwesomeIcon icon={faPlus} />
-                    </button>
-                  </div>
-
-                  {/* Preview das imagens */}
-                  <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-3">
-                    {currentAchievement.images.map((image, index) => (
-                      <div
-                        key={index}
-                        className="group relative overflow-hidden rounded-lg bg-gray-700"
-                      >
-                        <img
-                          src={image}
-                          alt={`Preview ${index + 1}`}
-                          className="h-32 w-full object-cover"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveImage(index)}
-                          className="absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white opacity-0 transition-opacity group-hover:opacity-100 hover:bg-red-600"
-                        >
-                          <FontAwesomeIcon icon={faTimes} />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+                  <input
+                    type="text"
+                    value={currentAchievement.institution}
+                    onChange={(e) =>
+                      setCurrentAchievement((prev) => ({
+                        ...prev,
+                        institution: e.target.value,
+                      }))
+                    }
+                    className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                    placeholder="IBM, Meta, etc."
+                  />
                 </div>
+              </div>
 
-                {/* Tags Section */}
+              {/* Titles PT/EN */}
+              <div className="grid gap-4 md:grid-cols-2">
                 <div>
                   <label className="mb-2 block text-sm font-medium text-white">
-                    <FontAwesomeIcon icon={faTag} className="mr-2" />
-                    Tags
+                    Título (PT)
                   </label>
-                  <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={currentAchievement.titlePt}
+                    onChange={(e) =>
+                      setCurrentAchievement((prev) => ({
+                        ...prev,
+                        titlePt: e.target.value,
+                      }))
+                    }
+                    className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                    placeholder="Título em português"
+                  />
+                </div>
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-white">
+                    Title (EN)
+                  </label>
+                  <input
+                    type="text"
+                    value={currentAchievement.titleEn}
+                    onChange={(e) =>
+                      setCurrentAchievement((prev) => ({
+                        ...prev,
+                        titleEn: e.target.value,
+                      }))
+                    }
+                    className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                    placeholder="Title in English"
+                  />
+                </div>
+              </div>
+
+              {/* Date Section */}
+              <div className="grid gap-4 md:grid-cols-3">
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-white">
+                    <FontAwesomeIcon icon={faCalendar} className="mr-2" />
+                    Date Key
+                  </label>
+                  <input
+                    type="text"
+                    value={currentAchievement.dateKey}
+                    onChange={(e) =>
+                      setCurrentAchievement((prev) => ({
+                        ...prev,
+                        dateKey: e.target.value,
+                      }))
+                    }
+                    className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                    placeholder="achievements.card1.date"
+                  />
+                </div>
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-white">
+                    Data (PT)
+                  </label>
+                  <input
+                    type="text"
+                    value={currentAchievement.datePt}
+                    onChange={(e) =>
+                      setCurrentAchievement((prev) => ({
+                        ...prev,
+                        datePt: e.target.value,
+                      }))
+                    }
+                    className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                    placeholder="Janeiro, 2025"
+                  />
+                </div>
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-white">
+                    Date (EN)
+                  </label>
+                  <input
+                    type="text"
+                    value={currentAchievement.dateEn}
+                    onChange={(e) =>
+                      setCurrentAchievement((prev) => ({
+                        ...prev,
+                        dateEn: e.target.value,
+                      }))
+                    }
+                    className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                    placeholder="January, 2025"
+                  />
+                </div>
+              </div>
+
+              {/* Description Section */}
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="md:col-span-2">
+                  <label className="mb-2 block text-sm font-medium text-white">
+                    Description Key
+                  </label>
+                  <input
+                    type="text"
+                    value={currentAchievement.descKey}
+                    onChange={(e) =>
+                      setCurrentAchievement((prev) => ({
+                        ...prev,
+                        descKey: e.target.value,
+                      }))
+                    }
+                    className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                    placeholder="achievements.card1.description"
+                  />
+                </div>
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-white">
+                    Descrição (PT)
+                  </label>
+                  <textarea
+                    value={currentAchievement.descPt}
+                    onChange={(e) =>
+                      setCurrentAchievement((prev) => ({
+                        ...prev,
+                        descPt: e.target.value,
+                      }))
+                    }
+                    className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                    rows="3"
+                    placeholder="Descrição em português..."
+                  />
+                </div>
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-white">
+                    Description (EN)
+                  </label>
+                  <textarea
+                    value={currentAchievement.descEn}
+                    onChange={(e) =>
+                      setCurrentAchievement((prev) => ({
+                        ...prev,
+                        descEn: e.target.value,
+                      }))
+                    }
+                    className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                    rows="3"
+                    placeholder="Description in English..."
+                  />
+                </div>
+              </div>
+
+              {/* Certificate URL */}
+              <div>
+                <label className="mb-2 block text-sm font-medium text-white">
+                  <FontAwesomeIcon icon={faGlobe} className="mr-2" />
+                  Certificate URL
+                </label>
+                <input
+                  type="url"
+                  value={currentAchievement.certificateUrl}
+                  onChange={(e) =>
+                    setCurrentAchievement((prev) => ({
+                      ...prev,
+                      certificateUrl: e.target.value,
+                    }))
+                  }
+                  className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                  placeholder="https://coursera.org/..."
+                />
+              </div>
+
+              {/* Images Section */}
+              <div>
+                <label className="mb-2 block text-sm font-medium text-white">
+                  <FontAwesomeIcon icon={faImage} className="mr-2" />
+                  Imagens
+                </label>
+
+                {/* Upload de arquivo */}
+                <div className="mb-2">
+                  <label className="bg-purple hover:bg-purple/80 inline-flex cursor-pointer items-center gap-2 rounded-lg px-4 py-3 text-white">
+                    <FontAwesomeIcon icon={faImage} />
+                    Upload do Dispositivo
                     <input
-                      type="text"
-                      value={currentAchievement.newTag}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          newTag: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple flex-1 rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="Python, React, etc."
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
                     />
-                    <button
-                      type="button"
-                      onClick={handleAddTag}
-                      className="bg-purple hover:bg-purple/80 rounded-lg px-4 py-3 text-white"
-                    >
-                      <FontAwesomeIcon icon={faPlus} />
-                    </button>
-                  </div>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {currentAchievement.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="bg-pink/20 text-pink flex items-center gap-2 rounded px-3 py-1 text-sm"
-                      >
-                        {tag}
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveTag(index)}
-                          className="text-pink/70 hover:text-pink"
-                        >
-                          <FontAwesomeIcon icon={faTimes} />
-                        </button>
-                      </span>
-                    ))}
-                  </div>
+                  </label>
+                  <span className="ml-3 text-sm text-gray-400">ou</span>
                 </div>
 
-                {/* Submit Buttons */}
-                <div className="flex justify-end gap-4 pt-4">
+                {/* URL de imagem */}
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={currentAchievement.imageUrl}
+                    onChange={(e) =>
+                      setCurrentAchievement((prev) => ({
+                        ...prev,
+                        imageUrl: e.target.value,
+                      }))
+                    }
+                    className="focus:ring-purple flex-1 rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                    placeholder="Ou cole a URL da imagem"
+                  />
                   <button
                     type="button"
-                    onClick={handleCloseModal}
-                    className="rounded-lg bg-gray-600 px-6 py-3 text-white hover:bg-gray-500"
+                    onClick={handleAddImage}
+                    className="bg-purple hover:bg-purple/80 rounded-lg px-4 py-3 text-white"
                   >
-                    Cancelar
-                  </button>
-                  <button
-                    type="submit"
-                    className="btn-gradient flex items-center gap-2 rounded-lg px-6 py-3 text-white hover:opacity-90"
-                  >
-                    <FontAwesomeIcon icon={faSave} />
-                    {editingId ? "Atualizar" : "Criar"}
+                    <FontAwesomeIcon icon={faPlus} />
                   </button>
                 </div>
-              </form>
-            </div>
+
+                {/* Preview das imagens */}
+                <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-3">
+                  {currentAchievement.images.map((image, index) => (
+                    <div
+                      key={index}
+                      className="group relative overflow-hidden rounded-lg bg-gray-700"
+                    >
+                      <img
+                        src={image}
+                        alt={`Preview ${index + 1}`}
+                        className="h-32 w-full object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveImage(index)}
+                        className="absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white opacity-0 transition-opacity group-hover:opacity-100 hover:bg-red-600"
+                      >
+                        <FontAwesomeIcon icon={faTimes} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tags Section */}
+              <div>
+                <label className="mb-2 block text-sm font-medium text-white">
+                  <FontAwesomeIcon icon={faTag} className="mr-2" />
+                  Tags
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={currentAchievement.newTag}
+                    onChange={(e) =>
+                      setCurrentAchievement((prev) => ({
+                        ...prev,
+                        newTag: e.target.value,
+                      }))
+                    }
+                    className="focus:ring-purple flex-1 rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                    placeholder="Python, React, etc."
+                  />
+                  <button
+                    type="button"
+                    onClick={handleAddTag}
+                    className="bg-purple hover:bg-purple/80 rounded-lg px-4 py-3 text-white"
+                  >
+                    <FontAwesomeIcon icon={faPlus} />
+                  </button>
+                </div>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {currentAchievement.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="bg-pink/20 text-pink flex items-center gap-2 rounded px-3 py-1 text-sm"
+                    >
+                      {tag}
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveTag(index)}
+                        className="text-pink/70 hover:text-pink"
+                      >
+                        <FontAwesomeIcon icon={faTimes} />
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Submit Buttons */}
+              <div className="flex justify-end gap-4 pt-4">
+                <button
+                  type="button"
+                  onClick={handleCloseModal}
+                  className="rounded-lg bg-gray-600 px-6 py-3 text-white hover:bg-gray-500"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  className="btn-gradient flex items-center gap-2 rounded-lg px-6 py-3 text-white hover:opacity-90"
+                >
+                  <FontAwesomeIcon icon={faSave} />
+                  {editingId ? "Atualizar" : "Criar"}
+                </button>
+              </div>
+            </form>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+    </>
+  );
+
+  if (embedded) {
+    return content;
+  }
+
+  return (
+    <div className="bg-darkBlue min-h-screen pt-20 pb-10">
+      <div className="container mx-auto px-4">{content}</div>
     </div>
   );
 }

@@ -26,8 +26,8 @@ const Home = () => {
         id="particles"
         className="pointer-events-none absolute inset-0 z-0"
       ></div>
-
-      <div className="relative z-10 container mx-10 flex flex-col items-center px-4 py-16 md:flex-row">
+  
+      <div className="relative z-10 container mx-10 gap-8 flex flex-col items-center justify-center px-4 py-16 md:flex-row md:gap-16 lg:gap-32">
         <div className="mb-10 text-center md:mb-0 md:w-1/2 md:text-left">
           <p className="text-pink mb-2 text-lg">{t("hero.greeting")}</p>
           <h1 className="mb-4 text-4xl font-bold md:text-5xl">
@@ -54,7 +54,7 @@ const Home = () => {
             </a>
           </div>
         </div>
-        <div className="flex justify-center md:w-1/2">
+        <div className="flex justify-center md:auto">
           <div className="relative h-64 w-64 md:h-80 md:w-80">
             <div className="from-pink to-purple absolute inset-0 animate-pulse rounded-full bg-gradient-to-br opacity-20 blur-xl"></div>
             <div className="bg-darkBlue border-purple/30 absolute inset-4 flex items-center justify-center overflow-hidden rounded-full border-2">
