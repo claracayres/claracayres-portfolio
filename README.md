@@ -1,4 +1,4 @@
-# 💻 Maria Clara | Dev Portfolio
+# Maria Clara | Dev Portfolio
 
 ![Portfolio Preview](https://img.shields.io/badge/Status-Live-success?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-19.0.0-blue?style=for-the-badge&logo=react)
@@ -7,7 +7,7 @@
 
 Welcome to my personal portfolio! This project showcases my skills, projects, and journey as a developer through a clean, responsive, and multilingual interface.
 
-## ✨ About
+## About
 
 A modern full-stack portfolio application featuring:
 
@@ -18,7 +18,7 @@ A modern full-stack portfolio application featuring:
 - **Admin Panel**: Protected dashboard for content management (Projects, Skills, Achievements)
 - **Authentication**: Secure password-based access to admin features
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 ### Frontend
 
@@ -42,7 +42,7 @@ A modern full-stack portfolio application featuring:
 - **Prettier** - Code formatting
 - **Git** - Version control
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 portfolio/
@@ -113,33 +113,33 @@ portfolio/
 └── vite.config.js               # Vite configuration
 ```
 
-## 🎯 Features
+## Features
 
 ### Public Features
 
-- ✅ **Multilingual Support**: Switch between Portuguese and English
-- ✅ **Smooth Navigation**: Anchor-based scroll navigation
-- ✅ **Responsive Design**: Mobile-first approach, works on all devices
-- ✅ **Dynamic Content**: Projects, skills, and achievements loaded from database
-- ✅ **Contact Form**: Direct communication channel
-- ✅ **CV Download**: One-click resume download
-- ✅ **Carousel Gallery**: Image showcases with navigation
-- ✅ **Back to Top**: Quick scroll to top button
-- ✅ **SEO Optimized**: Sitemap and robots.txt included
+- **Multilingual Support**: Switch between Portuguese and English
+- **Smooth Navigation**: Anchor-based scroll navigation
+- **Responsive Design**: Mobile-first approach, works on all devices
+- **Dynamic Content**: Projects, skills, and achievements loaded from database
+- **Contact Form**: Direct communication channel
+- **CV Download**: One-click resume download
+- **Carousel Gallery**: Image showcases with navigation
+- **Back to Top**: Quick scroll to top button
+- **SEO Optimized**: Sitemap and robots.txt included
 
 ### Admin Features
 
-- 🔐 **Protected Dashboard**: Secure admin panel with password authentication
-- 📊 **Content Management**: Full CRUD operations for:
+- **Protected Dashboard**: Secure admin panel with password authentication
+- **Content Management**: Full CRUD operations for:
   - Projects (with images, technologies, tags, URLs)
   - Skills (with progress bars, categories, icons)
   - Achievements (with certificates, institutions, dates)
-- 🌐 **Translation Management**: Auto-update translation files
-- 📱 **Unified Interface**: Tabbed dashboard for all admin operations
-- 💾 **Image Upload**: Support for both file upload and URL input
-- 🎨 **Real-time Preview**: See changes immediately
+- **Translation Management**: Auto-update translation files
+- **Unified Interface**: Tabbed dashboard for all admin operations
+- **Image Upload**: Support for both file upload and URL input
+- **Real-time Preview**: See changes immediately
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -202,7 +202,7 @@ python app.py
 
 Visit `http://localhost:5173` to see the portfolio.
 
-## 🔒 Admin Access
+## Admin Access
 
 To access the admin dashboard:
 
@@ -212,7 +212,7 @@ To access the admin dashboard:
 
 **Important**: Never commit the `.env` file. Use `.env.example` as a template.
 
-## 📦 Deployment
+## Deployment
 
 ### Vercel Deployment (Recommended)
 
@@ -240,7 +240,7 @@ npm run build
 npm run preview
 ```
 
-## 🎨 Customization
+## Customization
 
 ### Colors
 
@@ -262,25 +262,25 @@ Add or modify translations in:
 - `src/locales/pt/translation.json` (Portuguese)
 - `src/locales/en/translation.json` (English)
 
-## 📸 Live Preview
+## Live Preview
 
-🌐 [**View Live Portfolio**](https://claracayres-portfolio.vercel.app)
+ [**View Live Portfolio**](https://claracayres-portfolio.vercel.app)
 
-## 🤝 Contributing
+## Contributing
 
 Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/claracayres/claracayres-portfolio/issues).
 
-## 📄 License
+## License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 📬 Contact
+## Contact
 
 **Maria Clara Cayres**
 
-- 💼 LinkedIn: [Maria Clara Cayres](https://www.linkedin.com/in/maria-clara-cayres-de-almeida/)
-- 📧 Email: [clara.cayres1205@gmail.com](mailto:clara.cayres1205@gmail.com)
-- 🌐 Portfolio: [claracayres-portfolio.vercel.app](https://claracayres-portfolio.vercel.app)
+- LinkedIn: [Maria Clara Cayres](https://www.linkedin.com/in/maria-clara-cayres-de-almeida/)
+- Email: [clara.cayres1205@gmail.com](mailto:clara.cayres1205@gmail.com)
+- Portfolio: [claracayres-portfolio.vercel.app](https://claracayres-portfolio.vercel.app)
 
 
 ## ☕ Support & Recognition
