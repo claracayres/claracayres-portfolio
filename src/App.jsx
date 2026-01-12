@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import BackToTop from "./components/BackToTop";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -55,6 +56,7 @@ function App() {
       </Routes>
 
       <Footer />
+      <BackToTop />
     </>
   );
 }
