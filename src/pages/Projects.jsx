@@ -60,14 +60,14 @@ const Projects = () => {
             <p className="mt-2 text-gray-400">Carregando projetos...</p>
           </div>
         ) : (
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),min(450px,100%)))] place-content-center gap-8">
+          <div className="flex flex-wrap justify-center gap-10">
             {projects.map((project) => (
               <div
                 key={project._id}
-                className="project-card card flex flex-col justify-between overflow-hidden rounded-xl"
+                className="flex flex-col card w-full justify-between max-w-sm rounded-xl"
               >
                 {/* Carrossel de imagens */}
-                <div className="from-pink to-purple flex h-70 items-center justify-center overflow-hidden bg-gradient-to-br">
+                <div className="from-pink to-purple flex h-70 items-center rounded-xl justify-center overflow-hidden bg-gradient-to-br">
                   {project.images &&
                     project.images.length > 0 &&
                     (project.images.length > 1 ? (

@@ -3,9 +3,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLogin from "./pages/AdminLogin";
-import AdminAchievements from "./pages/AdminAchievements";
-import AdminProjects from "./pages/AdminProjects";
-import AdminSkills from "./pages/AdminSkills";
+import AdminDashboard from "./pages/AdminDashboard";
 import Home from "./pages/Home";
 import About from "./pages/About-me";
 import Projects from "./pages/Projects";
@@ -50,23 +48,7 @@ function App() {
           path="/admin"
           element={
             <ProtectedRoute>
-              <AdminAchievements />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin-projects"
-          element={
-            <ProtectedRoute>
-              <AdminProjects />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin-skills"
-          element={
-            <ProtectedRoute>
-              <AdminSkills />
+              <AdminDashboard />
             </ProtectedRoute>
           }
         />

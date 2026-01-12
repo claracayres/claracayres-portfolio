@@ -12,9 +12,9 @@ export default function AchievementCard({ card }) {
   const { t } = useTranslation();
 
   return (
-    <div className="project-card card flex flex-col justify-between overflow-hidden rounded-xl">
+    <div className="flex flex-col card w-full justify-between max-w-sm rounded-xl">
       {/* Carrossel */}
-      <div className="from-pink to-purple flex h-70 items-center justify-center overflow-hidden bg-gradient-to-br">
+      <div className="from-pink to-purple flex h-70 items-center rounded-xl justify-center overflow-hidden bg-gradient-to-br">
         {card.images && card.images.length > 0 && (
           card.images.length > 1 ? (
             <SimpleCarousel images={card.images} />
@@ -25,7 +25,7 @@ export default function AchievementCard({ card }) {
       </div>
 
       {/* Conteúdo do card */}
-      <div className="flex flex-1 flex-col justify-between p-6">
+      <div className="flex flex-1 flex-col h-fit justify-between p-6">
         <h3 className="text-xl font-semibold">{t(card.titleKey)}</h3>
         <p className="text-gray-400 italic">{card.institution} <br /> {t(card.dateKey)}</p>
         <p className="text-gray-400">{t(card.descKey)}</p>

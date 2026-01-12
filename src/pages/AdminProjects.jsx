@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlus,
@@ -14,13 +13,11 @@ import {
   faCode,
   faGlobe,
   faLink,
-  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { API_ENDPOINTS } from "../config/api";
 
 export default function AdminProjects() {
-  const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { t } = useTranslation();
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -293,7 +290,7 @@ export default function AdminProjects() {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm("Tem certeza que deseja deletar este projeto?")) {
+    if (window.confirm(t("admin.confirmDelete"))) {
       try {
         // Primeiro, busca o projeto para pegar as chaves de tradução
         const projectResponse = await fetch(API_ENDPOINTS.PROJECTS);
@@ -363,44 +360,8 @@ export default function AdminProjects() {
   };
 
   return (
-    <div className="bg-darkBlue min-h-screen pt-20 pb-10">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="mb-4 text-4xl font-bold">
-                <span className="gradient-text">Admin</span> - Projetos
-              </h1>
-              <p className="text-gray-400">Gerencie os projetos do portfolio</p>
-            </div>
-            <div className="flex gap-4">
-              <button
-                onClick={() => navigate("/admin")}
-                className="rounded-lg bg-gray-700 px-4 py-2 text-white hover:bg-gray-600"
-              >
-                Achievements
-              </button>
-              <button
-                onClick={() => navigate("/admin-skills")}
-                className="rounded-lg bg-gray-700 px-4 py-2 text-white hover:bg-gray-600"
-              >
-                Skills
-              </button>
-              <button
-                onClick={() => {
-                  logout();
-                  navigate("/");
-                }}
-                className="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700"
-              >
-                <FontAwesomeIcon icon={faSignOutAlt} />
-                Sair
-              </button>
-            </div>
-          </div>
-        </div>
-
+    <div className="bg-darkBlue min-h-screen">
+      <div className="container px-4">
         {/* Add Button */}
         <div className="mb-6 text-center">
           <button
@@ -408,7 +369,7 @@ export default function AdminProjects() {
             className="btn-gradient inline-flex items-center gap-2 rounded-lg px-6 py-3 font-medium text-white shadow-lg hover:opacity-90"
           >
             <FontAwesomeIcon icon={faPlus} />
-            Novo Projeto
+            {t("admin.addProject")}
           </button>
         </div>
 
@@ -416,12 +377,12 @@ export default function AdminProjects() {
         {isLoading ? (
           <div className="text-center">
             <div className="border-pink inline-block h-8 w-8 animate-spin rounded-full border-4 border-t-transparent"></div>
-            <p className="mt-2 text-gray-400">Carregando projetos...</p>
+            <p className="mt-2 text-gray-400">{t("admin.loadingProjects")}</p>
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
-              <div key={project._id} className="card rounded-lg p-4">
+              <div key={project._id} className="flex flex-col card justify-between rounded-lg p-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-white">
                     {project.title?.pt || project.titleKey}
@@ -444,15 +405,16 @@ export default function AdminProjects() {
 
                 <div className="space-y-2 text-sm text-gray-300">
                   <p>
-                    <strong>Tecnologias:</strong>{" "}
-                    {project.technologies?.join(", ") || "Nenhuma"}
+                    <strong>{t("admin.technologies")}:</strong>{" "}
+                    {project.technologies?.join(", ") || t("admin.none")}
                   </p>
                   <p>
-                    <strong>Tags:</strong>{" "}
-                    {project.tags?.join(", ") || "Nenhuma"}
+                    <strong>{t("admin.tags")}:</strong>{" "}
+                    {project.tags?.join(", ") || t("admin.none")}
                   </p>
                   <p>
-                    <strong>Imagens:</strong> {project.images?.length || 0}
+                    <strong>{t("admin.images")}:</strong>{" "}
+                    {project.images?.length || 0}
                   </p>
                 </div>
 
@@ -465,7 +427,7 @@ export default function AdminProjects() {
                       className="text-pink hover:text-lightPurple inline-flex items-center gap-2"
                     >
                       <FontAwesomeIcon icon={faEye} />
-                      Ver Projeto
+                      {t("admin.viewProject")}
                     </a>
                   )}
                   {project.githubUrl && (
@@ -491,7 +453,8 @@ export default function AdminProjects() {
             <div className="card max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-lg p-6">
               <div className="mb-6 flex items-center justify-between">
                 <h2 className="text-2xl font-bold text-white">
-                  {editingId ? "Editar" : "Novo"} Projeto
+                  {editingId ? t("admin.edit") : t("admin.create")}{" "}
+                  {t("admin.project")}
                 </h2>
                 <button
                   onClick={handleCloseModal}
@@ -667,7 +630,7 @@ export default function AdminProjects() {
                 <div>
                   <label className="mb-2 block text-sm font-medium text-white">
                     <FontAwesomeIcon icon={faImage} className="mr-2" />
-                    Imagens
+                    {t("admin.images")}
                   </label>
 
                   {/* Upload de arquivo */}
@@ -736,7 +699,7 @@ export default function AdminProjects() {
                 <div>
                   <label className="mb-2 block text-sm font-medium text-white">
                     <FontAwesomeIcon icon={faCode} className="mr-2" />
-                    Tecnologias
+                    {t("admin.technologies")}
                   </label>
                   <div className="flex gap-2">
                     <input
@@ -782,7 +745,7 @@ export default function AdminProjects() {
                 <div>
                   <label className="mb-2 block text-sm font-medium text-white">
                     <FontAwesomeIcon icon={faTag} className="mr-2" />
-                    Tags
+                    {t("admin.tags")}
                   </label>
                   <div className="flex gap-2">
                     <input
@@ -831,14 +794,14 @@ export default function AdminProjects() {
                     onClick={handleCloseModal}
                     className="rounded-lg bg-gray-600 px-6 py-3 text-white hover:bg-gray-500"
                   >
-                    Cancelar
+                    {t("admin.cancel")}
                   </button>
                   <button
                     type="submit"
                     className="btn-gradient flex items-center gap-2 rounded-lg px-6 py-3 text-white hover:opacity-90"
                   >
                     <FontAwesomeIcon icon={faSave} />
-                    {editingId ? "Atualizar" : "Criar"}
+                    {editingId ? t("admin.update") : t("admin.create")}
                   </button>
                 </div>
               </form>
