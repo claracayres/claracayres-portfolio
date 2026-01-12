@@ -89,7 +89,7 @@ const Skills = () => {
               <div className="border-pink inline-block h-8 w-8 animate-spin rounded-full border-4 border-t-transparent"></div>
             </div>
           ) : (
-            <div className="mx-auto grid max-w-4xl grid-cols-2 justify-items-center gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+            <div className="flex flex-wrap justify-center gap-10">
               {toolsSkills.concat(designSkills).map((tech, index) => {
                 const totalItems = toolsSkills.length + designSkills.length;
                 const itemsPerRow = 6;
