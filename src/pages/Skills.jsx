@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { API_ENDPOINTS } from "../config/api";
 
@@ -6,6 +6,9 @@ const Skills = () => {
   const { t } = useTranslation();
   const [skills, setSkills] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [animatedSkills, setAnimatedSkills] = useState({}); // Estado para animações
+  const [hasAnimated, setHasAnimated] = useState(false); // Para animar apenas uma vez
+  const skillsRef = useRef(null);
 
   // Fetch skills from API
   useEffect(() => {
@@ -29,6 +32,47 @@ const Skills = () => {
     }
   };
 
+  // Animate skills on scroll - CORRIGIDO
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Remove a condição de hasAnimated para que funcione sempre
+          if (entry.isIntersecting && skills.length > 0) {
+            // Só anima se ainda não foi animado
+            if (!hasAnimated) {
+              setHasAnimated(true);
+
+              // Animar skills de programação
+              const programmingSkills = skills.filter(
+                (skill) => !skill.category || skill.category === "programming",
+              );
+
+              programmingSkills.forEach((skill, index) => {
+                setTimeout(() => {
+                  setAnimatedSkills((prev) => ({
+                    ...prev,
+                    [skill._id || index]: skill.percentage,
+                  }));
+                }, index * 150); // Delay escalonado para cada skill
+              });
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.2, // Reduzido para detectar mais cedo
+        rootMargin: "0px 0px -100px 0px", // Margem para ativar antes
+      },
+    );
+
+    if (skillsRef.current) {
+      observer.observe(skillsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [skills, hasAnimated]);
+
   // Separar skills por categoria
   const programmingSkills = skills.filter(
     (skill) => !skill.category || skill.category === "programming",
@@ -39,6 +83,7 @@ const Skills = () => {
   return (
     <section
       id="skills"
+      ref={skillsRef}
       className="from-darkBlue to-darkBlue/95 bg-gradient-to-b py-20"
     >
       <div className="container mx-auto px-4">
@@ -63,15 +108,27 @@ const Skills = () => {
         ) : (
           <div className="mx-auto grid max-w-4xl grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2">
             {programmingSkills.map((skill, index) => (
-              <div key={skill._id || index}>
+              <div key={skill._id || index} className="skill-item">
                 <div className="mb-2 flex justify-between">
                   <span className="font-medium">{skill.name}</span>
-                  <span className="text-pink">{skill.percentage}%</span>
+                  <span className="text-pink font-semibold">
+                    {/* Mostra a porcentagem real se já foi animado, caso contrário 0 */}
+                    {hasAnimated
+                      ? skill.percentage
+                      : animatedSkills[skill._id || index] || 0}
+                    %
+                  </span>
                 </div>
-                <div className="skill-bar">
+                <div className="skill-bar bg-darkBlue/50 h-3 w-full overflow-hidden rounded-full">
                   <div
-                    className="skill-progress"
-                    style={{ width: `${skill.percentage}%` }}
+                    className="skill-progress from-pink to-purple h-full rounded-full bg-gradient-to-r transition-all duration-1000 ease-out"
+                    style={{
+                      // Se já foi animado, mantém a largura total, caso contrário usa o estado animado
+                      width: hasAnimated
+                        ? `${skill.percentage}%`
+                        : `${animatedSkills[skill._id || index] || 0}%`,
+                      transitionDelay: `${index * 150}ms`,
+                    }}
                   ></div>
                 </div>
               </div>
@@ -99,11 +156,14 @@ const Skills = () => {
                 return (
                   <div
                     key={tech._id || index}
-                    className={`card hover:glow flex h-30 w-30 flex-col items-center justify-center rounded-lg p-4 text-center transition-all ${
+                    className={`card hover:glow flex h-30 w-30 transform flex-col items-center justify-center rounded-lg p-4 text-center transition-all duration-300 hover:scale-105 ${
                       isFirstOfLastRow && itemsInLastRow > 0
                         ? "lg:col-start-2"
                         : ""
                     }`}
+                    style={{
+                      animationDelay: `${(programmingSkills.length + index) * 100}ms`,
+                    }}
                   >
                     {tech.icon ? (
                       <i
