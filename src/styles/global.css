@@ -10,11 +10,22 @@
 
 html {
   scroll-behavior: smooth;
+  color: #d1d5db;
+  /* background-color: #111827; */
+  background: linear-gradient(
+    to bottom,
+    var(--color-darkBlue),
+    rgba(17, 24, 39, 0.95)
+  );
+}
+
+ html.dark {
+  background: white;
+  color: #111827;
 }
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: var(--darkMode-color);
 }
 
 .gradient-text {
@@ -33,6 +44,17 @@ body {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(147, 112, 219, 0.3);
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.dark.card {
+  background: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 20, 147, 0.3);
+  border-radius: 2rem;
+  overflow: hidden;
 }
 
 .skill-bar {
