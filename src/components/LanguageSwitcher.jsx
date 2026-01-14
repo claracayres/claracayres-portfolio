@@ -16,7 +16,7 @@ const LanguageSwitcher = () => {
   return (
     <button
       onClick={toggleLanguage}
-      className="bg-purple/20 dark:bg-lightPurple/20 hover:bg-purple/30 dark:hover:bg-lightPurple/30 flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
+      className="bg-purple/20 h-8 dark:bg-lightPurple/20 transition-colors hover:bg-purple/30 flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium"
     >
       <img src={currentFlag} alt="flag" className="h-5 w-5 rounded-full" />
       <span className="sm:inline">{label}</span>

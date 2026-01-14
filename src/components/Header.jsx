@@ -106,17 +106,17 @@ const Header = () => {
         <LanguageSwitcher />
         <button
           onClick={modeSwitch}
-          className="bg-purple/20 hover:bg-purple/30 flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
+          className="bg-lightPurple/20 h-8 flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-purple/30"
         >
           <i
             className={`fas ${
-              isDark ? "fa-sun text-yellow-400" : "fa-moon text-gray-800"
+              isDark ? "fa-sun text-yellow-200" : "fa-moon text-gray-800"
             }`}
           ></i>
         </button>
         <button
           id="mobile-menu-button"
-          className="text-white dark:text-darkBlue focus:outline-none md:hidden"
+          className="dev focus:outline-none md:hidden"
         >
           <svg
             className="h-6 w-6"
