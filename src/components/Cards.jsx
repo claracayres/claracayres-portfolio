@@ -62,7 +62,7 @@ export function AchievementCard({ card }) {
           href={card.certificateUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-pink text-xs font-medium hover:text-white dark:hover:text-darkBlue"
+          className="link text-pink text-xs font-medium"
         >
           {t("achievements.certificate")}
         </a>
@@ -139,7 +139,7 @@ export function ProjectCard({ project }) {
               href={project.projectUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="link text-pink flex items-center gap-2 hover:text-white dark:hover:text-darkBlue"
+              className="link text-pink flex items-center gap-2"
             >
               <FontAwesomeIcon icon={faEye} />
               Demo
@@ -150,7 +150,7 @@ export function ProjectCard({ project }) {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="link text-purple flex items-center gap-2 hover:text-white dark:hover:text-darkBlue"
+              className="link text-purple flex items-center gap-2"
             >
               <FontAwesomeIcon icon={faCode} />
               Code

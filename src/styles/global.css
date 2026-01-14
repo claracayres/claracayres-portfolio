@@ -10,16 +10,12 @@
 
 html {
   scroll-behavior: smooth;
-  background: white;
+  background: linear-gradient(180deg, white 0%, #eaeaeb 100%);
   color: #111827;
 }
 
 html.dark {
-  background: linear-gradient(
-    to bottom,
-    var(--color-darkBlue),
-    rgba(17, 24, 39, 0.95)
-  );
+  background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
   color: #d1d5db;
 }
 
@@ -143,6 +139,13 @@ nav {
 
 .dark .btn {
   color: #111827;
+}
+.link:hover {
+  color: #111827;
+}
+
+.dark .link:hover {
+  color: white;
 }
 
 .nav-link::after {
