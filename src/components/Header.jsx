@@ -60,7 +60,7 @@ const Header = () => {
 
 
   return (
-    <nav className="bg-darkBlue/50 dark:bg-gray-50 fixed z-50 w-full shadow-lg backdrop-blur-md">
+    <nav className="fixed z-50 w-full shadow-lg backdrop-blur-md">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         <a href="#home" className="gradient-text text-2xl font-bold">
           Clara.<span className="dev">dev</span>
