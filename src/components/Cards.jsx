@@ -37,7 +37,7 @@ export function AchievementCard({ card }) {
           <h3 className="mb-2 line-clamp-2 text-[16px] font-semibold">
             {t(card.titleKey)}
           </h3>
-          <p className="mb-3 text-[14px] text-gray-600 font-medium italic">
+          <p className="mb-3 text-[14px]font-medium italic">
             {card.institution} <br /> {t(card.dateKey)}
           </p>
           <p className="mb-4 line-clamp-3 text-gray-400 flex-1 text-[12px] ">{t(card.descKey)}</p>
