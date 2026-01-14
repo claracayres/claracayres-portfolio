@@ -65,7 +65,7 @@ const Header = () => {
         <a href="#home" className="gradient-text text-2xl font-bold">
           Clara.<span className="dev">dev</span>
         </a>
-        <div className="hidden space-x-8 md:flex">
+        <div className="hidden space-x-8 lg:flex">
           <a
             href="#home"
             className="nav-link active hover:text-pink transition-colors"
@@ -116,7 +116,7 @@ const Header = () => {
         </button>
         <button
           id="mobile-menu-button"
-          className="dev focus:outline-none md:hidden"
+          className="dev focus:outline-none lg:hidden"
         >
           <svg
             className="h-6 w-6"
@@ -137,7 +137,7 @@ const Header = () => {
       {/* Menu mobile */}
       <div
         id="mobile-menu"
-        className="bg-darkBlue/5 hidden backdrop-blur-md md:hidden"
+        className="bg-darkBlue/5 hidden backdrop-blur-md lg:hidden"
       >
         <div className="container mx-auto flex flex-col space-y-3 px-4 py-3">
           <a
