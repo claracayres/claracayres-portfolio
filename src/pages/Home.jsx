@@ -33,7 +33,7 @@ const Home = () => {
           <h1 className="mb-4 text-4xl font-bold md:text-5xl">
             <span className="gradient-text">{t("hero.name")}</span>
           </h1>
-          <h2 className="text-lightPurple mb-6 text-2xl font-semibold md:text-3xl">
+          <h2 className="title mb-6 text-2xl font-semibold md:text-3xl">
             {t("hero.title")}
           </h2>
           <p className="mx-auto mb-8 max-w-lg md:mx-0">{t("hero.subtitle")}</p>
