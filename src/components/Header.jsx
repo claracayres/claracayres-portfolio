@@ -1,9 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 const Header = () => {
   const { t } = useTranslation();
+  const [isDark, setIsDark] = useState(
+    document.documentElement.classList.contains("dark"),
+  );
+
+  const modeSwitch = () => {
+    const html = document.documentElement;
+    const newTheme = html.classList.toggle("dark");
+    setIsDark(newTheme);
+    localStorage.setItem("theme", newTheme ? "dark" : "light");
+  };
 
   useEffect(() => {
     // Mobile menu toggle
@@ -48,11 +58,12 @@ const Header = () => {
     };
   }, []);
 
+
   return (
-    <nav className="bg-darkBlue/50 fixed z-50 w-full shadow-lg backdrop-blur-md">
+    <nav className="bg-darkBlue/50 dark:bg-gray-50 fixed z-50 w-full shadow-lg backdrop-blur-md">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         <a href="#home" className="gradient-text text-2xl font-bold">
-          Clara.<span className="text-white">dev</span>
+          Clara.<span className="dev">dev</span>
         </a>
         <div className="hidden space-x-8 md:flex">
           <a
@@ -92,10 +103,20 @@ const Header = () => {
             {t("nav.contact")}
           </a>
         </div>
-        <LanguageSwitcher/>
+        <LanguageSwitcher />
+        <button
+          onClick={modeSwitch}
+          className="bg-purple/20 hover:bg-purple/30 flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
+        >
+          <i
+            className={`fas ${
+              isDark ? "fa-sun text-yellow-400" : "fa-moon text-gray-800"
+            }`}
+          ></i>
+        </button>
         <button
           id="mobile-menu-button"
-          className="text-white focus:outline-none md:hidden"
+          className="text-white dark:text-darkBlue focus:outline-none md:hidden"
         >
           <svg
             className="h-6 w-6"

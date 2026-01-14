@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { API_ENDPOINTS } from "../config/api";
 import { ProjectCard } from "../components/Cards";
@@ -28,6 +28,33 @@ const Projects = () => {
     }
   };
 
+  // Scrollspy for carousel indicators
+  const containerRef = useRef(null);
+  const itemRefs = useRef([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.dataset.index);
+            setActiveIndex(index);
+          }
+        });
+      },
+      {
+        root: containerRef.current,
+        threshold: 0.6, // 60% visível
+      },
+    );
+
+    itemRefs.current.forEach((el) => el && observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [projects]);
+
   return (
     <section id="projects" className="py-20">
       <div className="container m-auto px-4">
@@ -47,10 +74,40 @@ const Projects = () => {
             <p className="mt-2 text-gray-400">Carregando projetos...</p>
           </div>
         ) : (
-          <div className="lg md:snap-none:overflow-visible flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4 pb-6 lg:flex lg:flex-wrap lg:justify-center lg:gap-10">
-            {projects.map((project) => (
-              <ProjectCard key={project._id} project={project} />
-            ))}
+          <div className="relative mx-auto w-full max-w-sm lg:max-w-7xl">
+            <div
+              ref={containerRef}
+              className="flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-hidden  scroll-smooth pb-6 lg:snap-none lg:flex-wrap lg:justify-center lg:gap-10 lg:overflow-visible"
+            >
+              {projects.map((project, index) => (
+                <div
+                  key={project._id}
+                  ref={(el) => (itemRefs.current[index] = el)}
+                  data-index={index}
+                  className="w-full max-w-sm flex-none snap-center"
+                >
+                  <div className="transition-transform duration-300 lg:hover:scale-105">
+                    <ProjectCard project={project} />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 flex justify-center gap-2 lg:hidden">
+              {projects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() =>
+                    itemRefs.current[index]?.scrollIntoView({
+                      behavior: "smooth",
+                      inline: "center",
+                    })
+                  }
+                  className={`h-2 w-2 rounded-full transition-all ${
+                    activeIndex === index ? "bg-pink w-4" : "bg-gray-400/40"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>

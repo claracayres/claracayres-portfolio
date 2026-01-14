@@ -15,34 +15,42 @@ export function AchievementCard({ card }) {
   const { t } = useTranslation();
 
   return (
-    <div className="card w-[90vw] max-w-sm shrink-0 snap-center">
+    <div className="card flex h-[550px] w-full max-w-sm flex-col overflow-hidden">
       {/* Carrossel */}
-      <div className="items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br">
+      <div className="flex h-48 items-center justify-center overflow-hidden rounded-t-xl">
         {card.images &&
           card.images.length > 0 &&
           (card.images.length > 1 ? (
             <SimpleCarousel images={card.images} />
           ) : (
-            <img src={card.images[0]} alt={t(card.titleKey)} width="100%" />
+            <img
+              src={card.images[0]}
+              alt={t(card.titleKey)}
+              className="h-full w-full object-cover"
+            />
           ))}
       </div>
 
       {/* Conteúdo do card */}
-      <div className="flex h-fit flex-1 flex-col justify-between p-6">
-        <h3 className="text-xl font-semibold">{t(card.titleKey)}</h3>
-        <p className="font-medium italic">
-          {card.institution} <br /> {t(card.dateKey)}
-        </p>
-        <p>{t(card.descKey)}</p>
+      <div className="flex flex-1 flex-col justify-between p-6">
+        <div className="flex-1 flex flex-col justify-between">
+          <h3 className="mb-2 line-clamp-2 text-[16px] font-semibold">
+            {t(card.titleKey)}
+          </h3>
+          <p className="mb-3 text-[14px] text-gray-600 font-medium italic">
+            {card.institution} <br /> {t(card.dateKey)}
+          </p>
+          <p className="mb-4 line-clamp-3 text-gray-400 flex-1 text-[12px] ">{t(card.descKey)}</p>
+        </div>
 
         {/* Tags com cores em loop */}
-        <div className="mb-4 flex flex-wrap gap-2">
+        <div className="mb-4 flex min-h-[2rem] flex-wrap gap-2">
           {card.tags.map((tag, i) => {
             const colorClass = colors[i % colors.length];
             return (
               <span
                 key={i}
-                className={`${colorClass} rounded-full px-3 py-1 text-xs`}
+                className={`${colorClass} h-fit rounded-full px-3 py-1 text-xs`}
               >
                 {tag}
               </span>
@@ -53,7 +61,8 @@ export function AchievementCard({ card }) {
         <a
           href={card.certificateUrl}
           target="_blank"
-          className="text-pink hover:text-gray-800 dark:hover:text-white"
+          rel="noopener noreferrer"
+          className="text-pink text-xs font-medium hover:text-white dark:hover:text-darkBlue"
         >
           {t("achievements.certificate")}
         </a>
@@ -85,9 +94,9 @@ export function ProjectCard({ project }) {
   };
 
   return (
-    <div className="card w-[90vw] max-w-sm shrink-0 snap-center">
+    <div className="card flex h-[500px] w-full max-w-sm flex-col overflow-hidden">
       {/* Carrossel de imagens */}
-      <div className="from-pink to-purple flex h-70 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br">
+      <div className="flex h-48 items-center justify-center overflow-hidden rounded-t-xl bg-gradient-to-br">
         {project.images &&
           project.images.length > 0 &&
           (project.images.length > 1 ? (
@@ -96,15 +105,15 @@ export function ProjectCard({ project }) {
             <img
               src={project.images[0]}
               alt={getTitle(project)}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover object-top"
             />
           ))}
       </div>
 
       {/* Conteúdo do card */}
       <div className="flex flex-1 flex-col justify-between p-6">
-        <h3 className="text-xl font-semibold">{getTitle(project)}</h3>
-        <p className="mt-2 text-gray-400">{getDescription(project)}</p>
+        <h3 className="text-[16px] font-semibold">{getTitle(project)}</h3>
+        <p className="mt-2 text-[12px] text-gray-400">{getDescription(project)}</p>
 
         {/* Technologies Tags com cores alternadas */}
         {project.technologies && project.technologies.length > 0 && (
@@ -114,26 +123,9 @@ export function ProjectCard({ project }) {
               return (
                 <span
                   key={index}
-                  className={`${colorClass} rounded-full px-3 py-1 text-xs`}
+                  className={`${colorClass} h-fit rounded-full px-3 py-1 text-xs`}
                 >
                   {tech}
-                </span>
-              );
-            })}
-          </div>
-        )}
-
-        {/* Project Tags com cores alternadas */}
-        {project.tags && project.tags.length > 0 && (
-          <div className="mb-4 flex flex-wrap gap-2">
-            {project.tags.map((tag, index) => {
-              const colorClass = colors[index % colors.length];
-              return (
-                <span
-                  key={index}
-                  className={`${colorClass} rounded-full px-3 py-1 text-xs`}
-                >
-                  {tag}
                 </span>
               );
             })}
@@ -147,7 +139,7 @@ export function ProjectCard({ project }) {
               href={project.projectUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-pink flex items-center gap-2 hover:text-gray-800 dark:hover:text-white"
+              className="link text-pink flex items-center gap-2 hover:text-white dark:hover:text-darkBlue"
             >
               <FontAwesomeIcon icon={faEye} />
               Demo
@@ -158,7 +150,7 @@ export function ProjectCard({ project }) {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-purple flex items-center gap-2 hover:text-gray-800 dark:hover:text-white"
+              className="link text-purple flex items-center gap-2 hover:text-white dark:hover:text-darkBlue"
             >
               <FontAwesomeIcon icon={faCode} />
               Code

@@ -81,11 +81,7 @@ const Skills = () => {
   const designSkills = skills.filter((skill) => skill.category === "design");
 
   return (
-    <section
-      id="skills"
-      ref={skillsRef}
-      className="from-darkBlue to-darkBlue/95 bg-gradient-to-b py-20"
-    >
+    <section id="skills" ref={skillsRef} className="py-20">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="mb-16 text-center">
@@ -94,7 +90,7 @@ const Skills = () => {
             <span className="gradient-text">{t("skills.subtitle")}</span>
           </h2>
           <div className="from-pink to-purple mx-auto h-1 w-24 bg-gradient-to-r"></div>
-          <p className="mx-auto mt-4 max-w-2xl text-gray-300">
+          <p className="mx-auto mt-4 max-w-2xl">
             {t("skills.description")}
           </p>
         </div>
@@ -119,7 +115,7 @@ const Skills = () => {
                     %
                   </span>
                 </div>
-                <div className="skill-bar bg-darkBlue/50 h-3 w-full overflow-hidden rounded-full">
+                <div className="skill-bar dark:bg-darkBlue/50 h-3 w-full overflow-hidden rounded-full bg-gray-200">
                   <div
                     className="skill-progress from-pink to-purple h-full rounded-full bg-gradient-to-r transition-all duration-1000 ease-out"
                     style={{
@@ -138,7 +134,7 @@ const Skills = () => {
 
         {/* Technologies & Tools */}
         <div className="mt-20">
-          <h3 className="text-lightPurple mb-10 text-center text-2xl font-semibold">
+          <h3 className="text-lightPurple dark:text-darkBlue mb-10 text-center text-2xl font-semibold">
             {t("skills.technologies")}
           </h3>
           {isLoading ? (

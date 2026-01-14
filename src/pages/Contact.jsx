@@ -1,7 +1,7 @@
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -36,17 +36,15 @@ const Contact = () => {
   };
   return (
     // <!-- Contact Section -->
-    <section
-      id="contact"
-      className="from-darkBlue/95 to-darkBlue bg-gradient-to-b py-20"
-    >
+    <section id="contact" className="py-20">
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
           <h2 className="mb-2 text-3xl font-bold md:text-4xl">
-            {t("contact.title")} <span className="gradient-text">{t("contact.subtitle")}</span>
+            {t("contact.title")}{" "}
+            <span className="gradient-text">{t("contact.subtitle")}</span>
           </h2>
           <div className="from-pink to-purple mx-auto h-1 w-24 bg-gradient-to-r"></div>
-          <p className="mx-auto mt-4 max-w-2xl text-gray-300">
+          <p className="mx-auto mt-4 max-w-2xl">
             {t("contact.description")}
           </p>
         </div>
@@ -54,7 +52,7 @@ const Contact = () => {
         <div className="mx-auto flex max-w-5xl flex-col gap-10 md:flex-row">
           <div className="md:w-2/5">
             <div className="card rounded-xl p-8">
-              <h3 className="text-lightPurple mb-6 text-2xl font-semibold">
+              <h3 className="title mb-6 text-2xl font-semibold">
                 {t("contact.info")}
               </h3>
 
@@ -67,7 +65,7 @@ const Contact = () => {
                     <h4 className="mb-1 font-medium">{t("contact.email")}</h4>
                     <a
                       href="mailto:clara.cayres1205@gmail.com"
-                      className="text-gray-400 w-full break-all hover:text-pink transition-colors"
+                      className="hover:text-pink w-full break-all text-gray-400 transition-colors"
                     >
                       clara.cayres1205@gmail.com
                     </a>
@@ -79,7 +77,9 @@ const Contact = () => {
                     <i className="fas fa-map-marker-alt text-pink"></i>
                   </div>
                   <div>
-                    <h4 className="mb-1 font-medium">{t("contact.location")}</h4>
+                    <h4 className="mb-1 font-medium">
+                      {t("contact.location")}
+                    </h4>
                     <p className="text-gray-400">
                       {t("contact.locationDescription")}
                     </p>
@@ -111,7 +111,7 @@ const Contact = () => {
 
           <div className="md:w-3/5">
             <div className="card rounded-xl p-8">
-              <h3 className="text-lightPurple mb-6 text-2xl font-semibold">
+              <h3 className="title mb-6 text-2xl font-semibold">
                 {t("contact.form.title")}
               </h3>
 
@@ -128,8 +128,8 @@ const Contact = () => {
                     <input
                       type="text"
                       id="name"
-                      className="bg-darkBlue/50 border-purple/30 focus:border-pink w-full rounded-lg border px-4 py-3 transition-colors focus:outline-none"
-                      placeholder= {t("contact.form.namePlaceholder")}
+                      className="text bg  border-purple/30 focus:border-pink w-full rounded-lg border bg-white px-4 py-3 text-gray-900 transition-colors focus:outline-none dark:text-white"
+                      placeholder={t("contact.form.namePlaceholder")}
                       required
                     />
                   </div>
@@ -140,7 +140,7 @@ const Contact = () => {
                     <input
                       type="email"
                       id="email"
-                      className="bg-darkBlue/50 border-purple/30 focus:border-pink w-full rounded-lg border px-4 py-3 transition-colors focus:outline-none"
+                      className="text bg border-purple/30 focus:border-pink w-full rounded-lg border bg-white px-4 py-3 text-gray-900 transition-colors focus:outline-none dark:text-white"
                       placeholder={t("contact.form.emailPlaceholder")}
                       required
                     />
@@ -154,7 +154,7 @@ const Contact = () => {
                   <input
                     type="text"
                     id="subject"
-                    className="bg-darkBlue/50 border-purple/30 focus:border-pink w-full rounded-lg border px-4 py-3 transition-colors focus:outline-none"
+                    className="text bg border-purple/30 focus:border-pink w-full rounded-lg border bg-white px-4 py-3 text-gray-900 transition-colors focus:outline-none dark:text-white"
                     placeholder={t("contact.form.subjectPlaceholder")}
                     required
                   />
@@ -167,7 +167,7 @@ const Contact = () => {
                   <textarea
                     id="message"
                     rows="5"
-                    className="bg-darkBlue/50 border-purple/30 focus:border-pink w-full rounded-lg border px-4 py-3 transition-colors focus:outline-none"
+                    className="text bg border-purple/30 focus:border-pink w-full rounded-lg border bg-white px-4 py-3 text-gray-900 transition-colors focus:outline-none dark:text-white"
                     placeholder={t("contact.form.messagePlaceholder")}
                     required
                   ></textarea>
@@ -175,7 +175,7 @@ const Contact = () => {
 
                 <button
                   type="submit"
-                  className="btn-gradient shadow-pink/20 w-full rounded-full px-8 py-3 font-medium shadow-lg transition-opacity hover:opacity-90 md:w-auto"
+                  className="btn btn-gradient shadow-pink/20 w-full rounded-full px-8 py-3 font-medium shadow-lg transition-opacity hover:opacity-90 md:w-auto"
                 >
                   {t("contact.form.send")}
                 </button>
