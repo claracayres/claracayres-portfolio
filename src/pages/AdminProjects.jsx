@@ -382,7 +382,10 @@ export default function AdminProjects() {
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
-              <div key={project._id} className="flex flex-col card justify-between rounded-lg p-4">
+              <div
+                key={project._id}
+                className="card flex flex-col justify-between rounded-lg p-4"
+              >
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-white">
                     {project.title?.pt || project.titleKey}
@@ -450,361 +453,365 @@ export default function AdminProjects() {
         {/* Modal */}
         {showModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-            <div className="card max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-lg p-6">
-              <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-white">
-                  {editingId ? t("admin.edit") : t("admin.create")}{" "}
-                  {t("admin.project")}
-                </h2>
-                <button
-                  onClick={handleCloseModal}
-                  className="rounded p-2 text-gray-400 hover:bg-gray-700"
-                >
-                  <FontAwesomeIcon icon={faTimes} />
-                </button>
+            <div className="border-purple/30 flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-lg border bg-gray-800/95 backdrop-blur-md">
+              <div className="flex-shrink-0 border-b border-gray-700 p-6">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-2xl font-bold text-white">
+                    {editingId ? t("admin.edit") : t("admin.create")}{" "}
+                    {t("admin.project")}
+                  </h2>
+                  <button
+                    onClick={handleCloseModal}
+                    className="rounded p-2 text-gray-400 hover:bg-gray-700"
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
+                  </button>
+                </div>
               </div>
 
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handleSubmit();
-                }}
-                className="space-y-6"
-              >
-                {/* Title Section */}
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="md:col-span-2">
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      <FontAwesomeIcon icon={faGlobe} className="mr-2" />
-                      Title Key
-                    </label>
-                    <input
-                      type="text"
-                      value={currentProject.titleKey}
-                      onChange={(e) =>
-                        setCurrentProject((prev) => ({
-                          ...prev,
-                          titleKey: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="projects.project1.title"
-                    />
+              <div className="flex-1 overflow-y-auto p-6">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSubmit();
+                  }}
+                  className="space-y-6"
+                >
+                  {/* Title Section */}
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div className="md:col-span-2">
+                      <label className="mb-2 block text-sm font-medium text-white">
+                        <FontAwesomeIcon icon={faGlobe} className="mr-2" />
+                        Title Key
+                      </label>
+                      <input
+                        type="text"
+                        value={currentProject.titleKey}
+                        onChange={(e) =>
+                          setCurrentProject((prev) => ({
+                            ...prev,
+                            titleKey: e.target.value,
+                          }))
+                        }
+                        className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                        placeholder="projects.project1.title"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                {/* Titles PT/EN */}
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Título (PT)
-                    </label>
-                    <input
-                      type="text"
-                      value={currentProject.titlePt}
-                      onChange={(e) =>
-                        setCurrentProject((prev) => ({
-                          ...prev,
-                          titlePt: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="Título em português"
-                    />
+                  {/* Titles PT/EN */}
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div>
+                      <label className="mb-2 block text-sm font-medium text-white">
+                        Título (PT)
+                      </label>
+                      <input
+                        type="text"
+                        value={currentProject.titlePt}
+                        onChange={(e) =>
+                          setCurrentProject((prev) => ({
+                            ...prev,
+                            titlePt: e.target.value,
+                          }))
+                        }
+                        className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                        placeholder="Título em português"
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-2 block text-sm font-medium text-white">
+                        Title (EN)
+                      </label>
+                      <input
+                        type="text"
+                        value={currentProject.titleEn}
+                        onChange={(e) =>
+                          setCurrentProject((prev) => ({
+                            ...prev,
+                            titleEn: e.target.value,
+                          }))
+                        }
+                        className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                        placeholder="Title in English"
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Title (EN)
-                    </label>
-                    <input
-                      type="text"
-                      value={currentProject.titleEn}
-                      onChange={(e) =>
-                        setCurrentProject((prev) => ({
-                          ...prev,
-                          titleEn: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="Title in English"
-                    />
-                  </div>
-                </div>
 
-                {/* Description Section */}
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="md:col-span-2">
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Description Key
-                    </label>
-                    <input
-                      type="text"
-                      value={currentProject.descKey}
-                      onChange={(e) =>
-                        setCurrentProject((prev) => ({
-                          ...prev,
-                          descKey: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="projects.project1.description"
-                    />
+                  {/* Description Section */}
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div className="md:col-span-2">
+                      <label className="mb-2 block text-sm font-medium text-white">
+                        Description Key
+                      </label>
+                      <input
+                        type="text"
+                        value={currentProject.descKey}
+                        onChange={(e) =>
+                          setCurrentProject((prev) => ({
+                            ...prev,
+                            descKey: e.target.value,
+                          }))
+                        }
+                        className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                        placeholder="projects.project1.description"
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-2 block text-sm font-medium text-white">
+                        Descrição (PT)
+                      </label>
+                      <textarea
+                        value={currentProject.descPt}
+                        onChange={(e) =>
+                          setCurrentProject((prev) => ({
+                            ...prev,
+                            descPt: e.target.value,
+                          }))
+                        }
+                        className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                        rows="3"
+                        placeholder="Descrição em português..."
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-2 block text-sm font-medium text-white">
+                        Description (EN)
+                      </label>
+                      <textarea
+                        value={currentProject.descEn}
+                        onChange={(e) =>
+                          setCurrentProject((prev) => ({
+                            ...prev,
+                            descEn: e.target.value,
+                          }))
+                        }
+                        className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                        rows="3"
+                        placeholder="Description in English..."
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Descrição (PT)
-                    </label>
-                    <textarea
-                      value={currentProject.descPt}
-                      onChange={(e) =>
-                        setCurrentProject((prev) => ({
-                          ...prev,
-                          descPt: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      rows="3"
-                      placeholder="Descrição em português..."
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Description (EN)
-                    </label>
-                    <textarea
-                      value={currentProject.descEn}
-                      onChange={(e) =>
-                        setCurrentProject((prev) => ({
-                          ...prev,
-                          descEn: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      rows="3"
-                      placeholder="Description in English..."
-                    />
-                  </div>
-                </div>
 
-                {/* URLs Section */}
-                <div className="grid gap-4 md:grid-cols-2">
+                  {/* URLs Section */}
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div>
+                      <label className="mb-2 block text-sm font-medium text-white">
+                        <FontAwesomeIcon icon={faLink} className="mr-2" />
+                        Project URL
+                      </label>
+                      <input
+                        type="url"
+                        value={currentProject.projectUrl}
+                        onChange={(e) =>
+                          setCurrentProject((prev) => ({
+                            ...prev,
+                            projectUrl: e.target.value,
+                          }))
+                        }
+                        className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                        placeholder="https://projeto.vercel.app"
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-2 block text-sm font-medium text-white">
+                        <FontAwesomeIcon icon={faCode} className="mr-2" />
+                        GitHub URL
+                      </label>
+                      <input
+                        type="url"
+                        value={currentProject.githubUrl}
+                        onChange={(e) =>
+                          setCurrentProject((prev) => ({
+                            ...prev,
+                            githubUrl: e.target.value,
+                          }))
+                        }
+                        className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                        placeholder="https://github.com/user/repo"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Images Section */}
                   <div>
                     <label className="mb-2 block text-sm font-medium text-white">
-                      <FontAwesomeIcon icon={faLink} className="mr-2" />
-                      Project URL
+                      <FontAwesomeIcon icon={faImage} className="mr-2" />
+                      {t("admin.images")}
                     </label>
-                    <input
-                      type="url"
-                      value={currentProject.projectUrl}
-                      onChange={(e) =>
-                        setCurrentProject((prev) => ({
-                          ...prev,
-                          projectUrl: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="https://projeto.vercel.app"
-                    />
+
+                    {/* Upload de arquivo */}
+                    <div className="mb-2">
+                      <label className="bg-purple hover:bg-purple/80 inline-flex cursor-pointer items-center gap-2 rounded-lg px-4 py-3 text-white">
+                        <FontAwesomeIcon icon={faImage} />
+                        Upload do Dispositivo
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageUpload}
+                          className="hidden"
+                        />
+                      </label>
+                      <span className="ml-3 text-sm text-gray-400">ou</span>
+                    </div>
+
+                    {/* URL de imagem */}
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={currentProject.imageUrl}
+                        onChange={(e) =>
+                          setCurrentProject((prev) => ({
+                            ...prev,
+                            imageUrl: e.target.value,
+                          }))
+                        }
+                        className="focus:ring-purple flex-1 rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                        placeholder="Ou cole a URL da imagem"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleAddImage}
+                        className="bg-purple hover:bg-purple/80 rounded-lg px-4 py-3 text-white"
+                      >
+                        <FontAwesomeIcon icon={faPlus} />
+                      </button>
+                    </div>
+
+                    {/* Preview das imagens */}
+                    <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-3">
+                      {currentProject.images.map((image, index) => (
+                        <div
+                          key={index}
+                          className="group relative overflow-hidden rounded-lg bg-gray-700"
+                        >
+                          <img
+                            src={image}
+                            alt={`Preview ${index + 1}`}
+                            className="h-32 w-full object-cover"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveImage(index)}
+                            className="absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white opacity-0 transition-opacity group-hover:opacity-100 hover:bg-red-600"
+                          >
+                            <FontAwesomeIcon icon={faTimes} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
                   </div>
+
+                  {/* Technologies Section */}
                   <div>
                     <label className="mb-2 block text-sm font-medium text-white">
                       <FontAwesomeIcon icon={faCode} className="mr-2" />
-                      GitHub URL
+                      {t("admin.technologies")}
                     </label>
-                    <input
-                      type="url"
-                      value={currentProject.githubUrl}
-                      onChange={(e) =>
-                        setCurrentProject((prev) => ({
-                          ...prev,
-                          githubUrl: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="https://github.com/user/repo"
-                    />
-                  </div>
-                </div>
-
-                {/* Images Section */}
-                <div>
-                  <label className="mb-2 block text-sm font-medium text-white">
-                    <FontAwesomeIcon icon={faImage} className="mr-2" />
-                    {t("admin.images")}
-                  </label>
-
-                  {/* Upload de arquivo */}
-                  <div className="mb-2">
-                    <label className="bg-purple hover:bg-purple/80 inline-flex cursor-pointer items-center gap-2 rounded-lg px-4 py-3 text-white">
-                      <FontAwesomeIcon icon={faImage} />
-                      Upload do Dispositivo
+                    <div className="flex gap-2">
                       <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="hidden"
+                        type="text"
+                        value={currentProject.newTechnology}
+                        onChange={(e) =>
+                          setCurrentProject((prev) => ({
+                            ...prev,
+                            newTechnology: e.target.value,
+                          }))
+                        }
+                        className="focus:ring-purple flex-1 rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                        placeholder="React, Node.js, MongoDB, etc."
                       />
+                      <button
+                        type="button"
+                        onClick={handleAddTechnology}
+                        className="bg-purple hover:bg-purple/80 rounded-lg px-4 py-3 text-white"
+                      >
+                        <FontAwesomeIcon icon={faPlus} />
+                      </button>
+                    </div>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {currentProject.technologies.map((tech, index) => (
+                        <span
+                          key={index}
+                          className="flex items-center gap-2 rounded bg-blue-600/20 px-3 py-1 text-sm text-blue-400"
+                        >
+                          {tech}
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveTechnology(index)}
+                            className="text-blue-400/70 hover:text-blue-400"
+                          >
+                            <FontAwesomeIcon icon={faTimes} />
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Tags Section */}
+                  <div>
+                    <label className="mb-2 block text-sm font-medium text-white">
+                      <FontAwesomeIcon icon={faTag} className="mr-2" />
+                      {t("admin.tags")}
                     </label>
-                    <span className="ml-3 text-sm text-gray-400">ou</span>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={currentProject.newTag}
+                        onChange={(e) =>
+                          setCurrentProject((prev) => ({
+                            ...prev,
+                            newTag: e.target.value,
+                          }))
+                        }
+                        className="focus:ring-purple flex-1 rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                        placeholder="Web App, Full Stack, etc."
+                      />
+                      <button
+                        type="button"
+                        onClick={handleAddTag}
+                        className="bg-purple hover:bg-purple/80 rounded-lg px-4 py-3 text-white"
+                      >
+                        <FontAwesomeIcon icon={faPlus} />
+                      </button>
+                    </div>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {currentProject.tags.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="bg-pink/20 text-pink flex items-center gap-2 rounded px-3 py-1 text-sm"
+                        >
+                          {tag}
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveTag(index)}
+                            className="text-pink/70 hover:text-pink"
+                          >
+                            <FontAwesomeIcon icon={faTimes} />
+                          </button>
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
-                  {/* URL de imagem */}
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      value={currentProject.imageUrl}
-                      onChange={(e) =>
-                        setCurrentProject((prev) => ({
-                          ...prev,
-                          imageUrl: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple flex-1 rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="Ou cole a URL da imagem"
-                    />
+                  {/* Submit Buttons */}
+                  <div className="flex justify-end gap-4 pt-4">
                     <button
                       type="button"
-                      onClick={handleAddImage}
-                      className="bg-purple hover:bg-purple/80 rounded-lg px-4 py-3 text-white"
+                      onClick={handleCloseModal}
+                      className="rounded-lg bg-gray-600 px-6 py-3 text-white hover:bg-gray-500"
                     >
-                      <FontAwesomeIcon icon={faPlus} />
+                      {t("admin.cancel")}
                     </button>
-                  </div>
-
-                  {/* Preview das imagens */}
-                  <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-3">
-                    {currentProject.images.map((image, index) => (
-                      <div
-                        key={index}
-                        className="group relative overflow-hidden rounded-lg bg-gray-700"
-                      >
-                        <img
-                          src={image}
-                          alt={`Preview ${index + 1}`}
-                          className="h-32 w-full object-cover"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveImage(index)}
-                          className="absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white opacity-0 transition-opacity group-hover:opacity-100 hover:bg-red-600"
-                        >
-                          <FontAwesomeIcon icon={faTimes} />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Technologies Section */}
-                <div>
-                  <label className="mb-2 block text-sm font-medium text-white">
-                    <FontAwesomeIcon icon={faCode} className="mr-2" />
-                    {t("admin.technologies")}
-                  </label>
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      value={currentProject.newTechnology}
-                      onChange={(e) =>
-                        setCurrentProject((prev) => ({
-                          ...prev,
-                          newTechnology: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple flex-1 rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="React, Node.js, MongoDB, etc."
-                    />
                     <button
-                      type="button"
-                      onClick={handleAddTechnology}
-                      className="bg-purple hover:bg-purple/80 rounded-lg px-4 py-3 text-white"
+                      type="submit"
+                      className="btn-gradient flex items-center gap-2 rounded-lg px-6 py-3 text-white hover:opacity-90"
                     >
-                      <FontAwesomeIcon icon={faPlus} />
+                      <FontAwesomeIcon icon={faSave} />
+                      {editingId ? t("admin.update") : t("admin.create")}
                     </button>
                   </div>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {currentProject.technologies.map((tech, index) => (
-                      <span
-                        key={index}
-                        className="flex items-center gap-2 rounded bg-blue-600/20 px-3 py-1 text-sm text-blue-400"
-                      >
-                        {tech}
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveTechnology(index)}
-                          className="text-blue-400/70 hover:text-blue-400"
-                        >
-                          <FontAwesomeIcon icon={faTimes} />
-                        </button>
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Tags Section */}
-                <div>
-                  <label className="mb-2 block text-sm font-medium text-white">
-                    <FontAwesomeIcon icon={faTag} className="mr-2" />
-                    {t("admin.tags")}
-                  </label>
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      value={currentProject.newTag}
-                      onChange={(e) =>
-                        setCurrentProject((prev) => ({
-                          ...prev,
-                          newTag: e.target.value,
-                        }))
-                      }
-                      className="focus:ring-purple flex-1 rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="Web App, Full Stack, etc."
-                    />
-                    <button
-                      type="button"
-                      onClick={handleAddTag}
-                      className="bg-purple hover:bg-purple/80 rounded-lg px-4 py-3 text-white"
-                    >
-                      <FontAwesomeIcon icon={faPlus} />
-                    </button>
-                  </div>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {currentProject.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="bg-pink/20 text-pink flex items-center gap-2 rounded px-3 py-1 text-sm"
-                      >
-                        {tag}
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveTag(index)}
-                          className="text-pink/70 hover:text-pink"
-                        >
-                          <FontAwesomeIcon icon={faTimes} />
-                        </button>
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Submit Buttons */}
-                <div className="flex justify-end gap-4 pt-4">
-                  <button
-                    type="button"
-                    onClick={handleCloseModal}
-                    className="rounded-lg bg-gray-600 px-6 py-3 text-white hover:bg-gray-500"
-                  >
-                    {t("admin.cancel")}
-                  </button>
-                  <button
-                    type="submit"
-                    className="btn-gradient flex items-center gap-2 rounded-lg px-6 py-3 text-white hover:opacity-90"
-                  >
-                    <FontAwesomeIcon icon={faSave} />
-                    {editingId ? t("admin.update") : t("admin.create")}
-                  </button>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         )}
