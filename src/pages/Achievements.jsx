@@ -1,39 +1,59 @@
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
-import AchievementCard from "../components/Cards";
+import { useEffect, useState, useRef } from "react";
+import { AchievementCard } from "../components/Cards";
 import { API_ENDPOINTS } from "../config/api";
 
 export default function Achievements() {
   const { t } = useTranslation();
   const [achievements, setAchievements] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(API_ENDPOINTS.ACHIEVEMENTS)
-      .then((res) => res.json())
-      .then((data) => {
-        setAchievements(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Erro ao buscar achievements", err);
-        setLoading(false);
-      });
+    fetchAchievements();
   }, []);
 
-  if (loading) {
-    return (
-      <section className="py-20 text-center text-gray-300">
-        Carregando...
-      </section>
-    );
-  }
+  const fetchAchievements = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(API_ENDPOINTS.ACHIEVEMENTS);
+      if (response.ok) {
+        const data = await response.json();
+        setAchievements(data);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar conquistas:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  // Scrollspy for carousel indicators
+  const containerRef = useRef(null);
+  const itemRefs = useRef([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  useEffect(() => {
+    if (!containerRef.current) return;
 
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.dataset.index);
+            setActiveIndex(index);
+          }
+        });
+      },
+      {
+        root: containerRef.current,
+        threshold: 0.6, // 60% visível
+      },
+    );
+
+    itemRefs.current.forEach((el) => el && observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [achievements]);
   return (
-    <section
-      id="achievements"
-      className="py-20"
-    >
+    <section id="achievements" className="py-20">
       <div className="container m-auto px-4">
         {/* Título */}
         <div className="mb-16 text-center">
@@ -48,11 +68,48 @@ export default function Achievements() {
         </div>
 
         {/* Grid de cards */}
-                <div className="lg md:snap-none:overflow-visible flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4 pb-6 lg:flex lg:flex-wrap lg:justify-center lg:gap-10">
-          {achievements.map((card) => (
-            <AchievementCard key={card._id || card.titleKey} card={card} />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="text-center">
+            <div className="border-pink inline-block h-8 w-8 animate-spin rounded-full border-4 border-t-transparent"></div>
+            <p className="mt-2 text-gray-400">Carregando conquistas...</p>
+          </div>
+        ) : (
+          <div className="relative mx-auto w-full max-w-sm lg:max-w-7xl">
+            <div
+              ref={containerRef}
+              className="flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-hidden scroll-smooth pb-6 lg:snap-none lg:flex-wrap lg:justify-center lg:gap-10 lg:overflow-visible"
+            >
+              {achievements.map((achievement, index) => (
+                <div
+                  key={achievement._id}
+                  ref={(el) => (itemRefs.current[index] = el)}
+                  data-index={index}
+                  className="w-full max-w-sm flex-none snap-center"
+                >
+                  <div className="transition-transform duration-300 lg:hover:scale-105">
+                    <AchievementCard card={achievement} />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 flex justify-center gap-2 lg:hidden">
+              {achievements.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() =>
+                    itemRefs.current[index]?.scrollIntoView({
+                      behavior: "smooth",
+                      inline: "center",
+                    })
+                  }
+                  className={`h-2 w-2 rounded-full transition-all ${
+                    activeIndex === index ? "bg-pink w-4" : "bg-gray-400/40"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

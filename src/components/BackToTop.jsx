@@ -24,7 +24,7 @@ const BackToTop = () => {
   return (
     <button
       id="back-to-top"
-      className="btn-gradient shadow-pink/20 invisible fixed right-6 bottom-6 z-50 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full opacity-0 shadow-lg transition-all"
+      className="btn btn-gradient shadow-pink/20 invisible fixed right-6 bottom-6 z-50 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full opacity-0 shadow-lg transition-all"
     >
       <svg
         className="h-5 w-5"

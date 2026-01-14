@@ -5,17 +5,15 @@ const AboutMe = () => {
   const { t } = useTranslation();
 
   return (
-    <section
-      id="about"
-      className="from-darkBlue to-darkBlue/95 bg-gradient-to-b py-20 mx-10"
-    >
+    <section id="about" className="mx-10 py-20">
       <div className="container mx-auto px-4">
-        <div className="mb-16 text-center">
-          <h2 className="mb-2 text-3xl font-bold md:text-4xl">
+        <div className="flex mb-16 items-center justify-center text-center">
+          <h2 className="w-fit mb-2 text-3xl font-bold md:text-4xl">
             {t("about.title")}{" "}
             <span className="gradient-text">{t("about.subtitle")}</span>
+            <div className="from-pink to-purple mx-auto h-1 w-full bg-gradient-to-r"></div>
           </h2>
-          <div className="from-pink to-purple mx-auto h-1 w-24 bg-gradient-to-r"></div>
+          
         </div>
 
         <div className="flex flex-col items-center gap-10 md:flex-row">
@@ -23,7 +21,7 @@ const AboutMe = () => {
             <div className="relative">
               <div className="from-pink to-purple absolute inset-0 -m-2 rounded-lg bg-gradient-to-tr opacity-20 blur-md"></div>
               <div className="card relative rounded-lg p-1">
-                <div className="bg-darkBlue overflow-hidden rounded-lg">
+                <div className="overflow-hidden rounded-lg">
                   <svg
                     className="text-purple/30 h-auto w-full"
                     viewBox="0 0 200 200"
@@ -49,13 +47,13 @@ const AboutMe = () => {
           </div>
 
           <div className="md:w-3/5">
-            <h3 className="text-lightPurple mb-4 text-2xl font-semibold">
+            <h3 className="title mb-4 text-2xl font-semibold">
               {t("about.area")}
             </h3>
-            <p className="mb-2 text-gray-300">{t("about.p1")}</p>
-            <p className="mb-2 text-gray-300">{t("about.p2")}</p>
-            <p className="mb-2 text-gray-300">{t("about.p3")}</p>
-            <p className="mb-2 text-gray-300">{t("about.p4")}</p>
+            <p className="mb-2">{t("about.p1")}</p>
+            <p className="mb-2">{t("about.p2")}</p>
+            <p className="mb-2">{t("about.p3")}</p>
+            <p className="mb-2">{t("about.p4")}</p>
 
             <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
               {[
@@ -101,7 +99,7 @@ const AboutMe = () => {
                   </div>
                   <div>
                     <h4 className="font-medium">{item.title}</h4>
-                    <p className="text-sm text-gray-400">{item.description}</p>
+                    <p className="text-sm">{item.description}</p>
                   </div>
                 </div>
               ))}
@@ -111,7 +109,7 @@ const AboutMe = () => {
               href={t("about.btnlink")}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-gradient shadow-pink/20 inline-block rounded-full px-8 py-3 font-medium shadow-lg transition-opacity hover:opacity-90"
+              className="btn btn-gradient shadow-pink/20 inline-block rounded-full px-8 py-3 font-medium shadow-lg transition-opacity hover:opacity-90"
             >
               {t("about.btn")}
             </a>

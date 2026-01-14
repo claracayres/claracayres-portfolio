@@ -2,12 +2,12 @@ import { useTranslation } from "react-i18next";
 const Footer = () => {
   const { t } = useTranslation();
   return (
-    <footer className="bg-darkBlue border-purple/20 border-t py-8">
+    <footer className="border-purple/20 border-t py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-between md:flex-row">
           <div className="mb-4 md:mb-0">
             <a href="#home" className="gradient-text text-2xl font-bold">
-              Clara.<span className="text-white">dev</span>
+              Clara.<span className="dev">dev</span>
             </a>
           </div>
 
