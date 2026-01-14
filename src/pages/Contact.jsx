@@ -167,7 +167,7 @@ const Contact = () => {
                   <textarea
                     id="message"
                     rows="5"
-                    className="text bg border-purple/30 focus:border-pink w-full rounded-lg border bg-white px-4 py-3 transition-colors focus:outline-none dark:text-white"
+                    className="text bg border-purple/30 focus:border-pink w-full rounded-lg border bg-white px-4 py-3 transition-colors focus:outline-none"
                     placeholder={t("contact.form.messagePlaceholder")}
                     required
                   ></textarea>
