@@ -134,7 +134,7 @@ const Skills = () => {
 
         {/* Technologies & Tools */}
         <div className="mt-20">
-          <h3 className="text-lightPurple dark:text-darkBlue mb-10 text-center text-2xl font-semibold">
+          <h3 className="dev mb-10 text-center text-2xl font-semibold">
             {t("skills.technologies")}
           </h3>
           {isLoading ? (
