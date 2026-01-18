@@ -704,10 +704,10 @@ export default function AdminAchievements({ embedded = false }) {
                 <div>
                   <label className="mb-2 block text-sm font-medium text-white">
                     <FontAwesomeIcon icon={faGlobe} className="mr-2" />
-                    Certificate URL
+                    Certificate URL or Path
                   </label>
                   <input
-                    type="url"
+                    type="text"
                     value={currentAchievement.certificateUrl}
                     onChange={(e) =>
                       setCurrentAchievement((prev) => ({
@@ -716,7 +716,7 @@ export default function AdminAchievements({ embedded = false }) {
                       }))
                     }
                     className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                    placeholder="https://coursera.org/..."
+                    placeholder="https://coursera.org/... or /certificates/cert.png"
                   />
                 </div>
 
