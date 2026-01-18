@@ -707,7 +707,7 @@ export default function AdminAchievements({ embedded = false }) {
                     Certificate URL
                   </label>
                   <input
-                    type="url"
+                    type="text" 
                     value={currentAchievement.certificateUrl}
                     onChange={(e) =>
                       setCurrentAchievement((prev) => ({
