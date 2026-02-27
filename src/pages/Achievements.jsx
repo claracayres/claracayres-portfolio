@@ -45,7 +45,7 @@ export default function Achievements() {
       {
         root: containerRef.current,
         threshold: 0.6, // 60% visível
-      },
+      }
     );
 
     itemRefs.current.forEach((el) => el && observer.observe(el));

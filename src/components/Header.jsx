@@ -5,7 +5,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 const Header = () => {
   const { t } = useTranslation();
   const [isDark, setIsDark] = useState(
-    document.documentElement.classList.contains("dark"),
+    document.documentElement.classList.contains("dark")
   );
 
   const modeSwitch = () => {
@@ -58,7 +58,6 @@ const Header = () => {
     };
   }, []);
 
-
   return (
     <nav className="fixed z-50 w-full shadow-lg backdrop-blur-md">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
@@ -106,7 +105,7 @@ const Header = () => {
         <LanguageSwitcher />
         <button
           onClick={modeSwitch}
-          className="bg-lightPurple/20 h-8 flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-purple/30"
+          className="bg-lightPurple/20 hover:bg-purple/30 flex h-8 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
         >
           <i
             className={`fas ${

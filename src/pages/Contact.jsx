@@ -44,9 +44,7 @@ const Contact = () => {
             <span className="gradient-text">{t("contact.subtitle")}</span>
           </h2>
           <div className="from-pink to-purple mx-auto h-1 w-24 bg-gradient-to-r"></div>
-          <p className="mx-auto mt-4 max-w-2xl">
-            {t("contact.description")}
-          </p>
+          <p className="mx-auto mt-4 max-w-2xl">{t("contact.description")}</p>
         </div>
 
         <div className="mx-auto flex max-w-5xl flex-col gap-10 md:flex-row">
@@ -128,7 +126,7 @@ const Contact = () => {
                     <input
                       type="text"
                       id="name"
-                      className="text bg  border-purple/30 focus:border-pink w-full rounded-lg border bg-white px-4 py-3 text-gray-900 transition-colors focus:outline-none dark:text-white"
+                      className="text bg border-purple/30 focus:border-pink w-full rounded-lg border bg-white px-4 py-3 text-gray-900 transition-colors focus:outline-none dark:text-white"
                       placeholder={t("contact.form.namePlaceholder")}
                       required
                     />

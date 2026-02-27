@@ -255,7 +255,7 @@ export default function AdminAchievements({ embedded = false }) {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(translations),
-            },
+            }
           );
 
           if (translationResponse.ok) {
@@ -307,7 +307,7 @@ export default function AdminAchievements({ embedded = false }) {
         const errorText = await response.text();
         console.error("Server response:", errorText);
         throw new Error(
-          `HTTP error! status: ${response.status} - ${errorText}`,
+          `HTTP error! status: ${response.status} - ${errorText}`
         );
       }
 
@@ -317,7 +317,7 @@ export default function AdminAchievements({ embedded = false }) {
       if (translations.length > 0 && !editingId) {
         setTimeout(() => {
           alert(
-            `🌐 Traduções aplicadas automaticamente!\n${translations.map((t) => `• ${t.key}`).join("\n")}\n\n✅ Recarregue a página para ver as traduções!`,
+            `🌐 Traduções aplicadas automaticamente!\n${translations.map((t) => `• ${t.key}`).join("\n")}\n\n✅ Recarregue a página para ver as traduções!`
           );
         }, 800);
       }
@@ -367,14 +367,14 @@ export default function AdminAchievements({ embedded = false }) {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ keys: keysToDelete }),
-                  },
+                  }
                 );
 
                 if (translationResponse.ok) {
                   const result = await translationResponse.json();
                   console.log(
                     "✅ Traduções removidas automaticamente:",
-                    result,
+                    result
                   );
                 } else {
                   console.log("⚠️ Falha na remoção automática de traduções");
@@ -382,7 +382,7 @@ export default function AdminAchievements({ embedded = false }) {
               } catch (translationError) {
                 console.log(
                   "❌ Erro na remoção de traduções:",
-                  translationError,
+                  translationError
                 );
               }
             }
@@ -391,7 +391,7 @@ export default function AdminAchievements({ embedded = false }) {
           alert(t("admin.deleted"));
           setTimeout(() => {
             alert(
-              "🗑️ Traduções removidas automaticamente!\n\n✅ Recarregue a página para ver as mudanças!",
+              "🗑️ Traduções removidas automaticamente!\n\n✅ Recarregue a página para ver as mudanças!"
             );
           }, 800);
           fetchAchievements();

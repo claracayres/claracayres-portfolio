@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { API_ENDPOINTS } from "../config/api";
 
+
 const Skills = () => {
   const { t } = useTranslation();
   const [skills, setSkills] = useState([]);
@@ -45,7 +46,7 @@ const Skills = () => {
 
               // Animar skills de programação
               const programmingSkills = skills.filter(
-                (skill) => !skill.category || skill.category === "programming",
+                (skill) => !skill.category || skill.category === "programming"
               );
 
               programmingSkills.forEach((skill, index) => {
@@ -63,7 +64,7 @@ const Skills = () => {
       {
         threshold: 0.2, // Reduzido para detectar mais cedo
         rootMargin: "0px 0px -100px 0px", // Margem para ativar antes
-      },
+      }
     );
 
     if (skillsRef.current) {
@@ -75,7 +76,7 @@ const Skills = () => {
 
   // Separar skills por categoria
   const programmingSkills = skills.filter(
-    (skill) => !skill.category || skill.category === "programming",
+    (skill) => !skill.category || skill.category === "programming"
   );
   const toolsSkills = skills.filter((skill) => skill.category === "tools");
   const designSkills = skills.filter((skill) => skill.category === "design");
@@ -90,9 +91,7 @@ const Skills = () => {
             <span className="gradient-text">{t("skills.subtitle")}</span>
           </h2>
           <div className="from-pink to-purple mx-auto h-1 w-24 bg-gradient-to-r"></div>
-          <p className="mx-auto mt-4 max-w-2xl">
-            {t("skills.description")}
-          </p>
+          <p className="mx-auto mt-4 max-w-2xl">{t("skills.description")}</p>
         </div>
 
         {/* Skills List */}

@@ -7,13 +7,12 @@ const AboutMe = () => {
   return (
     <section id="about" className="mx-10 py-20">
       <div className="container mx-auto px-4">
-        <div className="flex mb-16 items-center justify-center text-center">
-          <h2 className="w-fit mb-2 text-3xl font-bold md:text-4xl">
+        <div className="mb-16 flex items-center justify-center text-center">
+          <h2 className="mb-2 w-fit text-3xl font-bold md:text-4xl">
             {t("about.title")}{" "}
             <span className="gradient-text">{t("about.subtitle")}</span>
             <div className="from-pink to-purple mx-auto h-1 w-full bg-gradient-to-r"></div>
           </h2>
-          
         </div>
 
         <div className="flex flex-col items-center gap-10 md:flex-row">

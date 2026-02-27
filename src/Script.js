@@ -26,7 +26,8 @@ export function initDomScripts() {
       particle.style.left = `${posX}%`;
       particle.style.top = `${posY}%`;
       particle.style.opacity = opacity;
-      particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      particle.style.backgroundColor =
+        colors[Math.floor(Math.random() * colors.length)];
       particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
 
       particles.appendChild(particle);

@@ -224,8 +224,8 @@ export default function AdminSkills() {
                   onChange={handleInputChange}
                   className="focus:border-pink w-full rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 text-white focus:outline-none"
                 >
-                  <option value="programming">Porcentage</option>
-                  <option value="tools">Icons</option>
+                  <option value="programming">Programming</option>
+                  <option value="tools">Tools</option>
                   <option value="design">Design</option>
                 </select>
               </div>
@@ -303,13 +303,13 @@ export default function AdminSkills() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleEdit(skill)}
-                    className="text-purple rounded p-2 transition-colors ease-in hover:text-purple-200"
+                    className="rounded p-2 text-purple-400 transition-colors ease-in hover:text-purple-200"
                   >
                     <FontAwesomeIcon icon={faEdit} />
                   </button>
                   <button
                     onClick={() => handleDelete(skill._id)}
-                    className="rounded text-red-400 hover:text-pink-800"
+                    className="rounded p-2 text-red-400 hover:text-red-600"
                   >
                     <FontAwesomeIcon icon={faTrash} />
                   </button>

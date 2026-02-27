@@ -33,14 +33,16 @@ export function AchievementCard({ card }) {
 
       {/* Conteúdo do card */}
       <div className="flex flex-1 flex-col justify-between p-6">
-        <div className="flex-1 flex flex-col justify-between">
+        <div className="flex flex-1 flex-col justify-between">
           <h3 className="mb-2 line-clamp-2 text-[16px] font-semibold">
             {t(card.titleKey)}
           </h3>
-          <p className="mb-3 text-[14px]font-medium italic">
+          <p className="mb-3 text-[14px] font-medium italic">
             {card.institution} <br /> {t(card.dateKey)}
           </p>
-          <p className="mb-4 line-clamp-3 text-gray-400 flex-1 text-[12px] ">{t(card.descKey)}</p>
+          <p className="mb-4 line-clamp-3 flex-1 text-[12px] text-gray-400">
+            {t(card.descKey)}
+          </p>
         </div>
 
         {/* Tags com cores em loop */}
@@ -113,7 +115,9 @@ export function ProjectCard({ project }) {
       {/* Conteúdo do card */}
       <div className="flex flex-1 flex-col justify-between p-6">
         <h3 className="text-[16px] font-semibold">{getTitle(project)}</h3>
-        <p className="mt-2 text-[12px] text-gray-400">{getDescription(project)}</p>
+        <p className="mt-2 text-[12px] text-gray-400">
+          {getDescription(project)}
+        </p>
 
         {/* Technologies Tags com cores alternadas */}
         {project.technologies && project.technologies.length > 0 && (

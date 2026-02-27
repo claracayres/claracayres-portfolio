@@ -33,7 +33,8 @@ export default function AdminDashboard() {
           <div className="flex flex-col items-center justify-between gap-4 lg:flex-row">
             <div className="text-center lg:text-left">
               <h1 className="mb-2 text-4xl font-bold">
-                <span className="gradient-text">{t("admin.title")}</span> {t("admin.dashboard")}
+                <span className="gradient-text">{t("admin.title")}</span>{" "}
+                {t("admin.dashboard")}
               </h1>
               <p className="text-gray-400">{t("admin.managePortfolio")}</p>
             </div>
@@ -46,7 +47,7 @@ export default function AdminDashboard() {
               className="flex items-center gap-2 rounded-lg bg-red-600 px-6 py-3 text-white transition-all hover:bg-red-700"
             >
               <FontAwesomeIcon icon={faSignOutAlt} />
-                {t("admin.logoutButton")}
+              {t("admin.logoutButton")}
             </button>
           </div>
 

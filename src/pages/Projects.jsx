@@ -47,7 +47,7 @@ const Projects = () => {
       {
         root: containerRef.current,
         threshold: 0.6, // 60% visível
-      },
+      }
     );
 
     itemRefs.current.forEach((el) => el && observer.observe(el));
@@ -77,7 +77,7 @@ const Projects = () => {
           <div className="relative mx-auto w-full max-w-sm lg:max-w-7xl">
             <div
               ref={containerRef}
-              className="flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-hidden  scroll-smooth pb-6 lg:snap-none lg:flex-wrap lg:justify-center lg:gap-10 lg:overflow-visible"
+              className="flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-hidden scroll-smooth pb-6 lg:snap-none lg:flex-wrap lg:justify-center lg:gap-10 lg:overflow-visible"
             >
               {projects.map((project, index) => (
                 <div

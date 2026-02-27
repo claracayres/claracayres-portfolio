@@ -264,7 +264,7 @@ Add or modify translations in:
 
 ## Live Preview
 
- [**View Live Portfolio**](https://claracayres-portfolio.vercel.app)
+[**View Live Portfolio**](https://claracayres-portfolio.vercel.app)
 
 ## Contributing
 
@@ -281,7 +281,6 @@ This project is open source and available under the [MIT License](LICENSE).
 - LinkedIn: [Maria Clara Cayres](https://www.linkedin.com/in/maria-clara-cayres-de-almeida/)
 - Email: [clara.cayres1205@gmail.com](mailto:clara.cayres1205@gmail.com)
 - Portfolio: [claracayres-portfolio.vercel.app](https://claracayres-portfolio.vercel.app)
-
 
 ## ☕ Support & Recognition
 
