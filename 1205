@@ -1,0 +1,30 @@
+[33mcommit 96bb23dfb0c1658585480d76d2723a7cb4bc020e[m
+Author: claracayres <0123m.m4567@gmail.com>
+Date:   Sun Jan 11 02:35:36 2026 -0500
+
+    refactor: remove deploy setup script and Vercel deployment guide; update resume files and translations
+    
+    - Deleted `deploy-setup.sh` and `vercel-deploy-guide.md` as they are no longer needed.
+    - Updated English and Portuguese resume PDFs with new content and formatting.
+    - Removed old resume PDF file `Resume-Maria-Clara-Cayres-de-Almeida.pdf`.
+    - Deleted unused SVG logo file `logo_white.svg`.
+    - Enhanced translation files for English and Portuguese with updated personal descriptions and education details.
+    - Modified `About-me`, `Achievements`, and `Projects` pages for improved layout and content presentation.
+
+[33mcommit ebffec3508c3eb96acd577db1476978ff22460b2[m
+Author: claracayres <0123m.m4567@gmail.com>
+Date:   Sat Jan 10 23:49:57 2026 -0500
+
+    feat: add AdminSkills page for managing skills with CRUD operations
+    
+    feat: integrate particle effects in Home page
+    
+    feat: implement dynamic project fetching in Projects page
+    
+    feat: fetch and display skills from API in Skills page
+    
+    style: add global styles for particle effects
+    
+    docs: create Vercel deployment guide
+    
+    chore: add Vercel configuration for serverless functions and static build

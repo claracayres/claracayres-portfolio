@@ -104,10 +104,8 @@ const AboutMe = () => {
               ))}
             </div>
             <a
-              download="Resume-Maria-Clara-Cayres-de-Almeida.pdf"
+              download
               href={t("about.btnlink")}
-              target="_blank"
-              rel="noopener noreferrer"
               className="btn btn-gradient shadow-pink/20 inline-block rounded-full px-8 py-3 font-medium shadow-lg transition-opacity hover:opacity-90"
             >
               {t("about.btn")}
