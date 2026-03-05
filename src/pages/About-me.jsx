@@ -4,6 +4,20 @@ import { useTranslation } from "react-i18next";
 const AboutMe = () => {
   const { t } = useTranslation();
 
+  const handleDownload = () => {
+    const link = t("about.btnlink");
+    const filename = link.split("/").pop();
+
+    // Criar um elemento 'a' temporário para forçar o download
+    const downloadLink = document.createElement("a");
+    downloadLink.href = link;
+    downloadLink.download = filename;
+    downloadLink.target = "_blank";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
+
   return (
     <section id="about" className="mx-10 py-20">
       <div className="container mx-auto px-4">
@@ -103,13 +117,12 @@ const AboutMe = () => {
                 </div>
               ))}
             </div>
-            <a
-              download
-              href={t("about.btnlink")}
-              className="btn btn-gradient shadow-pink/20 inline-block rounded-full px-8 py-3 font-medium shadow-lg transition-opacity hover:opacity-90"
+            <button
+              onClick={handleDownload}
+              className="btn btn-gradient shadow-pink/20 inline-block cursor-pointer rounded-full px-8 py-3 font-medium shadow-lg transition-opacity hover:opacity-90"
             >
               {t("about.btn")}
-            </a>
+            </button>
           </div>
         </div>
       </div>
