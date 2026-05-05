@@ -1,27 +1,29 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faPlus,
-  faEdit,
-  faTrash,
-  faSave,
-  faTimes,
-  faEye,
-  faImage,
-  faTag,
-  faCalendar,
   faBuilding,
+  faCalendar,
+  faEdit,
+  faEye,
   faGlobe,
+  faImage,
+  faPlus,
+  faSave,
+  faTag,
+  faTimes,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { API_ENDPOINTS } from "../config/api";
 
-export default function AdminAchievements({ embedded = false }) {
+export default function AdminAchievements({ embedded = false, theme = "dark" }) {
   const { t } = useTranslation();
+
   const [achievements, setAchievements] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState(null);
+
   const [currentAchievement, setCurrentAchievement] = useState({
     titleKey: "",
     titlePt: "",
@@ -40,27 +42,46 @@ export default function AdminAchievements({ embedded = false }) {
     certificateUrl: "",
   });
 
-  // Fetch achievements on component mount
+  const isDark = theme === "dark";
+
+  const cardClass = isDark
+    ? "border-white/10 bg-white/[0.06] text-white"
+    : "border-slate-200 bg-white text-slate-950 shadow-lg shadow-slate-200/60";
+
+  const modalClass = isDark
+    ? "border-white/10 bg-slate-950/95 text-white"
+    : "border-slate-200 bg-white text-slate-950 shadow-2xl shadow-slate-300/70";
+
+  const inputClass = isDark
+    ? "border-white/10 bg-slate-950/60 text-white placeholder:text-white/30 focus:border-cyan-300/60 focus:ring-cyan-300/10"
+    : "border-slate-200 bg-white text-slate-950 placeholder:text-slate-400 focus:border-cyan-500/60 focus:ring-cyan-500/10";
+
+  const mutedClass = isDark ? "text-white/55" : "text-slate-600";
+
   useEffect(() => {
     fetchAchievements();
   }, []);
 
-  const fetchAchievements = async () => {
+  async function fetchAchievements() {
     try {
       setIsLoading(true);
+
       const response = await fetch(API_ENDPOINTS.ACHIEVEMENTS);
-      if (response.ok) {
-        const data = await response.json();
-        setAchievements(data);
+
+      if (!response.ok) {
+        throw new Error(`Erro ao buscar achievements: ${response.status}`);
       }
+
+      const data = await response.json();
+      setAchievements(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error("Erro ao buscar achievements:", error);
     } finally {
       setIsLoading(false);
     }
-  };
+  }
 
-  const resetForm = () => {
+  function resetForm() {
     setCurrentAchievement({
       titleKey: "",
       titlePt: "",
@@ -78,23 +99,25 @@ export default function AdminAchievements({ embedded = false }) {
       newTag: "",
       certificateUrl: "",
     });
-    setEditingId(null);
-  };
 
-  const handleOpenModal = (achievement = null) => {
+    setEditingId(null);
+  }
+
+  function handleOpenModal(achievement = null) {
     if (achievement) {
       setEditingId(achievement._id);
+
       setCurrentAchievement({
         titleKey: achievement.titleKey || "",
-        titlePt: achievement.title?.pt || "",
-        titleEn: achievement.title?.en || "",
+        titlePt: achievement.title?.pt || achievement.titlePt || "",
+        titleEn: achievement.title?.en || achievement.titleEn || "",
         institution: achievement.institution || "",
         dateKey: achievement.dateKey || "",
-        datePt: achievement.date?.pt || "",
-        dateEn: achievement.date?.en || "",
+        datePt: achievement.date?.pt || achievement.datePt || "",
+        dateEn: achievement.date?.en || achievement.dateEn || "",
         descKey: achievement.descKey || "",
-        descPt: achievement.description?.pt || "",
-        descEn: achievement.description?.en || "",
+        descPt: achievement.description?.pt || achievement.descPt || "",
+        descEn: achievement.description?.en || achievement.descEn || "",
         images: achievement.images || [],
         imageUrl: "",
         tags: achievement.tags || [],
@@ -104,196 +127,109 @@ export default function AdminAchievements({ embedded = false }) {
     } else {
       resetForm();
     }
-    setShowModal(true);
-  };
 
-  const handleCloseModal = () => {
+    setShowModal(true);
+  }
+
+  function handleCloseModal() {
     setShowModal(false);
     resetForm();
-  };
+  }
 
-  const handleAddImage = () => {
-    if (currentAchievement.imageUrl.trim()) {
-      setCurrentAchievement((prev) => ({
-        ...prev,
-        images: [...prev.images, prev.imageUrl.trim()],
-        imageUrl: "",
-      }));
-    }
-  };
+  function handleAddImage() {
+    const image = currentAchievement.imageUrl.trim();
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      // Validar tipo de arquivo
-      if (!file.type.startsWith("image/")) {
-        alert("Por favor, selecione apenas arquivos de imagem!");
-        return;
-      }
+    if (!image) return;
 
-      // Validar tamanho (max 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        alert("Imagem muito grande! Máximo 5MB");
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setCurrentAchievement((prev) => ({
-          ...prev,
-          images: [...prev.images, reader.result],
-        }));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleRemoveImage = (index) => {
-    setCurrentAchievement((prev) => ({
-      ...prev,
-      images: prev.images.filter((_, i) => i !== index),
+    setCurrentAchievement((previous) => ({
+      ...previous,
+      images: [...previous.images, image],
+      imageUrl: "",
     }));
-  };
+  }
 
-  const handleAddTag = () => {
-    if (currentAchievement.newTag.trim()) {
-      setCurrentAchievement((prev) => ({
-        ...prev,
-        tags: [...prev.tags, prev.newTag.trim()],
-        newTag: "",
-      }));
+  function handleImageUpload(event) {
+    const file = event.target.files?.[0];
+
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("Por favor, selecione apenas arquivos de imagem.");
+      return;
     }
-  };
 
-  const handleRemoveTag = (index) => {
-    setCurrentAchievement((prev) => ({
-      ...prev,
-      tags: prev.tags.filter((_, i) => i !== index),
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Imagem muito grande. O máximo recomendado é 5MB.");
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setCurrentAchievement((previous) => ({
+        ...previous,
+        images: [...previous.images, reader.result],
+      }));
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  function handleRemoveImage(index) {
+    setCurrentAchievement((previous) => ({
+      ...previous,
+      images: previous.images.filter((_, imageIndex) => imageIndex !== index),
     }));
-  };
+  }
 
-  // Função para gerar e exibir as traduções para serem copiadas
-  const showTranslationUpdate = (translations) => {
-    if (translations.length === 0) return;
+  function handleAddTag() {
+    const tag = currentAchievement.newTag.trim();
 
-    let message = "🌐 TRADUÇÕES PARA ADICIONAR:\n\n";
+    if (!tag) return;
 
-    message += "📁 PT (src/locales/pt/translation.json):\n";
-    translations.forEach(({ key, pt }) => {
-      if (key && pt) {
-        const cleanKey = key.replace("achievements.", "");
-        message += `"${cleanKey}": "${pt}",\n`;
-      }
-    });
+    setCurrentAchievement((previous) => ({
+      ...previous,
+      tags: [...previous.tags, tag],
+      newTag: "",
+    }));
+  }
 
-    message += "\n📁 EN (src/locales/en/translation.json):\n";
-    translations.forEach(({ key, en }) => {
-      if (key && en) {
-        const cleanKey = key.replace("achievements.", "");
-        message += `"${cleanKey}": "${en}",\n`;
-      }
-    });
+  function handleRemoveTag(index) {
+    setCurrentAchievement((previous) => ({
+      ...previous,
+      tags: previous.tags.filter((_, tagIndex) => tagIndex !== index),
+    }));
+  }
 
-    message +=
-      "\n💡 Adicione essas linhas na seção 'achievements' dos arquivos de tradução!";
+  async function handleSubmit(event) {
+    event.preventDefault();
 
-    // Cria um modal customizado com textarea para copiar
-    const translationModal = document.createElement("div");
-    translationModal.style.cssText = `
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.8); z-index: 9999;
-      display: flex; align-items: center; justify-content: center;
-      padding: 20px;
-    `;
-
-    translationModal.innerHTML = `
-      <div style="background: #1f2937; border-radius: 8px; padding: 20px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto;">
-        <h3 style="color: #ec4899; margin-bottom: 15px;">🌐 Traduções Geradas</h3>
-        <textarea style="width: 100%; height: 300px; background: #374151; color: white; border: 1px solid #6366f1; border-radius: 4px; padding: 10px; font-family: monospace; font-size: 12px;" readonly>${message}</textarea>
-        <div style="margin-top: 15px; text-align: right;">
-          <button style="background: #6366f1; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;" onclick="navigator.clipboard.writeText(this.parentElement.previousElementSibling.value).then(() => alert('Copiado!')).catch(() => alert('Erro ao copiar'))">📋 Copiar</button>
-          <button style="background: #ef4444; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-left: 10px;" onclick="this.closest('div').remove()">❌ Fechar</button>
-        </div>
-      </div>
-    `;
-
-    document.body.appendChild(translationModal);
-
-    // Remove modal ao clicar fora
-    translationModal.addEventListener("click", (e) => {
-      if (e.target === translationModal) translationModal.remove();
-    });
-  };
-
-  const handleSubmit = async () => {
     try {
-      // Prepara as traduções
-      const translations = [
-        {
-          key: currentAchievement.titleKey,
-          pt: currentAchievement.titlePt,
-          en: currentAchievement.titleEn,
-        },
-        {
-          key: currentAchievement.dateKey,
-          pt: currentAchievement.datePt,
-          en: currentAchievement.dateEn,
-        },
-        {
-          key: currentAchievement.descKey,
-          pt: currentAchievement.descPt,
-          en: currentAchievement.descEn,
-        },
-      ].filter((t) => t.key && t.pt && t.en); // Remove entradas vazias
-
-      // Atualiza arquivos de tradução automaticamente
-      if (translations.length > 0) {
-        try {
-          const translationResponse = await fetch(
-            `${API_ENDPOINTS.TRANSLATIONS}/update`,
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(translations),
-            }
-          );
-
-          if (translationResponse.ok) {
-            const result = await translationResponse.json();
-            console.log("✅ Traduções atualizadas automaticamente:", result);
-          } else {
-            console.log("⚠️ Falha na atualização automática de traduções");
-          }
-        } catch (translationError) {
-          console.log("❌ Erro na API de traduções:", translationError);
-          // Se falhar, mostra o modal para cópia manual
-          if (!editingId) {
-            setTimeout(() => {
-              showTranslationUpdate(translations);
-            }, 500);
-          }
-        }
-      }
-
-      // Prepara dados do achievement
       const achievementData = {
         titleKey: currentAchievement.titleKey || "",
-        dateKey: currentAchievement.dateKey || "",
-        descKey: currentAchievement.descKey || "",
+        title: {
+          pt: currentAchievement.titlePt || "",
+          en: currentAchievement.titleEn || "",
+        },
         institution: currentAchievement.institution || "",
+        dateKey: currentAchievement.dateKey || "",
+        date: {
+          pt: currentAchievement.datePt || "",
+          en: currentAchievement.dateEn || "",
+        },
+        descKey: currentAchievement.descKey || "",
+        description: {
+          pt: currentAchievement.descPt || "",
+          en: currentAchievement.descEn || "",
+        },
         images: currentAchievement.images || [],
         tags: currentAchievement.tags || [],
         certificateUrl: currentAchievement.certificateUrl || "",
       };
 
-      console.log("Sending achievement data:", achievementData); // Debug
-
-      // Salva o achievement
       const url = editingId
         ? `${API_ENDPOINTS.ACHIEVEMENTS}/${editingId}`
         : API_ENDPOINTS.ACHIEVEMENTS;
-
-      console.log("Sending to URL:", url); // Debug
 
       const response = await fetch(url, {
         method: editingId ? "PUT" : "POST",
@@ -301,171 +237,178 @@ export default function AdminAchievements({ embedded = false }) {
         body: JSON.stringify(achievementData),
       });
 
-      console.log("Response status:", response.status); // Debug
-
       if (!response.ok) {
         const errorText = await response.text();
-        console.error("Server response:", errorText);
-        throw new Error(
-          `HTTP error! status: ${response.status} - ${errorText}`
-        );
+        throw new Error(`Erro ao salvar: ${response.status} - ${errorText}`);
       }
 
       alert(editingId ? t("admin.updated") : t("admin.created"));
 
-      // Mostra notificação de traduções automáticas se foi um novo achievement
-      if (translations.length > 0 && !editingId) {
-        setTimeout(() => {
-          alert(
-            `🌐 Traduções aplicadas automaticamente!\n${translations.map((t) => `• ${t.key}`).join("\n")}\n\n✅ Recarregue a página para ver as traduções!`
-          );
-        }, 800);
-      }
-
-      fetchAchievements();
+      await fetchAchievements();
       handleCloseModal();
     } catch (error) {
-      console.error(error);
+      console.error("Erro ao salvar achievement:", error);
       alert(t("admin.errorSave"));
     }
-  };
+  }
 
-  const handleDelete = async (id) => {
-    if (window.confirm(t("admin.confirmDelete"))) {
-      try {
-        // Primeiro, busca o achievement para pegar as chaves de tradução
-        const achievementResponse = await fetch(API_ENDPOINTS.ACHIEVEMENTS);
-        const allAchievements = await achievementResponse.json();
-        const achievementToDelete = allAchievements.find((a) => a._id === id);
+  async function handleDelete(id) {
+    const confirmed = window.confirm(t("admin.confirmDelete"));
 
-        console.log("Deleting achievement:", achievementToDelete); // Debug
+    if (!confirmed) return;
 
-        // Deleta o achievement
-        const response = await fetch(`${API_ENDPOINTS.ACHIEVEMENTS}/${id}`, {
-          method: "DELETE",
-        });
+    try {
+      const response = await fetch(`${API_ENDPOINTS.ACHIEVEMENTS}/${id}`, {
+        method: "DELETE",
+      });
 
-        if (response.ok) {
-          // Remove as traduções associadas se existirem
-          if (
-            achievementToDelete &&
-            (achievementToDelete.titleKey ||
-              achievementToDelete.dateKey ||
-              achievementToDelete.descKey)
-          ) {
-            const keysToDelete = [
-              achievementToDelete.titleKey,
-              achievementToDelete.dateKey,
-              achievementToDelete.descKey,
-            ].filter((key) => key); // Remove valores vazios
-
-            if (keysToDelete.length > 0) {
-              try {
-                const translationResponse = await fetch(
-                  `${API_ENDPOINTS.TRANSLATIONS}/delete`,
-                  {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ keys: keysToDelete }),
-                  }
-                );
-
-                if (translationResponse.ok) {
-                  const result = await translationResponse.json();
-                  console.log(
-                    "✅ Traduções removidas automaticamente:",
-                    result
-                  );
-                } else {
-                  console.log("⚠️ Falha na remoção automática de traduções");
-                }
-              } catch (translationError) {
-                console.log(
-                  "❌ Erro na remoção de traduções:",
-                  translationError
-                );
-              }
-            }
-          }
-
-          alert(t("admin.deleted"));
-          setTimeout(() => {
-            alert(
-              "🗑️ Traduções removidas automaticamente!\n\n✅ Recarregue a página para ver as mudanças!"
-            );
-          }, 800);
-          fetchAchievements();
-        }
-      } catch (error) {
-        alert(t("admin.errorDelete"));
-        console.error("Erro:", error);
+      if (!response.ok) {
+        throw new Error(`Erro ao deletar achievement: ${response.status}`);
       }
+
+      alert(t("admin.deleted"));
+      await fetchAchievements();
+    } catch (error) {
+      console.error("Erro ao deletar achievement:", error);
+      alert(t("admin.errorDelete"));
     }
-  };
+  }
+
+  function getAchievementTitle(achievement) {
+    return (
+      achievement.title?.pt ||
+      achievement.titlePt ||
+      achievement.titleKey ||
+      "Achievement"
+    );
+  }
+
+  function getAchievementDate(achievement) {
+    return achievement.date?.pt || achievement.datePt || achievement.dateKey || "-";
+  }
+
+  function getAchievementDescription(achievement) {
+    return (
+      achievement.description?.pt ||
+      achievement.descPt ||
+      achievement.descKey ||
+      ""
+    );
+  }
 
   const content = (
     <>
-      {/* Add Button */}
-      <div className="mb-6 text-center">
+      <div className="mb-6 flex justify-center">
         <button
+          type="button"
           onClick={() => handleOpenModal()}
-          className="btn-gradient inline-flex items-center gap-2 rounded-lg px-6 py-3 font-medium text-white shadow-lg hover:opacity-90"
+          className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-fuchsia-500 via-pink-500 to-cyan-400 px-6 py-3 font-black text-white shadow-lg shadow-fuchsia-500/20 transition hover:scale-[1.02]"
         >
           <FontAwesomeIcon icon={faPlus} />
           {t("admin.addAchievement")}
         </button>
       </div>
 
-      {/* Achievements Grid */}
       {isLoading ? (
-        <div className="text-center">
-          <div className="border-pink inline-block h-8 w-8 animate-spin rounded-full border-4 border-t-transparent"></div>
-          <p className="mt-2 text-gray-400">{t("admin.loadingAchievements")}</p>
+        <div className="py-10 text-center">
+          <div className="inline-block h-9 w-9 animate-spin rounded-full border-4 border-fuchsia-500 border-t-transparent" />
+          <p className={`mt-3 text-sm font-bold ${mutedClass}`}>
+            {t("admin.loadingAchievements")}
+          </p>
+        </div>
+      ) : achievements.length === 0 ? (
+        <div className={`rounded-2xl border p-8 text-center ${cardClass}`}>
+          <p className={mutedClass}>Nenhuma conquista cadastrada ainda.</p>
         </div>
       ) : (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {achievements.map((achievement) => (
-            <div
+            <article
               key={achievement._id}
-              className="card flex flex-col justify-between rounded-lg p-4"
+              className={`flex min-h-[220px] flex-col justify-between rounded-2xl border p-5 transition hover:-translate-y-1 ${cardClass}`}
             >
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-white">
-                  {achievement.title?.pt || achievement.titleKey}
-                </h3>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => handleOpenModal(achievement)}
-                    className="text-purple rounded p-2 transition-colors ease-in hover:text-purple-200"
-                  >
-                    <FontAwesomeIcon icon={faEdit} />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(achievement._id)}
-                    className="rounded text-red-400 hover:text-pink-800"
-                  >
-                    <FontAwesomeIcon icon={faTrash} />
-                  </button>
-                </div>
-              </div>
+              <div>
+                <div className="mb-4 flex items-start justify-between gap-4">
+                  <div>
+                    <p className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-fuchsia-400">
+                      Achievement
+                    </p>
 
-              <div className="space-y-2 text-sm text-gray-300">
-                <p>
-                  <strong>{t("admin.institution")}:</strong>{" "}
-                  {achievement.institution}
-                </p>
-                <p>
-                  <strong>{t("admin.date")}:</strong>{" "}
-                  {achievement.date?.pt || achievement.dateKey}
-                </p>
-                <p>
-                  <strong>{t("admin.tags")}:</strong>{" "}
-                  {achievement.tags?.join(", ") || t("admin.none")}
-                </p>
-                <p>
-                  <strong>{t("admin.images")}:</strong>{" "}
-                  {achievement.images?.length || 0}
-                </p>
+                    <h3 className="text-xl font-black leading-tight">
+                      {getAchievementTitle(achievement)}
+                    </h3>
+                  </div>
+
+                  <div className="flex shrink-0 gap-1">
+                    <button
+                      type="button"
+                      onClick={() => handleOpenModal(achievement)}
+                      className={`grid h-9 w-9 place-items-center rounded-full transition ${
+                        isDark
+                          ? "bg-white/10 text-cyan-200 hover:bg-white/15"
+                          : "bg-slate-100 text-cyan-700 hover:bg-slate-200"
+                      }`}
+                      aria-label="Editar achievement"
+                    >
+                      <FontAwesomeIcon icon={faEdit} />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(achievement._id)}
+                      className="grid h-9 w-9 place-items-center rounded-full bg-red-500/10 text-red-400 transition hover:bg-red-500/20"
+                      aria-label="Deletar achievement"
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
+
+                <div className={`space-y-2 text-sm leading-6 ${mutedClass}`}>
+                  <p>
+                    <strong className={isDark ? "text-white" : "text-slate-950"}>
+                      {t("admin.institution")}:
+                    </strong>{" "}
+                    {achievement.institution || "-"}
+                  </p>
+
+                  <p>
+                    <strong className={isDark ? "text-white" : "text-slate-950"}>
+                      {t("admin.date")}:
+                    </strong>{" "}
+                    {getAchievementDate(achievement)}
+                  </p>
+
+                  {getAchievementDescription(achievement) && (
+                    <p className="line-clamp-3">
+                      {getAchievementDescription(achievement)}
+                    </p>
+                  )}
+
+                  <p>
+                    <strong className={isDark ? "text-white" : "text-slate-950"}>
+                      {t("admin.images")}:
+                    </strong>{" "}
+                    {achievement.images?.length || 0}
+                  </p>
+                </div>
+
+                {achievement.tags?.length > 0 && (
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {achievement.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className={`rounded-full px-3 py-1 text-xs font-bold ${
+                          isDark
+                            ? "bg-white/10 text-white/70"
+                            : "bg-slate-100 text-slate-600"
+                        }`}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {achievement.certificateUrl && (
@@ -473,30 +416,47 @@ export default function AdminAchievements({ embedded = false }) {
                   href={achievement.certificateUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-pink hover:text-lightPurple mt-4 inline-flex items-center gap-2"
+                  className="mt-5 inline-flex items-center gap-2 text-sm font-black text-fuchsia-400 transition hover:text-cyan-300"
                 >
                   <FontAwesomeIcon icon={faEye} />
-                  Ver Certificado
+                  Ver certificado
                 </a>
               )}
-            </div>
+            </article>
           ))}
         </div>
       )}
 
-      {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="border-purple/30 flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-lg border bg-gray-800/95 backdrop-blur-md">
-            <div className="flex-shrink-0 border-b border-gray-700 p-6">
-              <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-white">
-                  {editingId ? t("admin.edit") : t("admin.create")}{" "}
-                  {t("admin.achievement")}
-                </h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
+          <div
+            className={`flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-[2rem] border ${modalClass}`}
+          >
+            <div
+              className={`flex-shrink-0 border-b p-6 ${
+                isDark ? "border-white/10" : "border-slate-200"
+              }`}
+            >
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <p className="mb-2 text-xs font-black uppercase tracking-[0.25em] text-fuchsia-400">
+                    {editingId ? "Editar" : "Criar"}
+                  </p>
+
+                  <h2 className="text-2xl font-black">
+                    {editingId ? t("admin.edit") : t("admin.create")}{" "}
+                    {t("admin.achievement")}
+                  </h2>
+                </div>
+
                 <button
+                  type="button"
                   onClick={handleCloseModal}
-                  className="rounded p-2 text-gray-400 hover:bg-gray-700"
+                  className={`grid h-10 w-10 place-items-center rounded-full transition ${
+                    isDark
+                      ? "bg-white/10 text-white/60 hover:bg-white/15 hover:text-white"
+                      : "bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-950"
+                  }`}
                 >
                   <FontAwesomeIcon icon={faTimes} />
                 </button>
@@ -504,234 +464,236 @@ export default function AdminAchievements({ embedded = false }) {
             </div>
 
             <div className="flex-1 overflow-y-auto p-6">
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handleSubmit();
-                }}
-                className="space-y-6"
-              >
-                {/* Title Section */}
+              <form onSubmit={handleSubmit} className="space-y-7">
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
+                    <label className="mb-2 block text-sm font-bold">
                       <FontAwesomeIcon icon={faGlobe} className="mr-2" />
                       Title Key
                     </label>
+
                     <input
                       type="text"
                       value={currentAchievement.titleKey}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          titleKey: e.target.value,
+                      onChange={(event) =>
+                        setCurrentAchievement((previous) => ({
+                          ...previous,
+                          titleKey: event.target.value,
                         }))
                       }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                      className={`w-full rounded-2xl border p-3 outline-none transition focus:ring-4 ${inputClass}`}
                       placeholder="achievements.card1.title"
                     />
                   </div>
+
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
+                    <label className="mb-2 block text-sm font-bold">
                       <FontAwesomeIcon icon={faBuilding} className="mr-2" />
                       {t("admin.institution")}
                     </label>
+
                     <input
                       type="text"
                       value={currentAchievement.institution}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          institution: e.target.value,
+                      onChange={(event) =>
+                        setCurrentAchievement((previous) => ({
+                          ...previous,
+                          institution: event.target.value,
                         }))
                       }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="IBM, Meta, etc."
+                      className={`w-full rounded-2xl border p-3 outline-none transition focus:ring-4 ${inputClass}`}
+                      placeholder="IBM, Meta, Google..."
                     />
                   </div>
                 </div>
 
-                {/* Titles PT/EN */}
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Título (PT)
+                    <label className="mb-2 block text-sm font-bold">
+                      Título PT
                     </label>
+
                     <input
                       type="text"
                       value={currentAchievement.titlePt}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          titlePt: e.target.value,
+                      onChange={(event) =>
+                        setCurrentAchievement((previous) => ({
+                          ...previous,
+                          titlePt: event.target.value,
                         }))
                       }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                      className={`w-full rounded-2xl border p-3 outline-none transition focus:ring-4 ${inputClass}`}
                       placeholder="Título em português"
                     />
                   </div>
+
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Title (EN)
+                    <label className="mb-2 block text-sm font-bold">
+                      Título EN
                     </label>
+
                     <input
                       type="text"
                       value={currentAchievement.titleEn}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          titleEn: e.target.value,
+                      onChange={(event) =>
+                        setCurrentAchievement((previous) => ({
+                          ...previous,
+                          titleEn: event.target.value,
                         }))
                       }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                      className={`w-full rounded-2xl border p-3 outline-none transition focus:ring-4 ${inputClass}`}
                       placeholder="Title in English"
                     />
                   </div>
                 </div>
 
-                {/* Date Section */}
                 <div className="grid gap-4 md:grid-cols-3">
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
+                    <label className="mb-2 block text-sm font-bold">
                       <FontAwesomeIcon icon={faCalendar} className="mr-2" />
                       Date Key
                     </label>
+
                     <input
                       type="text"
                       value={currentAchievement.dateKey}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          dateKey: e.target.value,
+                      onChange={(event) =>
+                        setCurrentAchievement((previous) => ({
+                          ...previous,
+                          dateKey: event.target.value,
                         }))
                       }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                      className={`w-full rounded-2xl border p-3 outline-none transition focus:ring-4 ${inputClass}`}
                       placeholder="achievements.card1.date"
                     />
                   </div>
+
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Data (PT)
+                    <label className="mb-2 block text-sm font-bold">
+                      Data PT
                     </label>
+
                     <input
                       type="text"
                       value={currentAchievement.datePt}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          datePt: e.target.value,
+                      onChange={(event) =>
+                        setCurrentAchievement((previous) => ({
+                          ...previous,
+                          datePt: event.target.value,
                         }))
                       }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                      className={`w-full rounded-2xl border p-3 outline-none transition focus:ring-4 ${inputClass}`}
                       placeholder="Janeiro, 2025"
                     />
                   </div>
+
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Date (EN)
+                    <label className="mb-2 block text-sm font-bold">
+                      Date EN
                     </label>
+
                     <input
                       type="text"
                       value={currentAchievement.dateEn}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          dateEn: e.target.value,
+                      onChange={(event) =>
+                        setCurrentAchievement((previous) => ({
+                          ...previous,
+                          dateEn: event.target.value,
                         }))
                       }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                      className={`w-full rounded-2xl border p-3 outline-none transition focus:ring-4 ${inputClass}`}
                       placeholder="January, 2025"
                     />
                   </div>
                 </div>
 
-                {/* Description Section */}
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="md:col-span-2">
-                    <label className="mb-2 block text-sm font-medium text-white">
+                    <label className="mb-2 block text-sm font-bold">
                       Description Key
                     </label>
+
                     <input
                       type="text"
                       value={currentAchievement.descKey}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          descKey: e.target.value,
+                      onChange={(event) =>
+                        setCurrentAchievement((previous) => ({
+                          ...previous,
+                          descKey: event.target.value,
                         }))
                       }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                      className={`w-full rounded-2xl border p-3 outline-none transition focus:ring-4 ${inputClass}`}
                       placeholder="achievements.card1.description"
                     />
                   </div>
+
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Descrição (PT)
+                    <label className="mb-2 block text-sm font-bold">
+                      Descrição PT
                     </label>
+
                     <textarea
                       value={currentAchievement.descPt}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          descPt: e.target.value,
+                      onChange={(event) =>
+                        setCurrentAchievement((previous) => ({
+                          ...previous,
+                          descPt: event.target.value,
                         }))
                       }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      rows="3"
+                      className={`min-h-32 w-full rounded-2xl border p-3 outline-none transition focus:ring-4 ${inputClass}`}
                       placeholder="Descrição em português..."
                     />
                   </div>
+
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      Description (EN)
+                    <label className="mb-2 block text-sm font-bold">
+                      Description EN
                     </label>
+
                     <textarea
                       value={currentAchievement.descEn}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          descEn: e.target.value,
+                      onChange={(event) =>
+                        setCurrentAchievement((previous) => ({
+                          ...previous,
+                          descEn: event.target.value,
                         }))
                       }
-                      className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      rows="3"
+                      className={`min-h-32 w-full rounded-2xl border p-3 outline-none transition focus:ring-4 ${inputClass}`}
                       placeholder="Description in English..."
                     />
                   </div>
                 </div>
 
-                {/* Certificate URL */}
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-white">
+                  <label className="mb-2 block text-sm font-bold">
                     <FontAwesomeIcon icon={faGlobe} className="mr-2" />
                     Certificate URL
                   </label>
+
                   <input
-                    type="text" 
+                    type="text"
                     value={currentAchievement.certificateUrl}
-                    onChange={(e) =>
-                      setCurrentAchievement((prev) => ({
-                        ...prev,
-                        certificateUrl: e.target.value,
+                    onChange={(event) =>
+                      setCurrentAchievement((previous) => ({
+                        ...previous,
+                        certificateUrl: event.target.value,
                       }))
                     }
-                    className="focus:ring-purple w-full rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
+                    className={`w-full rounded-2xl border p-3 outline-none transition focus:ring-4 ${inputClass}`}
                     placeholder="https://coursera.org/..."
                   />
                 </div>
 
-                {/* Images Section */}
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-white">
+                  <label className="mb-3 block text-sm font-bold">
                     <FontAwesomeIcon icon={faImage} className="mr-2" />
                     Imagens
                   </label>
 
-                  {/* Upload de arquivo */}
-                  <div className="mb-2">
-                    <label className="bg-purple hover:bg-purple/80 inline-flex cursor-pointer items-center gap-2 rounded-lg px-4 py-3 text-white">
+                  <div className="mb-4 flex flex-wrap items-center gap-3">
+                    <label className="inline-flex cursor-pointer items-center gap-2 rounded-2xl bg-gradient-to-r from-fuchsia-500 via-pink-500 to-cyan-400 px-5 py-3 text-sm font-black text-white transition hover:scale-[1.02]">
                       <FontAwesomeIcon icon={faImage} />
-                      Upload do Dispositivo
+                      Upload
                       <input
                         type="file"
                         accept="image/*"
@@ -739,114 +701,142 @@ export default function AdminAchievements({ embedded = false }) {
                         className="hidden"
                       />
                     </label>
-                    <span className="ml-3 text-sm text-gray-400">ou</span>
+
+                    <span className={`text-sm ${mutedClass}`}>ou cole uma URL</span>
                   </div>
 
-                  {/* URL de imagem */}
                   <div className="flex gap-2">
                     <input
                       type="text"
                       value={currentAchievement.imageUrl}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          imageUrl: e.target.value,
+                      onChange={(event) =>
+                        setCurrentAchievement((previous) => ({
+                          ...previous,
+                          imageUrl: event.target.value,
                         }))
                       }
-                      className="focus:ring-purple flex-1 rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="Ou cole a URL da imagem"
+                      className={`flex-1 rounded-2xl border p-3 outline-none transition focus:ring-4 ${inputClass}`}
+                      placeholder="https://imagem.com/preview.png"
                     />
+
                     <button
                       type="button"
                       onClick={handleAddImage}
-                      className="bg-purple hover:bg-purple/80 rounded-lg px-4 py-3 text-white"
+                      className="grid w-12 place-items-center rounded-2xl bg-gradient-to-r from-fuchsia-500 to-cyan-400 text-white transition hover:scale-[1.03]"
                     >
                       <FontAwesomeIcon icon={faPlus} />
                     </button>
                   </div>
 
-                  {/* Preview das imagens */}
-                  <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-3">
-                    {currentAchievement.images.map((image, index) => (
-                      <div
-                        key={index}
-                        className="group relative overflow-hidden rounded-lg bg-gray-700"
-                      >
-                        <img
-                          src={image}
-                          alt={`Preview ${index + 1}`}
-                          className="h-32 w-full object-cover"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveImage(index)}
-                          className="absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white opacity-0 transition-opacity group-hover:opacity-100 hover:bg-red-600"
+                  {currentAchievement.images.length > 0 && (
+                    <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3">
+                      {currentAchievement.images.map((image, index) => (
+                        <div
+                          key={`${image}-${index}`}
+                          className={`group relative overflow-hidden rounded-2xl border ${
+                            isDark ? "border-white/10" : "border-slate-200"
+                          }`}
                         >
-                          <FontAwesomeIcon icon={faTimes} />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+                          <img
+                            src={image}
+                            alt={`Preview ${index + 1}`}
+                            className="h-32 w-full object-cover"
+                          />
+
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveImage(index)}
+                            className="absolute right-2 top-2 grid h-8 w-8 place-items-center rounded-full bg-red-500 text-white opacity-0 transition group-hover:opacity-100"
+                          >
+                            <FontAwesomeIcon icon={faTimes} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
-                {/* Tags Section */}
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-white">
+                  <label className="mb-2 block text-sm font-bold">
                     <FontAwesomeIcon icon={faTag} className="mr-2" />
                     Tags
                   </label>
+
                   <div className="flex gap-2">
                     <input
                       type="text"
                       value={currentAchievement.newTag}
-                      onChange={(e) =>
-                        setCurrentAchievement((prev) => ({
-                          ...prev,
-                          newTag: e.target.value,
+                      onChange={(event) =>
+                        setCurrentAchievement((previous) => ({
+                          ...previous,
+                          newTag: event.target.value,
                         }))
                       }
-                      className="focus:ring-purple flex-1 rounded-lg bg-gray-700 p-3 text-white focus:ring-2 focus:outline-none"
-                      placeholder="Python, React, etc."
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter") {
+                          event.preventDefault();
+                          handleAddTag();
+                        }
+                      }}
+                      className={`flex-1 rounded-2xl border p-3 outline-none transition focus:ring-4 ${inputClass}`}
+                      placeholder="React, IBM, Certificate..."
                     />
+
                     <button
                       type="button"
                       onClick={handleAddTag}
-                      className="bg-purple hover:bg-purple/80 rounded-lg px-4 py-3 text-white"
+                      className="grid w-12 place-items-center rounded-2xl bg-gradient-to-r from-fuchsia-500 to-cyan-400 text-white transition hover:scale-[1.03]"
                     >
                       <FontAwesomeIcon icon={faPlus} />
                     </button>
                   </div>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {currentAchievement.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="bg-pink/20 text-pink flex items-center gap-2 rounded px-3 py-1 text-sm"
-                      >
-                        {tag}
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveTag(index)}
-                          className="text-pink/70 hover:text-pink"
+
+                  {currentAchievement.tags.length > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {currentAchievement.tags.map((tag, index) => (
+                        <span
+                          key={`${tag}-${index}`}
+                          className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-bold ${
+                            isDark
+                              ? "bg-white/10 text-white/75"
+                              : "bg-slate-100 text-slate-700"
+                          }`}
                         >
-                          <FontAwesomeIcon icon={faTimes} />
-                        </button>
-                      </span>
-                    ))}
-                  </div>
+                          {tag}
+
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveTag(index)}
+                            className="text-red-400 hover:text-red-500"
+                          >
+                            <FontAwesomeIcon icon={faTimes} />
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
-                {/* Submit Buttons */}
-                <div className="flex justify-end gap-4 pt-4">
+                <div
+                  className={`flex flex-col justify-end gap-3 border-t pt-5 sm:flex-row ${
+                    isDark ? "border-white/10" : "border-slate-200"
+                  }`}
+                >
                   <button
                     type="button"
                     onClick={handleCloseModal}
-                    className="rounded-lg bg-gray-600 px-6 py-3 text-white hover:bg-gray-500"
+                    className={`rounded-2xl border px-6 py-3 font-bold transition ${
+                      isDark
+                        ? "border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                        : "border-slate-200 bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-950"
+                    }`}
                   >
                     Cancelar
                   </button>
+
                   <button
                     type="submit"
-                    className="btn-gradient flex items-center gap-2 rounded-lg px-6 py-3 text-white hover:opacity-90"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-fuchsia-500 via-pink-500 to-cyan-400 px-6 py-3 font-black text-white transition hover:scale-[1.02]"
                   >
                     <FontAwesomeIcon icon={faSave} />
                     {editingId ? "Atualizar" : "Criar"}
@@ -865,8 +855,12 @@ export default function AdminAchievements({ embedded = false }) {
   }
 
   return (
-    <div className="bg-darkBlue min-h-screen pt-20 pb-10">
-      <div className="container mx-auto px-4">{content}</div>
-    </div>
+    <main
+      className={`min-h-screen px-4 py-10 ${
+        isDark ? "bg-slate-950 text-white" : "bg-[#f7f4ef] text-slate-950"
+      }`}
+    >
+      <div className="mx-auto max-w-7xl">{content}</div>
+    </main>
   );
 }

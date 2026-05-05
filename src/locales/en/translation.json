@@ -1,134 +1,127 @@
 {
-  "lang": "en",
   "nav": {
     "home": "Home",
     "about": "About",
-    "skills": "Skills",
-    "achievements": "Achievements",
     "projects": "Projects",
-    "contact": "Contact"
+    "lab": "Lab",
+    "contact": "Contact",
+    "talk": "Let's talk"
   },
   "hero": {
-    "greeting": "Hello, I'm",
-    "name": "Clara Cayres",
-    "title": "Junior Full Stack Developer",
-    "subtitle": "Focused on Front-End and API development with Flask and MongoDB, learning through practice and constantly striving to evolve while creating well-organized and functional solutions.",
-    "cta": "Let's talk",
-    "projects": "View Projects"
+    "badge": "Junior Full Stack Developer • Open to internships, freelance and front-end roles",
+    "titleA": "Built with ",
+    "titleB": "clarity.",
+    "titleC": "",
+    "text": "Software engineering student, front-end freelancer and product-minded developer creating animated, responsive and memorable web experiences.",
+    "explore": "Explore my work",
+    "download": "View my CV",
+    "cv": "/Resume - en - Maria Clara Cayres de Almeida.pdf"
+  },
+  "home": {
+    "featured": "Featured projects",
+    "tech": "Technologies & tools",
+    "aboutEyebrow": "About me",
+    "aboutTitle": "Learning while building.",
+    "aboutText": "I like figuring out why things work, even when it doesn’t really matter.",
+    "learnMore": "Learn more about me",
+    "viewProject": "View case study"
+  },
+  "passport": {
+    "title": "Passport",
+    "role": "Full-Stack Developer",
+    "subtitle": "Building innovative web experiences with a focus on user interaction and modern technologies",
+
+    "skills": {
+      "react": "React & UI Engineering",
+      "frontend": "Front-End Development",
+      "backend": "Back-End Foundations",
+      "design": "Design Systems & UX"
+    },
+
+    "stats": {
+      "br": "Brazilian roots",
+      "us": "U.S. experience",
+      "career": "Software Engineering student",
+      "learning": "Always learning"
+    }
   },
   "about": {
-    "title": "Get to Know",
-    "subtitle": "Me",
-    "area": "Full Stack Developer & UI/UX Designer",
-    "p1": "Hello! I'm Clara Cayres, a Software Engineering student and freelance Web Developer, currently in my 6th semester of college.",
-    "p2": "I currently live in the United States as an au pair, a multicultural experience that strengthened my communication, independence, and adaptability. I will be available for on-site tech opportunities starting in July 2026. Currently open to remote roles and freelance projects.",
-    "p3": "I have worked on freelance and personal projects, building modern, responsive, and visually appealing websites and web applications. I have experience with HTML, CSS, TailwindCSS, Python, Flask, Django, SQL, MongoDB, and modern web development tools, and I’m constantly improving my Front-End and web design skills.",
-    "p4": "I’m open to job opportunities and collaborations where I can contribute, learn, and grow. If you have an opportunity that aligns with my skills and interests, feel free to get in touch.",
-    "description": "I am a curious web developer focused on continuous learning, creating functional and visually impactful digital experiences by combining development and design.",
-    "btn": "Download CV",
-    "btnlink": "/Resume-en-Maria-Clara-Cayres-de-Almeida.pdf"
-  },
-  "aboutopics": {
-    "education": "Education",
-    "edescription": "Bachelor's in Software Engineering",
-    "edgraduation": "Grad. Dec 2026",
-    "experience": "Professional Experience",
-    "exdescription": "1 year of experience",
-    "location": "Location",
-    "locdescription": "North Carolina, USA",
-    "fredescription": "Available"
+    "eyebrow": "About me",
+    "title": "Who I am, where I came from and where I’m going.",
+    "who": "Who I am",
+    "whoText": "I’m Clara Cayres, a software engineering student, currently building my path as a front-end developer with full-stack foundations. I’m based between Brazil and the U.S. and I like turning ideas into polished web experiences.",
+    "origin": "Where I’m from",
+    "originText": "I’m from Brazil and my journey mixes technology, international experience, client projects and constant learning.",
+    "objective": "Objective",
+    "objectiveText": "My goal is to grow into a strong front-end or full-stack developer, working on products that combine usability, performance and beautiful interfaces.",
+    "freetime": "Free time",
+    "freetimeText": "In my free time, I enjoy doing arts and crafts, building LEGO, watching some of my favorite shows, keeping up with the news, and learning a bit about economics. I also like listening to music and practicing coding.",
+    "soft": "Soft skills",
+    "hard": "Hard skills",
+    "journey": "Trajectory",
+    "technical": "Technical abilities",
+    "download": "View my CV",
+    "cv": "/Resume - en - Maria Clara Cayres de Almeida.pdf",
+    "links": "Links",
+
+    "softSkills": [
+      "Clear and effective communication",
+      "Adaptability in fast-paced environments",
+      "Fast learning and continuous curiosity",
+      "Creative thinking for problem-solving",
+      "Problem-solving with a solution-oriented mindset",
+      "Strong organization and consistency in task execution"
+    ],
+    "hardSkills": [
+      "React.js (Vite, Hooks, React Router)",
+      "Modern JavaScript (ES6+)",
+      "HTML5, CSS3, Tailwind CSS",
+      "REST API integration",
+      "Python (Flask for API development)",
+      "Databases: PostgreSQL and MongoDB (basic)",
+      "Git and version control",
+      "Responsive design (Mobile-First)",
+      "Technical SEO (meta tags, structure, performance)",
+      "Deployment with Vercel"
+    ],
+    "timeline": [
+      "Started career as an Administrative & Operations Intern, gaining hands-on experience with data, processes, and client support",
+      "Transitioned into tech while pursuing a Software Engineering degree",
+      "Built real-world experience as a Front-End freelancer working on responsive and modern web applications",
+      "Expanded into back-end development with IBM Professional Certificate (APIs, databases, microservices)",
+      "Specialized in modern front-end development through Meta Certification (React, UI/UX, performance optimization)",
+      "Lived an international experience in the United States as an Au Pair, strengthening communication, adaptability, and problem-solving skills",
+      "Currently focused on building full-stack applications integrating React, Flask, APIs, and AI-driven features"
+    ]
   },
   "projects": {
-    "title": "My",
-    "subtitle": "Projects",
-    "description": "Check out some of my most recent work. Each project represents a unique challenge that helped me grow as a developer.",
-    "fisiotitle": "Fisioella Clinic Website",
-    "fisiodescription": "A website developed for Fisioella Clinic by Dr. Neila Cayres, focused to reach more women in need of pelvic physiotherapy and offer them valuable guidance and support. Built with React, Vite, CSS, and JavaScript, and deployed on Vercel.",
-    "fisioella": {
-      "title": "Fisioella Clinic Website",
-      "description": "A website developed for Fisioella Clinic by Dr. Neila Cayres, focused to reach more women in need of pelvic physiotherapy and offer them valuable guidance and support. Built with React, Vite, CSS, and JavaScript, and deployed on Vercel."
-    }
+    "eyebrow": "Projects",
+    "title": "Explore my work in depth",
+    "subtitle": "A selection of projects showcasing my skills in building modern, responsive, and scalable web applications.",
+    "open": "Open project page",
+    "back": "Back to projects",
+    "overview": "Overview",
+    "gallery": "Gallery placeholders",
+    "stack": "Stack",
+    "links": "Project links",
+    "live": "Live demo",
+    "repo": "Repository"
   },
-  "achievements": {
-    "title": "My",
-    "subtitle": "Achievements",
-    "description": "Here are some of the courses and certifications I've completed to enhance my skills and knowledge in software development.",
-    "certificate": "View Certificate",
-    "card1": {
-      "title": "Learn English Intermediate Grammar ",
-      "date": "February, 2025",
-      "description": "A comprehensive course that enhanced my understanding of English grammar at an intermediate level."
-    },
-    "card2": {
-      "title": "Beyond the Basics: Advanced Grammar",
-      "date": "September, 2024",
-      "description": "Focused on advanced grammar concepts and their practical applications and conversational skills."
-    },
-    "card3": {
-      "title": "IBM Back-End Development Professional Certificate",
-      "date": "March, 2025",
-      "description": "A 11-course certificate from IBM on building scalable back-end apps using Python, Flask, Docker, Kubernetes, and microservices — with hands-on projects and real-world training."
-    },
-    "card4": {
-      "title": "HTML, CSS, and Javascript for Web Developers",
-      "date": "April, 2025",
-      "description": "Completed this 4-course specialization mastering web essentials like HTML5, CSS3, responsive design, JavaScript, and AJAX to build dynamic, user-friendly web applications. Achieved perfect scores in most courses, emphasizing strong front-end development skills."
-    },
-    "card5": {
-      "title": "Data Structures in Python",
-      "date": "1st semester, 2025",
-      "description": "Completed a 10-hour course covering the fundamentals of data structures using Python. This training strengthened my understanding of core programming logic, object-oriented concepts, and practical problem-solving."
-    },
-    "card6": {
-      "title": "Meta Front-End Developer",
-      "date": "September, 2025",
-      "description": "A 9-course specialization from Meta focusing on front-end development using React, JavaScript, and CSS. This program provided hands-on experience in building responsive user interfaces and mastering essential front-end technologies."
-    },
-    "card7": {
-      "title": "Web & Mobile Designer: UI/UX and Figma",
-      "date": "In Progress",
-      "description": "Comprehensive course in UI/UX design for web and mobile, focusing on Figma, prototyping, responsive design, usability, and interface best practices. I am working on practical projects that allow me to apply concepts of typography, colors, grids, and interaction, enhancing my skills in modern digital design."
-    },
-    "projects": {
-      "project2": {
-        "title": "Habitus",
-        "description": "A responsive landing page created to promote a mobile shopping app. This project was originally inspired by a UI/UX design course, but the HTML and CSS were fully rebuilt from scratch with a focus on clean semantics, responsiveness, and real-world front-end best practices."
-      }
-    }
-  },
-  "skills": {
-    "title": "My",
-    "subtitle": "Skills",
-    "description": "These are the technologies and tools I work with daily to create efficient digital solutions.",
-    "technologies": "Technologies & Tools"
+  "lab": {
+    "eyebrow": "Creative lab",
+    "title": "Skills, experiments and tools I use.",
+    "note": "This page is the technical playground: stack, tools, patterns and the way I like to build."
   },
   "contact": {
-    "title": "Get in",
-    "subtitle": "Touch",
-    "description": "Have a project in mind? Let's talk about how I can help turn your idea into reality.",
-    "info": "Contact Information",
-    "email": "Email",
-    "phone": "Phone",
-    "location": "Location",
-    "locationDescription": "North Carolina, United States",
-    "social": "Find me on social media",
-    "form": {
-      "title": "Send a message",
-      "name": "Name",
-      "namePlaceholder": "Your name",
-      "email": "Email",
-      "emailPlaceholder": "Your email",
-      "subject": "Subject",
-      "subjectPlaceholder": "Message subject",
-      "message": "Message",
-      "messagePlaceholder": "Your message...",
-      "send": "Send Message",
-      "success": "Your message has been sent successfully!",
-      "error": "There was an error sending your message. Please try again later."
-    }
+    "eyebrow": "Contact",
+    "title": "Let’s build something great together.",
+    "text": "I’m open to internships, front-end roles, freelance projects, and creative collaborations."
   },
   "footer": {
-    "rights": "All rights reserved."
+    "text": "A portfolio built like a small creative operating system: colorful, animated and easy to expand.",
+    "pages": "Pages",
+    "social": "Social",
+    "available": "Available for internships • freelance • front-end roles"
   },
   "admin": {
     "loginTitle": "Admin Login Area",
@@ -136,7 +129,7 @@
     "passwordPlaceholder": "Enter password",
     "incorrectPassword": "Incorrect password. Please try again.",
     "loginButton": "Login",
-    "backToSite": "← Back to site",
+    "backToSite": "Back to site",
     "logoutButton": "Logout",
     "achievements": "Achievements",
     "skills": "Skills",

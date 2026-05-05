@@ -1,91 +1,103 @@
-import eu from "../assets/eu.jpg";
-import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
-import { initDomScripts } from "../Script.js";
+/* eslint-disable no-unused-vars */
+import PageShell from '../layouts/PageShell';
+import DeveloperPassport from '../components/DeveloperPassport';
+import InfiniteProjectLoop from '../components/InfiniteProjectsLoop';
+import TechCloud from '../components/TechCloud';
+import AboutPreview from '../components/AboutPreview';
+import AnimatedGradientText from '../components/ui/AnimatedGradientText';
+import { surface, mutedText } from '../utils/theme';
+import { motion } from 'framer-motion';
+import Icon from '../components/Icons';
+import { useTranslation } from 'react-i18next';
+import ResumeButton from '../components/ResumeButton';
+import { useNavigate } from 'react-router-dom';
 
-const Home = () => {
+function HomePage({ setActivePage, setSelectedProject, lang, theme }) {
   const { t } = useTranslation();
-
-  useEffect(() => {
-    if (window.location.hash) {
-      history.replaceState(null, "", window.location.pathname);
-    }
-
-    // Inicializar partículas
-    initDomScripts();
-  }, []);
+  const navigate = useNavigate();
 
   return (
-    // Hero Section
-    <section
-      id="home"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden pt-16"
-    >
-      {/* Container das partículas */}
-      <div
-        id="particles"
-        className="pointer-events-none absolute inset-0 z-0"
-      ></div>
+    <PageShell theme={theme} noNavSpace={true}>
+      <div className="relative grid min-h-[78vh] items-center gap-10 overflow-hidden rounded-[3rem] border border-white/10 px-5 py-10 md:px-10 lg:grid-cols-[1fr_.85fr]">
+        <div className="absolute inset-0 -z-10 bg-linear-to-br from-fuchsia-500/10 via-transparent to-cyan-400/10" />
 
-      <div className="relative z-10 container mx-10 flex flex-col items-center justify-center gap-8 px-4 py-16 md:flex-row md:gap-16 lg:gap-32">
-        <div className="mb-10 text-center md:mb-0 md:w-1/2 md:text-left">
-          <p className="text-pink mb-2 text-lg">{t("hero.greeting")}</p>
-          <h1 className="mb-4 text-4xl font-bold md:text-5xl">
-            <span className="gradient-text">{t("hero.name")}</span>
-          </h1>
-          <h2 className="title mb-6 text-2xl font-semibold md:text-3xl">
-            {t("hero.title")}
-          </h2>
-          <p className="mx-auto mb-8 max-w-lg md:mx-0">{t("hero.subtitle")}</p>
-          <div className="flex flex-wrap justify-center gap-4 md:justify-start">
-            <a
-              href="#contact"
-              className="btn btn-gradient shadow-pink/20 rounded-full px-8 py-3 font-medium shadow-lg transition-opacity hover:opacity-90"
-            >
-              {t("hero.cta")}
-            </a>
-            <a
-              href="#projects"
-              className="border-purple hover:bg-purple/10 rounded-full border bg-transparent px-8 py-3 font-medium transition-colors"
-            >
-              {t("hero.projects")}
-            </a>
-          </div>
-        </div>
-        <div className="md:auto flex justify-center">
-          <div className="relative h-64 w-64 md:h-80 md:w-80">
-            <div className="from-pink to-purple absolute inset-0 animate-pulse rounded-full bg-gradient-to-br opacity-20 blur-xl"></div>
-            <div className="dark:bg-darkBlue border-purple/30 absolute inset-4 flex items-center justify-center overflow-hidden rounded-full border-2 bg-gray-200">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <img src={eu} alt="Maria Clara" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 transform animate-bounce">
-        <a
-          href="#about"
-          className="text-purple hover:text-pink transition-colors"
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="relative z-10"
         >
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
+          <div
+            className={`mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm backdrop-blur ${surface(
+              theme,
+            )}`}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            ></path>
-          </svg>
-        </a>
-      </div>
-    </section>
-  );
-};
+            {t('hero.badge')}
+          </div>
 
-export default Home;
+          <h1 className="max-w-4xl text-5xl leading-[0.9] font-black tracking-[-0.07em] md:text-7xl lg:text-8xl">
+            {t('hero.titleA')}{' '}
+            <AnimatedGradientText>{t('hero.titleB')}</AnimatedGradientText>
+          </h1>
+
+          <p
+            className={`mt-7 max-w-xl text-base leading-8 md:text-lg ${mutedText(
+              theme,
+            )}`}
+          >
+            {t('hero.text')}
+          </p>
+
+          <div className="mt-9 flex flex-wrap gap-4">
+            <button
+              onClick={() => navigate('/projetos')}
+              className="group inline-flex items-center gap-2 rounded-full bg-linear-to-r from-fuchsia-500 via-purple-500 to-cyan-400 px-7 py-4 text-sm font-bold text-white shadow-[0_0_40px_rgba(217,70,239,.35)] transition hover:scale-105"
+            >
+              {t('hero.explore')}
+              <Icon
+                name="arrow"
+                className="transition group-hover:translate-x-1 group-hover:-translate-y-1"
+              />
+            </button>
+
+            <ResumeButton t={t} theme={theme} />
+          </div>
+
+          <div className="mt-10 flex flex-wrap gap-3 text-xs font-bold tracking-[0.22em] uppercase opacity-60">
+            <span>React</span>
+            <span>•</span>
+            <span>JavaScript</span>
+            <span>•</span>
+            <span>APIs</span>
+            <span>•</span>
+            <span>Creative Web</span>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 40, rotate: 4 }}
+          animate={{ opacity: 1, x: 0, rotate: 0 }}
+          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.15 }}
+          className="relative z-10 flex justify-center lg:justify-end"
+        >
+          <DeveloperPassport theme={theme} />
+        </motion.div>
+
+        <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-fuchsia-500/20 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 left-1/3 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl" />
+      </div>
+
+      <InfiniteProjectLoop
+        setActivePage={setActivePage}
+        setSelectedProject={setSelectedProject}
+        t={t}
+        lang={lang}
+        theme={theme}
+      />
+      <TechCloud theme={theme} t={t} />
+      <AboutPreview setActivePage={setActivePage} t={t} theme={theme} />
+    </PageShell>
+  );
+}
+
+export default HomePage;

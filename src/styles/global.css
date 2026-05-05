@@ -1,218 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
-@theme {
-  --color-darkBlue: #111827;
-  --color-pink: #ff1493;
-  --color-purple: #9370db;
-  --color-lightPurple: #a5b4fc;
-  --fontFamily: "Poppins", sans-serif;
-}
 
 html {
   scroll-behavior: smooth;
-  background: linear-gradient(180deg, white 0%, #eaeaeb 100%);
-  color: #111827;
 }
 
-html.dark {
-  background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
-  color: #d1d5db;
-}
 
-body {
-  font-family: "Poppins", sans-serif;
-}
-
-/* Utility classes for text truncation */
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.gradient-text {
-  background: linear-gradient(90deg, #ff1493, #9370db);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.btn-gradient {
-  background: linear-gradient(90deg, #ff1493, #9370db);
-}
-
-.card {
-  background: rgba(255, 255, 255, 0.8);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 20, 147, 0.3);
-  border-radius: 2rem;
-  overflow: hidden;
-}
-
-.dark .card {
-  background: rgba(28, 39, 65, 0.8);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(147, 112, 219, 0.3);
-  border-radius: 2rem;
-  overflow: hidden;
-}
-
-.skill-bar {
-  position: relative;
-  height: 8px;
-  background: rgba(147, 112, 219, 0.2);
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.skill-progress {
-  position: absolute;
-  height: 100%;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #ff1493, #9370db);
-  animation: fillBar 1.5s ease-out forwards;
-  transform-origin: left;
-  transform: scaleX(0);
-}
-
-@keyframes fillBar {
-  to {
-    transform: scaleX(1);
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
-nav {
-  background: rgb(231, 231, 231, 0.1);
-}
-.dark nav {
-  background: rgb(17, 24, 39, 0.1);
-}
-
-.nav-link {
-  position: relative;
-}
-
-.dark .text {
-  color: #d1d5db;
-}
-
-.text {
-  color: #111827;
-}
-
-.bg {
-  background-color: #f9fafb;
-}
-
-.dark .bg {
-  background-color: rgb(17, 24, 39, 0.5);
-}
-.dark .dev {
-  color: white;
-}
-
-.dev {
-  color: #111827;
-}
-
-.title {
-  color: rgb(165, 143, 255);
-}
-
-.dark .title {
-  color: white;
-}
-
-.btn {
-  color: white;
-}
-
-.dark .btn {
-  color: #111827;
-}
-.link:hover {
-  color: #111827;
-}
-
-.dark .link:hover {
-  color: white;
-}
-
-.nav-link::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -2px;
-  left: 0;
-  background: linear-gradient(90deg, #ff1493, #9370db);
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-  width: 100%;
-}
-
-.active::after {
-  width: 100%;
-}
-
-.project-card {
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(255, 20, 147, 0.2);
-}
-
-.glow {
-  box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
-}
-
-.particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  overflow: hidden;
-}
-
-@media (max-width: 768px) {
-  #home .inset-4,
-  #home.inset-0,
-  #home .w-64 {
-    display: none;
-  }
-}
-
-/* Estilos para partículas */
-#particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-#particles div {
-  position: absolute;
-  pointer-events: none;
+.animate-gradient {
+  animation: gradientMove 10s ease infinite;
 }
