@@ -37,7 +37,7 @@ export default function AdminLogin({ theme }) {
 
   return (
     <main
-      className={`relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-10 transition-colors duration-500 ${
+      className={`relative flex min-h-screen items-center mt-20 justify-center overflow-hidden px-4 py-10 transition-colors duration-500 ${
         isDark
           ? "bg-slate-950 text-white"
           : "bg-[#f7f4ef] text-slate-950"
