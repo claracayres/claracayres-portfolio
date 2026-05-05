@@ -1,58 +1,8 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "./api/*.py",
-      "use": "@vercel/python"
-    },
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/projects",
-      "dest": "/api/projects.py"
-    },
-    {
-      "src": "/api/projects/(.*)",
-      "dest": "/api/projects.py"
-    },
-    {
-      "src": "/api/skills",
-      "dest": "/api/skills.py"
-    },
-    {
-      "src": "/api/skills/(.*)",
-      "dest": "/api/skills.py"
-    },
-    {
-      "src": "/api/achievements",
-      "dest": "/api/achievements.py"
-    },
-    {
-      "src": "/api/achievements/(.*)",
-      "dest": "/api/achievements.py"
-    },
-    {
-      "src": "/api/translations/(.*)",
-      "dest": "/api/translations.py"
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
-    {
-      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|eot))",
-      "dest": "/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
