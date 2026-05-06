@@ -37,7 +37,7 @@ function App() {
           <Route path="/sobre" element={<About theme={theme} />} />
           <Route path="/projetos" element={<Projects theme={theme} />} />
           <Route
-            path="/projetos/:id"
+            path="/projetos/:slug"
             element={<ProjectDetails theme={theme} />}
           />
           <Route path="/contato" element={<Contact theme={theme} />} />

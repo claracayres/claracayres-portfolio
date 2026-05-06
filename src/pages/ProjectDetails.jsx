@@ -22,7 +22,7 @@ function getLocalizedText(value, language = "pt") {
 }
 
 function ProjectDetailPage({ theme }) {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const isPt = i18n.language === "pt";
@@ -36,7 +36,7 @@ function ProjectDetailPage({ theme }) {
       try {
         setLoading(true);
 
-        const data = await getProjectBySlug(id);
+        const data = await getProjectBySlug(slug);
 
         setProject(data);
         setSelectedImage(data.images?.[0] || "");
@@ -49,7 +49,7 @@ function ProjectDetailPage({ theme }) {
     }
 
     loadProject();
-  }, [id]);
+  }, [slug]);
 
   if (loading) {
     return (
