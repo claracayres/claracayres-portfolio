@@ -353,7 +353,7 @@ function ProjectDetailPage({ theme }) {
               getProjectGradient(project)
             } px-4 py-2 text-xs font-black tracking-[0.2em] text-white uppercase`}
           >
-            Creative note
+            {t("projects.creativeNote")}
           </div>
 
           <p className={`max-w-4xl text-lg leading-8 ${mutedText(theme)}`}>
