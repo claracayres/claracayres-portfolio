@@ -34,10 +34,19 @@ export function getProjectById(id) {
   return request(`${API_ENDPOINTS.PROJECTS}/${id}`);
 }
 
-export function getProjectBySlug(slug) {
-  return request(`${API_ENDPOINTS.PROJECTS}/${slug}`);
-}
+export async function getProjectBySlug(slug) {
+  const projects = await getProjects();
 
+  const project = projects.find(
+    (item) => item.slug === slug || item._id === slug || item.id === slug
+  );
+
+  if (!project) {
+    throw new Error("Projeto não encontrado.");
+  }
+
+  return project;
+}
 export function createProject(project) {
   return request(API_ENDPOINTS.PROJECTS, {
     method: "POST",
